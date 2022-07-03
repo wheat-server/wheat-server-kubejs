@@ -1,0 +1,76 @@
+{
+	"credit": "Created by Frost-ZX using Blockbench.",
+	"parent": "block/block",
+	"ambientocclusion": false,
+	"textures": {
+		"particle": "wheat_plus:block/road/base",
+		"base": "wheat_plus:block/road/base",
+		"content": "wheat_plus:block/road/content",
+		"side": "wheat_plus:block/transparent"
+	},
+	"elements": [
+		{
+			"name": "content",
+			"from": [0, 8.1, 0],
+			"to": [16, 8.1, 16],
+			"faces": {
+				"up": {"uv": [0, 0, 16, 16], "texture": "#content"}
+			}
+		},
+		{
+			"name": "base",
+			"from": [0, 0, 0],
+			"to": [16, 8, 16],
+			"faces": {
+				"north": {"uv": [0, 8, 16, 16], "texture": "#base", "cullface": "north"},
+				"east": {"uv": [0, 8, 16, 16], "texture": "#base", "cullface": "east"},
+				"south": {"uv": [0, 8, 16, 16], "texture": "#base", "cullface": "south"},
+				"west": {"uv": [0, 8, 16, 16], "texture": "#base", "cullface": "west"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#base"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#base", "cullface": "down"}
+			}
+		},
+		{
+			"name": "north",
+			"from": [0, 0, -0.1],
+			"to": [16, 8, -0.1],
+			"faces": {
+				"north": {"uv": [0, 8, 16, 16], "texture": "#side", "cullface": "north"}
+			}
+		},
+		{
+			"name": "south",
+			"from": [0, 0, 16.1],
+			"to": [16, 8, 16.1],
+			"faces": {
+				"south": {"uv": [0, 8, 16, 16], "texture": "#side", "cullface": "south"}
+			}
+		},
+		{
+			"name": "west",
+			"from": [-0.1, 0, 0],
+			"to": [-0.1, 8, 16],
+			"faces": {
+				"west": {"uv": [0, 8, 16, 16], "texture": "#side", "cullface": "west"}
+			}
+		},
+		{
+			"name": "east",
+			"from": [16.1, 0, 0],
+			"to": [16.1, 8, 16],
+			"faces": {
+				"east": {"uv": [0, 8, 16, 16], "texture": "#side", "cullface": "east"}
+			}
+		}
+	],
+	"groups": [
+		0,
+		1,
+		{
+			"name": "side",
+			"origin": [0, 0, 0],
+			"color": 0,
+			"children": [2, 3, 4, 5]
+		}
+	]
+}
