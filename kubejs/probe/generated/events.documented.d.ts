@@ -408,6 +408,17 @@ declare function onEvent(name: "tags.worldgen.structure_pool_element", handler: 
 */
 declare function onEvent(name: "block.place", handler: (event: Internal.BlockPlaceEventJS) => void);
 /**
+* Fired by different tag when the server:
+* - loads
+* - ticks
+* - unloads
+* 
+* The event fires on: **startup**, **server**.
+* 
+* The event is **not** cancellable.
+*/
+declare function onEvent(name: "server.unload", handler: (event: Internal.ServerEventJS) => void);
+/**
 * Fired when you need to add, change tags of things.
 *
 * However, due to the type erasure of Java, Probe can not determine what
@@ -732,6 +743,16 @@ declare function onEvent(name: "tags.loot_nbt_provider_type", handler: (event: I
 */
 declare function onEvent(name: "tags.worldgen.configured_structure_feature", handler: (event: Internal.TagEventJS<any>) => void);
 /**
+* Fired by different tag when the client is:
+* - logged in
+* - logged out
+* 
+* The event fires on: **startup**, **client**.
+* 
+* The event is **not** cancellable.
+*/
+declare function onEvent(name: "client.logged_out", handler: (event: Internal.ClientLoggedInEventJS) => void);
+/**
 * Fired when you need to add, change tags of things.
 *
 * However, due to the type erasure of Java, Probe can not determine what
@@ -793,6 +814,17 @@ declare function onEvent(name: "tags.worldgen.configured_feature", handler: (eve
 * The event is **not** cancellable.
 */
 declare function onEvent(name: "generic.loot_tables", handler: (event: Internal.GenericLootEventJS) => void);
+/**
+* Fired by different tag everytime when a player:
+* - ticks
+* - logged in
+* - logged out
+* 
+* The event fires on: **startup**, **server**.
+* 
+* The event is **not** cancellable.
+*/
+declare function onEvent(name: "player.logged_out", handler: (event: Internal.SimplePlayerEventJS) => void);
 /**
 * Fired when you need to add, change tags of things.
 *
@@ -1099,6 +1131,17 @@ declare function onEvent(name: "item.pickup", handler: (event: Internal.ItemPick
 * The event is **not** cancellable.
 */
 declare function onEvent(name: "tags.worldgen.processor_list", handler: (event: Internal.TagEventJS<any>) => void);
+/**
+* Fired by different tag when the level:
+* - loads
+* - ticks
+* - unloads
+* 
+* The event fires on: **startup**, **server**.
+* 
+* The event is **not** cancellable.
+*/
+declare function onEvent(name: "level.unload", handler: (event: Internal.SimpleLevelEventJS) => void);
 /**
 * Fired when you need to add, change tags of things.
 *
