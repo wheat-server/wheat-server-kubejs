@@ -1,6 +1,7 @@
 // priority: 0
 
 const defaults = global.defaults;
+const COLORS = global.COLORS;
 const LOG_PREFIX = global.LOG_PREFIX;
 
 /**
@@ -256,6 +257,36 @@ onEvent('block.registry', (event) => {
   });
 
   console.info(`${LOG_PREFIX} 注册方块 - 路 - 完成`);
+
+});
+
+// 注册方块 - 强化混凝土
+onEvent('block.registry', (event) => {
+
+  console.info(`${LOG_PREFIX} 注册方块 - 强化混凝土 - 开始`);
+
+  const keys = Object.keys(COLORS);
+
+  keys.forEach((key) => {
+
+    const color = COLORS[key];
+    const id = `${MOD_ID}:reinforced_concrete_${color.CODE}`;
+    const block = event.create(id, 'basic');
+    const texture = `${PATH_TEXTURE}reinforced_concrete/${color.CODE}`;
+
+    setBlockProps(block, {
+      boxType: 'full',
+      displayName: `${color.LABEL_CN}强化混凝土`,
+    });
+
+    block.modelJson = {
+      parent: 'minecraft:block/cube_all',
+      textures: { all: texture },
+    };
+
+  });
+
+  console.info(`${LOG_PREFIX} 注册方块 - 强化混凝土 - 完成`);
 
 });
 
