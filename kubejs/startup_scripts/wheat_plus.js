@@ -1,7 +1,5 @@
 // priority: 0
 
-console.info(`${LOG_PREFIX} 处理 ${MOD_ID} 相关内容`);
-
 const defaults = global.defaults;
 const LOG_PREFIX = global.LOG_PREFIX;
 
@@ -96,6 +94,8 @@ const setBlockProps = function (block, options) {
   return true;
 
 };
+
+console.info(`${LOG_PREFIX} 处理 ${MOD_ID} 相关内容`);
 
 // 注册方块 - 路
 onEvent('block.registry', (event) => {
