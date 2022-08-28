@@ -17,8 +17,10 @@ declare const global: {
   /** 颜色列表 */
   COLORS: {
     [key: string]: {
-      CODE: string,
-      HEX: string,
+      CODE: string;
+      HEX: string;
+      LABEL_CN: string;
+      LABEL_EN: string;
     };
   };
 
