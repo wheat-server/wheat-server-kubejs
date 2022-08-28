@@ -1,5 +1,22 @@
 // priority: 100
 
+// 注意事项：
+// - 暂不支持解构赋值（2022-08-28）
+// - 暂不支持设置函数参数默认值（2022-08-28）
+// - 暂不支持 try catch（2022-08-28）
+
+// 自定义方块：
+// https://mods.latvian.dev/books/kubejs/page/custom-blocks
+
+global.defaults = function (v, d) {
+  (typeof d === 'undefined') && (d = null);
+  return ((typeof v === 'undefined' || v === null) ? d : v);
+};
+
+global.writeJSON = function (path, data) {
+  JsonIO.write(path, data);
+};
+
 // 参考：
 // https://github.com/Railcraft/Railcraft/blob/mc-1.12.2/src/main/java/mods/railcraft/common/plugins/color/EnumColor.java
 global.COLORS = {

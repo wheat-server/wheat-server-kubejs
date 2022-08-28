@@ -1,46 +1,106 @@
 // priority: 0
 
-console.info(`${global.LOG_PREFIX} 注册 wheat_plus 相关内容`);
+console.info(`${LOG_PREFIX} 处理 ${MOD_ID} 相关内容`);
 
-/** 模组 ID */
-const modID = 'wheat_plus';
+const defaults = global.defaults;
+const LOG_PREFIX = global.LOG_PREFIX;
 
 /**
- * @description 设置方块碰撞箱属性
- * @param {Internal.BlockBuilder} block
- * @param {'full'|'half'}         type
+ * @desc 方块构造器
+ * @typedef B.Builder
+ * @type {Internal.BlockBuilder}
  */
-const setBlockBoxProps = function (block, type) {
-  if (type === 'full') {
-    block.box(0, 0, 0, 16, 16, 16, true);
-    block.fullBlock(true);
-    block.opaque(true);
-  } else if (type === 'half') {
-    block.box(0, 0, 0, 16, 8, 16, true);
-    block.fullBlock(false);
-    block.opaque(false);
+
+/**
+ * @desc 方块碰撞箱类型
+ * @typedef B.BoxType
+ * @type {'full'|'half'}
+ */
+
+/**
+ * @desc 方块材质类型
+ * @typedef B.Material
+ * @type {Internal.MaterialJS_}
+ */
+
+/**
+ * @desc 方块渲染类型
+ * - `cutout`: required for blocks with texture like glass
+ * - `translucent`: required for blocks like stained glass
+ * @typedef B.RenderType
+ * @type {'solid'|'cutout'|'translucent'}
+ */
+
+/** 模组 ID */
+const MOD_ID = 'wheat_plus';
+
+/** 模型文件基础路径 */
+const PATH_MODEL = `${MOD_ID}:block/`;
+
+/** 纹理文件基础路径 */
+const PATH_TEXTURE = `${MOD_ID}:block/`;
+
+/**
+ * @description 设置方块基础属性
+ * @param {B.Builder}    block
+ * @param {object}       options
+ * @param {B.BoxType}    options.boxType     碰撞箱类型
+ * @param {string}       options.displayName
+ * @param {number}       options.hardness
+ * @param {boolean}      options.isFull      是否完整方块
+ * @param {boolean}      options.isOpaque    是否不透明
+ * @param {number}       options.lightLevel  范围 0 ~ 1
+ * @param {B.Material}   options.material
+ * @param {B.RenderType} options.renderType
+ * @param {number}       options.resistance
+ */
+const setBlockProps = function (block, options) {
+
+  if (!block) {
+    console.error(`${LOG_PREFIX} 设置方块属性失败：缺少“block”参数`);
+    return false;
   }
+
+  if (!options) {
+    options = {};
+  }
+
+  const boxType = defaults(options.boxType, '');
+  const displayName = defaults(options.displayName, '');
+  const hardness = defaults(options.hardness, 8);
+  const isFull = defaults(options.isFull, true);
+  const isOpaque = defaults(options.isOpaque, true);
+  const lightLevel = defaults(options.lightLevel, 0);
+  const material = defaults(options.material, 'stone');
+  const renderType = defaults(options.renderType, 'solid');
+  const resistance = defaults(options.resistance, 16);
+
+  if (displayName) {
+    block.displayName(displayName);
+  }
+
+  if (boxType === 'full') {
+    block.box(0, 0, 0, 16, 16, 16, true);
+  } else if (boxType === 'half') {
+    block.box(0, 0, 0, 16, 8, 16, true);
+  }
+
+  block.fullBlock(isFull);
+  block.hardness(hardness);
+  block.lightLevel(lightLevel);
+  block.opaque(isOpaque);
+  block.material(material);
+  block.renderType(renderType);
+  block.resistance(resistance);
+
+  return true;
+
 };
 
-// 注册方块
+// 注册方块 - 路
 onEvent('block.registry', (event) => {
 
-  console.info(`${global.LOG_PREFIX} 注册方块 - 开始`);
-
-  /** 模型文件基础路径 */
-  const modelPathBase = `${modID}:block/`;
-
-  /** 纹理文件基础路径 */
-  const texturePathBase = `${modID}:block/`;
-
-  /** 路方块基础属性 */
-  const roadBlockAttrs = {
-    hardness: 8.0,
-    lightLevel: 0,
-    material: 'rock',
-    renderType: 'cutout',
-    resistance: 16.0,
-  };
+  console.info(`${LOG_PREFIX} 注册方块 - 路 - 开始`);
 
   /** 普通路方块 */
   const roadBlocksNormal = [
@@ -50,6 +110,7 @@ onEvent('block.registry', (event) => {
       texturePath: 'transparent',
       hasNormal: true,
       hasSlant: false,
+      isBlank: true,
     },
     {
       name: 'road_line_single_white',
@@ -57,6 +118,7 @@ onEvent('block.registry', (event) => {
       texturePath: 'road/line/single_white',
       hasNormal: true,
       hasSlant: true,
+      isBlank: false,
     },
     {
       name: 'road_line_single_yellow',
@@ -64,6 +126,7 @@ onEvent('block.registry', (event) => {
       texturePath: 'road/line/single_yellow',
       hasNormal: true,
       hasSlant: true,
+      isBlank: false,
     },
     {
       name: 'road_line_double_white',
@@ -71,6 +134,7 @@ onEvent('block.registry', (event) => {
       texturePath: 'road/line/double_white',
       hasNormal: true,
       hasSlant: true,
+      isBlank: false,
     },
     {
       name: 'road_line_double_yellow',
@@ -78,13 +142,14 @@ onEvent('block.registry', (event) => {
       texturePath: 'road/line/double_yellow',
       hasNormal: true,
       hasSlant: true,
+      isBlank: false,
     },
   ];
 
   roadBlocksNormal.forEach((config) => {
 
     /** 方块 ID，包含模组 ID */
-    const id = `${modID}:${config.name}`;
+    const id = `${MOD_ID}:${config.name}`;
 
     /** 方块名称文本 */
     const label = (config.label || 'Unknown');
@@ -96,23 +161,22 @@ onEvent('block.registry', (event) => {
     if (config.hasNormal) {
 
       const block = event.create(`${id}_full`, 'basic');
+      const suffix = (config.isBlank ? '' : '，直线');
 
-      block.displayName(`${label}，完整，直线`);
-
-      setBlockBoxProps(block, 'full');
+      setBlockProps(block, {
+        boxType: 'full',
+        displayName: `${label}，完整${suffix}`,
+        renderType: 'cutout',
+      });
 
       if (texturePath) {
         block.modelJson = {
-          parent: `${modelPathBase}road/base_full`,
+          parent: `${PATH_MODEL}road/base_full`,
           textures: {
-            content: `${texturePathBase}${texturePath}`,
-            side: `${texturePathBase}${texturePath}`
+            content: `${PATH_TEXTURE}${texturePath}`,
+            side: `${PATH_TEXTURE}${texturePath}`
           }
         };
-      }
-
-      for (let attr in roadBlockAttrs) {
-        block[attr](roadBlockAttrs[attr]);
       }
 
     }
@@ -121,23 +185,22 @@ onEvent('block.registry', (event) => {
     if (config.hasSlant) {
 
       const block = event.create(`${id}_full_slant`, 'basic');
+      const suffix = (config.isBlank ? '' : '，斜线');
 
-      block.displayName(`${label}，完整，斜线`);
-
-      setBlockBoxProps(block, 'full');
+      setBlockProps(block, {
+        boxType: 'full',
+        displayName: `${label}，完整${suffix}`,
+        renderType: 'cutout',
+      });
 
       if (texturePath) {
         block.modelJson = {
-          parent: `${modelPathBase}road/base_full`,
+          parent: `${PATH_MODEL}road/base_full`,
           textures: {
-            content: `${texturePathBase}${texturePath}_slant`,
-            side: `${texturePathBase}${texturePath}`
+            content: `${PATH_TEXTURE}${texturePath}_slant`,
+            side: `${PATH_TEXTURE}${texturePath}`
           }
         };
-      }
-
-      for (let attr in roadBlockAttrs) {
-        block[attr](roadBlockAttrs[attr]);
       }
 
     }
@@ -146,23 +209,22 @@ onEvent('block.registry', (event) => {
     if (config.hasNormal) {
 
       const block = event.create(`${id}_half`, 'basic');
+      const suffix = (config.isBlank ? '' : '，直线');
 
-      block.displayName(`${label}，一半，直线`);
-
-      setBlockBoxProps(block, 'half');
+      setBlockProps(block, {
+        boxType: 'half',
+        displayName: `${label}，一半${suffix}`,
+        renderType: 'cutout',
+      });
 
       if (texturePath) {
         block.modelJson = {
-          parent: `${modelPathBase}road/base_half`,
+          parent: `${PATH_MODEL}road/base_half`,
           textures: {
-            content: `${texturePathBase}${texturePath}`,
-            side: `${texturePathBase}${texturePath}`
+            content: `${PATH_TEXTURE}${texturePath}`,
+            side: `${PATH_TEXTURE}${texturePath}`
           }
         };
-      }
-
-      for (let attr in roadBlockAttrs) {
-        block[attr](roadBlockAttrs[attr]);
       }
 
     }
@@ -171,40 +233,34 @@ onEvent('block.registry', (event) => {
     if (config.hasSlant) {
 
       const block = event.create(`${id}_half_slant`, 'basic');
+      const suffix = (config.isBlank ? '' : '，斜线');
 
-      block.displayName(`${label}，一半，斜线`);
-
-      setBlockBoxProps(block, 'half');
+      setBlockProps(block, {
+        boxType: 'half',
+        displayName: `${label}，一半${suffix}`,
+        renderType: 'cutout',
+      });
 
       if (texturePath) {
         block.modelJson = {
-          parent: `${modelPathBase}road/base_half`,
+          parent: `${PATH_MODEL}road/base_half`,
           textures: {
-            content: `${texturePathBase}${texturePath}_slant`,
-            side: `${texturePathBase}${texturePath}`
+            content: `${PATH_TEXTURE}${texturePath}_slant`,
+            side: `${PATH_TEXTURE}${texturePath}`
           }
         };
-      }
-
-      for (let attr in roadBlockAttrs) {
-        block[attr](roadBlockAttrs[attr]);
       }
 
     }
 
   });
 
-  console.info(`${global.LOG_PREFIX} 注册方块 - 完成`);
+  console.info(`${LOG_PREFIX} 注册方块 - 路 - 完成`);
 
 });
 
 // 注册物品
-onEvent('item.registry', (event) => {
-
-  console.info(`${global.LOG_PREFIX} 注册物品 - 开始`);
-
-  // event.create('example_item').displayName('Example Item');
-
-  console.info(`${global.LOG_PREFIX} 注册物品 - 完成`);
-
-});
+// onEvent('item.registry', (event) => {
+//   console.info(`${LOG_PREFIX} 注册物品 - 开始`);
+//   console.info(`${LOG_PREFIX} 注册物品 - 完成`);
+// });
