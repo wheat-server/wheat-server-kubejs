@@ -5,7 +5,7 @@
 	"textures": {
 		"particle": "wheat_plus:block/road/base",
 		"base": "wheat_plus:block/road/base",
-		"content": "wheat_plus:block/road/content",
+		"content": "wheat_plus:block/road/content_gray",
 		"side": "wheat_plus:block/transparent"
 	},
 	"elements": [
