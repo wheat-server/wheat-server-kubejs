@@ -34,10 +34,10 @@ const LOG_PREFIX = global.LOG_PREFIX;
 const MOD_ID = 'wheat_plus';
 
 /** 模型文件基础路径 */
-const PATH_MODEL = `${MOD_ID}:block/`;
+const PATH_MODEL = `${MOD_ID}:block`;
 
 /** 纹理文件基础路径 */
-const PATH_TEXTURE = `${MOD_ID}:block/`;
+const PATH_TEXTURE = `${MOD_ID}:block`;
 
 /**
  * @description 设置方块基础属性
@@ -198,10 +198,10 @@ onEvent('block.registry', (event) => {
 
       if (tPath) {
         block.modelJson = {
-          parent: `${PATH_MODEL}road/base_full`,
+          parent: `${PATH_MODEL}/road/base_full`,
           textures: {
-            content: `${PATH_TEXTURE}${tPath}`,
-            side: tSide ? `${PATH_TEXTURE}${tPath}` : undefined
+            content: `${PATH_TEXTURE}/${tPath}`,
+            side: tSide ? `${PATH_TEXTURE}/${tPath}` : undefined
           }
         };
       }
@@ -222,10 +222,10 @@ onEvent('block.registry', (event) => {
 
       if (tPath) {
         block.modelJson = {
-          parent: `${PATH_MODEL}road/base_full`,
+          parent: `${PATH_MODEL}/road/base_full`,
           textures: {
-            content: `${PATH_TEXTURE}${tPath}_slant`,
-            side: tSide ? `${PATH_TEXTURE}${tPath}` : undefined
+            content: `${PATH_TEXTURE}/${tPath}_slant`,
+            side: tSide ? `${PATH_TEXTURE}/${tPath}` : undefined
           }
         };
       }
@@ -246,10 +246,10 @@ onEvent('block.registry', (event) => {
 
       if (tPath) {
         block.modelJson = {
-          parent: `${PATH_MODEL}road/base_half`,
+          parent: `${PATH_MODEL}/road/base_half`,
           textures: {
-            content: `${PATH_TEXTURE}${tPath}`,
-            side: tSide ? `${PATH_TEXTURE}${tPath}` : undefined
+            content: `${PATH_TEXTURE}/${tPath}`,
+            side: tSide ? `${PATH_TEXTURE}/${tPath}` : undefined
           }
         };
       }
@@ -270,10 +270,10 @@ onEvent('block.registry', (event) => {
 
       if (tPath) {
         block.modelJson = {
-          parent: `${PATH_MODEL}road/base_half`,
+          parent: `${PATH_MODEL}/road/base_half`,
           textures: {
-            content: `${PATH_TEXTURE}${tPath}_slant`,
-            side: tSide ? `${PATH_TEXTURE}${tPath}` : undefined
+            content: `${PATH_TEXTURE}/${tPath}_slant`,
+            side: tSide ? `${PATH_TEXTURE}/${tPath}` : undefined
           }
         };
       }
@@ -298,7 +298,7 @@ onEvent('block.registry', (event) => {
     const color = COLORS[key];
     const id = `${MOD_ID}:reinforced_concrete_${color.CODE}`;
     const block = event.create(id, 'basic');
-    const texture = `${PATH_TEXTURE}reinforced_concrete/${color.CODE}`;
+    const texture = `${PATH_TEXTURE}/reinforced_concrete/${color.CODE}`;
 
     setBlockProps(block, {
       boxType: 'full',
@@ -323,6 +323,9 @@ onEvent('block.registry', (event) => {
 
   const keys = Object.keys(COLORS);
 
+  /** 父模型路径 */
+  const parent = `${PATH_MODEL}/lamp/modern`;
+
   keys.forEach((key) => {
 
     const color = COLORS[key];
@@ -331,7 +334,7 @@ onEvent('block.registry', (event) => {
 
     // 纹理文件路径前缀
     // wheat_plus:block/lamp_modern/color_
-    const tBase = `${PATH_TEXTURE}lamp_modern/${color.CODE}`;
+    const tBase = `${PATH_TEXTURE}/lamp_modern/${color.CODE}`;
 
     setBlockProps(block, {
       boxType: 'full',
@@ -342,7 +345,7 @@ onEvent('block.registry', (event) => {
     });
 
     block.modelJson = {
-      parent: `${PATH_MODEL}lamp_modern`,
+      parent: parent,
       textures: {
         glow: `${tBase}_glow`,
         core: `${tBase}_core`,
