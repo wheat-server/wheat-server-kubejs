@@ -364,3 +364,65 @@ onEvent('block.registry', (event) => {
 //   console.info(`${LOG_PREFIX} 注册物品 - 开始`);
 //   console.info(`${LOG_PREFIX} 注册物品 - 完成`);
 // });
+
+// 注册命令 example
+// https://github.com/KubeJS-Mods/KubeJS/blob/1.18/main/common/src/main/java/dev/latvian/mods/kubejs/command/CommandRegistryEventJS.java
+onEvent('command.registry', (event) => {
+
+  console.info(`${LOG_PREFIX} 注册命令 - example - 开始`);
+
+  const { commands: Commands, arguments: Arguments } = event;
+
+  event.register(
+    Commands.literal('wp-example').then(
+      Commands.literal('add').then(
+        Commands.argument('name', Arguments.STRING.create(event))
+          .executes((ctx) => {
+
+            const arName = Arguments.STRING.getResult(ctx, 'name');
+            const msg = `Example ${arName} added.`;
+
+            ctx.source.sendSuccess(msg, true);
+
+            return 1;
+
+          })
+      )
+    ).then(
+      Commands.literal('edit').then(
+        Commands.argument('name', Arguments.STRING.create(event)).then(
+          Commands.argument('property', Arguments.STRING.create(event))
+            .suggests((ctx, builder) => {
+              return ctx.source.suggest(['test-1', 'test-2'], builder);
+            }).executes((ctx) => {
+
+              const arName = Arguments.STRING.getResult(ctx, 'name');
+              const arProperty = Arguments.STRING.getResult(ctx, 'property');
+              const msg = `Example property ${arProperty} for ${arName} has been edited.`
+
+              ctx.source.sendSuccess(msg, true);
+
+              return 1;
+
+            })
+        )
+      )
+    ).then(
+      Commands.literal('remove').then(
+        Commands.argument('name', Arguments.STRING.create(event))
+          .executes((ctx) => {
+
+            const arName = Arguments.STRING.getResult(ctx, 'name');
+
+            ctx.source.sendSuccess(`Example ${arName} removed.`, true);
+
+            return 1;
+
+          })
+      )
+    )
+  );
+
+  console.info(`${LOG_PREFIX} 注册命令 - example - 完成`);
+
+});
