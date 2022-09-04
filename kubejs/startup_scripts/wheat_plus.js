@@ -109,9 +109,10 @@ onEvent('block.registry', (event) => {
       name: 'road_blank',
       label: '路 - 空白',
       texturePath: 'transparent',
-      hasNormal: true,
-      hasSlant: false,
-      isBlank: true,
+      hasNormal: true, // 普通 / 直线
+      hasSlant: false, // 斜线
+      hasSide: false,  // 侧边纹理
+      isBlank: true,   // 空白
     },
     {
       name: 'road_white',
@@ -119,6 +120,7 @@ onEvent('block.registry', (event) => {
       texturePath: 'road/content_white',
       hasNormal: true,
       hasSlant: false,
+      hasSide: false,
       isBlank: true,
     },
     {
@@ -127,6 +129,7 @@ onEvent('block.registry', (event) => {
       texturePath: 'road/content_yellow',
       hasNormal: true,
       hasSlant: false,
+      hasSide: false,
       isBlank: true,
     },
     {
@@ -135,6 +138,7 @@ onEvent('block.registry', (event) => {
       texturePath: 'road/line/single_white',
       hasNormal: true,
       hasSlant: true,
+      hasSide: true,
       isBlank: false,
     },
     {
@@ -143,6 +147,7 @@ onEvent('block.registry', (event) => {
       texturePath: 'road/line/single_yellow',
       hasNormal: true,
       hasSlant: true,
+      hasSide: true,
       isBlank: false,
     },
     {
@@ -151,6 +156,7 @@ onEvent('block.registry', (event) => {
       texturePath: 'road/line/double_white',
       hasNormal: true,
       hasSlant: true,
+      hasSide: true,
       isBlank: false,
     },
     {
@@ -159,6 +165,7 @@ onEvent('block.registry', (event) => {
       texturePath: 'road/line/double_yellow',
       hasNormal: true,
       hasSlant: true,
+      hasSide: true,
       isBlank: false,
     },
   ];
@@ -172,7 +179,10 @@ onEvent('block.registry', (event) => {
     const label = (config.label || 'Unknown');
 
     /** 纹理文件相对路径 */
-    const texturePath = config.texturePath;
+    const tPath = config.texturePath;
+
+    /** 是否存在侧边纹理 */
+    const tSide = config.hasSide;
 
     // 完整，直线
     if (config.hasNormal) {
@@ -186,12 +196,12 @@ onEvent('block.registry', (event) => {
         renderType: 'cutout',
       });
 
-      if (texturePath) {
+      if (tPath) {
         block.modelJson = {
           parent: `${PATH_MODEL}road/base_full`,
           textures: {
-            content: `${PATH_TEXTURE}${texturePath}`,
-            side: `${PATH_TEXTURE}${texturePath}`
+            content: `${PATH_TEXTURE}${tPath}`,
+            side: tSide ? `${PATH_TEXTURE}${tPath}` : undefined
           }
         };
       }
@@ -210,12 +220,12 @@ onEvent('block.registry', (event) => {
         renderType: 'cutout',
       });
 
-      if (texturePath) {
+      if (tPath) {
         block.modelJson = {
           parent: `${PATH_MODEL}road/base_full`,
           textures: {
-            content: `${PATH_TEXTURE}${texturePath}_slant`,
-            side: `${PATH_TEXTURE}${texturePath}`
+            content: `${PATH_TEXTURE}${tPath}_slant`,
+            side: tSide ? `${PATH_TEXTURE}${tPath}` : undefined
           }
         };
       }
@@ -234,12 +244,12 @@ onEvent('block.registry', (event) => {
         renderType: 'cutout',
       });
 
-      if (texturePath) {
+      if (tPath) {
         block.modelJson = {
           parent: `${PATH_MODEL}road/base_half`,
           textures: {
-            content: `${PATH_TEXTURE}${texturePath}`,
-            side: `${PATH_TEXTURE}${texturePath}`
+            content: `${PATH_TEXTURE}${tPath}`,
+            side: tSide ? `${PATH_TEXTURE}${tPath}` : undefined
           }
         };
       }
@@ -258,12 +268,12 @@ onEvent('block.registry', (event) => {
         renderType: 'cutout',
       });
 
-      if (texturePath) {
+      if (tPath) {
         block.modelJson = {
           parent: `${PATH_MODEL}road/base_half`,
           textures: {
-            content: `${PATH_TEXTURE}${texturePath}_slant`,
-            side: `${PATH_TEXTURE}${texturePath}`
+            content: `${PATH_TEXTURE}${tPath}_slant`,
+            side: tSide ? `${PATH_TEXTURE}${tPath}` : undefined
           }
         };
       }
