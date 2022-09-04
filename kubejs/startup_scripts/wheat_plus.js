@@ -114,6 +114,22 @@ onEvent('block.registry', (event) => {
       isBlank: true,
     },
     {
+      name: 'road_white',
+      label: '路 - 白色',
+      texturePath: 'road/content_white',
+      hasNormal: true,
+      hasSlant: false,
+      isBlank: true,
+    },
+    {
+      name: 'road_yellow',
+      label: '路 - 黄色',
+      texturePath: 'road/content_yellow',
+      hasNormal: true,
+      hasSlant: false,
+      isBlank: true,
+    },
+    {
       name: 'road_line_single_white',
       label: '路 - 单白线',
       texturePath: 'road/line/single_white',
