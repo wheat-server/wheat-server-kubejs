@@ -1,0 +1,35 @@
+{
+    "credit": "Create by Frost-ZX using Blockbench.",
+    "parent": "block/block",
+    "ambientocclusion": false,
+    "elements": [
+        {
+            "name": "core",
+            "from": [0, 0, 0],
+            "to": [16, 16, 16],
+            "shade": false,
+            "faces": {
+                "north": {"uv": [0, 0, 16, 16], "texture": "#core"},
+                "east": {"uv": [0, 0, 16, 16], "texture": "#core"},
+                "south": {"uv": [0, 0, 16, 16], "texture": "#core"},
+                "west": {"uv": [0, 0, 16, 16], "texture": "#core"},
+                "up": {"uv": [0, 0, 16, 16], "texture": "#core"},
+                "down": {"uv": [0, 0, 16, 16], "texture": "#core"}
+            }
+        },
+        {
+            "name": "glow",
+            "from": [-0.75, -0.75, -0.75],
+            "to": [16.75, 16.75, 16.75],
+            "shade": false,
+            "faces": {
+                "north": {"uv": [3, 3, 13, 13], "texture": "#glow"},
+                "east": {"uv": [3, 3, 13, 13], "texture": "#glow"},
+                "south": {"uv": [3, 3, 13, 13], "texture": "#glow"},
+                "west": {"uv": [3, 3, 13, 13], "texture": "#glow"},
+                "up": {"uv": [3, 3, 13, 13], "texture": "#glow"},
+                "down": {"uv": [3, 3, 13, 13], "texture": "#glow"}
+            }
+        }
+    ]
+}

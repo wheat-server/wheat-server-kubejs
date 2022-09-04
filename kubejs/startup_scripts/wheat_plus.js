@@ -290,6 +290,46 @@ onEvent('block.registry', (event) => {
 
 });
 
+// 注册方块 - 灯
+onEvent('block.registry', (event) => {
+
+  console.info(`${LOG_PREFIX} 注册方块 - 灯 - 开始`);
+
+  const keys = Object.keys(COLORS);
+
+  keys.forEach((key) => {
+
+    const color = COLORS[key];
+    const id = `${MOD_ID}:lamp_modern_${color.CODE}`;
+    const block = event.create(id, 'basic');
+
+    // 纹理文件路径前缀
+    // wheat_plus:block/lamp_modern/color_
+    const tBase = `${PATH_TEXTURE}lamp_modern/${color.CODE}`;
+
+    setBlockProps(block, {
+      boxType: 'full',
+      displayName: `现代${color.LABEL_CN}灯`,
+      lightLevel: 1,
+      material: 'glass',
+      renderType: 'translucent',
+    });
+
+    block.modelJson = {
+      parent: `${PATH_MODEL}lamp_modern`,
+      textures: {
+        glow: `${tBase}_glow`,
+        core: `${tBase}_core`,
+        particle: `${tBase}_core`
+      }
+    };
+
+  });
+
+  console.info(`${LOG_PREFIX} 注册方块 - 灯 - 完成`);
+
+});
+
 // 注册物品
 // onEvent('item.registry', (event) => {
 //   console.info(`${LOG_PREFIX} 注册物品 - 开始`);
