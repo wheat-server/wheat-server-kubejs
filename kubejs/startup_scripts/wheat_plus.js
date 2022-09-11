@@ -331,6 +331,26 @@ onEvent('block.registry', (event) => {
 
   });
 
+  // 覆盖默认语言（en_US）
+  JSON_ASSETS.push({
+    PATH: 'minecraft:lang/en_us',
+    DATA: {
+      'block.minecraft.ancient_debris': 'White Reinforced Concrete',
+      'block.minecraft.raw_copper_block': 'Gray Reinforced Concrete',
+      'block.minecraft.raw_iron_block': 'Light Gray Reinforced Concrete',
+    },
+  });
+
+  // 覆盖默认语言（zh_CN）
+  JSON_ASSETS.push({
+    PATH: 'minecraft:lang/zh_cn',
+    DATA: {
+      'block.minecraft.ancient_debris': '白色强化混凝土',
+      'block.minecraft.raw_copper_block': '灰色强化混凝土',
+      'block.minecraft.raw_iron_block': '淡灰色强化混凝土',
+    },
+  });
+
   console.info(`${LOG_PREFIX} 注册方块 - 强化混凝土 - 完成`);
 
 });
