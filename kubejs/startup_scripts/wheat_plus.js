@@ -2,6 +2,7 @@
 
 const defaults = global.defaults;
 const COLORS = global.COLORS;
+const JSON_ASSETS = global.JSON_ASSETS;
 const LOG_PREFIX = global.LOG_PREFIX;
 
 /**
@@ -27,7 +28,7 @@ const LOG_PREFIX = global.LOG_PREFIX;
  * - `cutout`: required for blocks with texture like glass
  * - `translucent`: required for blocks like stained glass
  * @typedef B.RenderType
- * @type {'solid'|'cutout'|'translucent'}
+ * @type {'solid'|'cutout'|'cutout_mipped'|'translucent'}
  */
 
 /** 模组 ID */
@@ -44,12 +45,14 @@ const PATH_TEXTURE = `${MOD_ID}:block`;
  * @param {B.Builder}    block
  * @param {object}       options
  * @param {B.BoxType}    options.boxType     碰撞箱类型
+ * @param {boolean}      options.collision   开启碰撞箱
  * @param {string}       options.displayName
  * @param {number}       options.hardness
  * @param {boolean}      options.isFull      是否完整方块
  * @param {boolean}      options.isOpaque    是否不透明
  * @param {number}       options.lightLevel  范围 0 ~ 1
  * @param {B.Material}   options.material
+ * @param {string}       options.modelPath   模型文件路径
  * @param {B.RenderType} options.renderType
  * @param {number}       options.resistance
  */
@@ -65,12 +68,14 @@ const setBlockProps = function (block, options) {
   }
 
   const boxType = defaults(options.boxType, '');
+  const collision = defaults(options.collision, true);
   const displayName = defaults(options.displayName, '');
   const hardness = defaults(options.hardness, 8);
   const isFull = defaults(options.isFull, true);
   const isOpaque = defaults(options.isOpaque, true);
   const lightLevel = defaults(options.lightLevel, 0);
   const material = defaults(options.material, 'stone');
+  const modelPath = defaults(options.modelPath, '');
   const renderType = defaults(options.renderType, 'solid');
   const resistance = defaults(options.resistance, 16);
 
@@ -82,6 +87,14 @@ const setBlockProps = function (block, options) {
     block.box(0, 0, 0, 16, 16, 16, true);
   } else if (boxType === 'half') {
     block.box(0, 0, 0, 16, 8, 16, true);
+  }
+
+  if (!collision) {
+    block.noCollision();
+  }
+
+  if (modelPath) {
+    block.model(modelPath);
   }
 
   block.fullBlock(isFull);
@@ -316,10 +329,10 @@ onEvent('block.registry', (event) => {
 
 });
 
-// 注册方块 - 灯
+// 注册方块 - 现代灯
 onEvent('block.registry', (event) => {
 
-  console.info(`${LOG_PREFIX} 注册方块 - 灯 - 开始`);
+  console.info(`${LOG_PREFIX} 注册方块 - 现代灯 - 开始`);
 
   const keys = Object.keys(COLORS);
 
@@ -355,7 +368,75 @@ onEvent('block.registry', (event) => {
 
   });
 
-  console.info(`${LOG_PREFIX} 注册方块 - 灯 - 完成`);
+  console.info(`${LOG_PREFIX} 注册方块 - 现代灯 - 完成`);
+
+});
+
+// 注册方块 - 简约灯
+onEvent('block.registry', (event) => {
+
+  console.info(`${LOG_PREFIX} 注册方块 - 简约灯 - 开始`);
+
+  const blocks = [
+    {
+      name: 'lamp_simple_large',
+      label: '简约灯（大）',
+      model: 'lamp/simple_large',
+    },
+    {
+      name: 'lamp_simple_medium',
+      label: '简约灯（中）',
+      model: 'lamp/simple_medium',
+    },
+    {
+      name: 'lamp_simple_small',
+      label: '简约灯（小）',
+      model: 'lamp/simple_small',
+    },
+    {
+      name: 'lamp_simple_stripe',
+      label: '简约灯（条状）',
+      model: 'lamp/simple_stripe',
+    },
+  ];
+
+  blocks.forEach((config) => {
+
+    const blockName = config.name;
+    const blockId = `${MOD_ID}:${blockName}`;
+    const block = event.create(blockId, 'stone_button');
+
+    // 用于替换默认模型
+    const modelJSON = { parent: `${PATH_MODEL}/${config.model}` };
+
+    setBlockProps(block, {
+      displayName: config.label,
+      lightLevel: 0.8,
+      material: 'glass',
+      renderType: 'translucent',
+    });
+
+    // 按钮方块默认状态
+    JSON_ASSETS.push({
+      PATH: `${MOD_ID}:models/block/${blockName}`,
+      DATA: modelJSON,
+    });
+
+    // 按钮方块按下状态
+    JSON_ASSETS.push({
+      PATH: `${MOD_ID}:models/block/${blockName}_pressed`,
+      DATA: modelJSON,
+    });
+
+    // 按钮物品状态
+    JSON_ASSETS.push({
+      PATH: `${MOD_ID}:models/item/${blockName}`,
+      DATA: modelJSON,
+    });
+
+  });
+
+  console.info(`${LOG_PREFIX} 注册方块 - 简约灯 - 完成`);
 
 });
 

@@ -24,6 +24,12 @@ declare const global: {
     };
   };
 
+  /** 需要在 `client.generate_assets` 生成的 JSON 文件 */
+  JSON_ASSETS: Array<{
+    PATH: string;
+    DATA: Internal.JsonElement;
+  }>;
+
   /** 日志前缀 */
   LOG_PREFIX: string;
 

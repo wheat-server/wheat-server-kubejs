@@ -118,6 +118,7 @@ global.COLORS = {
   },
 };
 
+global.JSON_ASSETS = [];
 global.LOG_PREFIX = '[KubeJS]';
 
 console.info(`${global.LOG_PREFIX} 启动`);
