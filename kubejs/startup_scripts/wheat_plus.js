@@ -34,11 +34,17 @@ const LOG_PREFIX = global.LOG_PREFIX;
 /** 模组 ID */
 const MOD_ID = 'wheat_plus';
 
-/** 模型文件基础路径 */
-const PATH_MODEL = `${MOD_ID}:block`;
+/** 方块模型、纹理文件基础短路径 */
+const P_BLOCK = `${MOD_ID}:block`;
 
-/** 纹理文件基础路径 */
-const PATH_TEXTURE = `${MOD_ID}:block`;
+/** 方块模型文件基础长路径 */
+const P_BLOCK_MODEL = `${MOD_ID}:models/block`;
+
+/** 物品模型、纹理文件基础短路径*/
+const P_ITEM = `${MOD_ID}:item`;
+
+/** 物品模型文件基础长路径 */
+const P_ITEM_MODEL = `${MOD_ID}:models/item`;
 
 /**
  * @description 设置方块基础属性
@@ -211,10 +217,10 @@ onEvent('block.registry', (event) => {
 
       if (tPath) {
         block.modelJson = {
-          parent: `${PATH_MODEL}/road/base_full`,
+          parent: `${P_BLOCK}/road/base_full`,
           textures: {
-            content: `${PATH_TEXTURE}/${tPath}`,
-            side: tSide ? `${PATH_TEXTURE}/${tPath}` : undefined
+            content: `${P_BLOCK}/${tPath}`,
+            side: tSide ? `${P_BLOCK}/${tPath}` : undefined
           }
         };
       }
@@ -235,10 +241,10 @@ onEvent('block.registry', (event) => {
 
       if (tPath) {
         block.modelJson = {
-          parent: `${PATH_MODEL}/road/base_full`,
+          parent: `${P_BLOCK}/road/base_full`,
           textures: {
-            content: `${PATH_TEXTURE}/${tPath}_slant`,
-            side: tSide ? `${PATH_TEXTURE}/${tPath}` : undefined
+            content: `${P_BLOCK}/${tPath}_slant`,
+            side: tSide ? `${P_BLOCK}/${tPath}` : undefined
           }
         };
       }
@@ -259,10 +265,10 @@ onEvent('block.registry', (event) => {
 
       if (tPath) {
         block.modelJson = {
-          parent: `${PATH_MODEL}/road/base_half`,
+          parent: `${P_BLOCK}/road/base_half`,
           textures: {
-            content: `${PATH_TEXTURE}/${tPath}`,
-            side: tSide ? `${PATH_TEXTURE}/${tPath}` : undefined
+            content: `${P_BLOCK}/${tPath}`,
+            side: tSide ? `${P_BLOCK}/${tPath}` : undefined
           }
         };
       }
@@ -283,10 +289,10 @@ onEvent('block.registry', (event) => {
 
       if (tPath) {
         block.modelJson = {
-          parent: `${PATH_MODEL}/road/base_half`,
+          parent: `${P_BLOCK}/road/base_half`,
           textures: {
-            content: `${PATH_TEXTURE}/${tPath}_slant`,
-            side: tSide ? `${PATH_TEXTURE}/${tPath}` : undefined
+            content: `${P_BLOCK}/${tPath}_slant`,
+            side: tSide ? `${P_BLOCK}/${tPath}` : undefined
           }
         };
       }
@@ -311,7 +317,7 @@ onEvent('block.registry', (event) => {
     const color = COLORS[key];
     const id = `${MOD_ID}:reinforced_concrete_${color.CODE}`;
     const block = event.create(id, 'basic');
-    const texture = `${PATH_TEXTURE}/reinforced_concrete/${color.CODE}`;
+    const texture = `${P_BLOCK}/reinforced_concrete/${color.CODE}`;
 
     setBlockProps(block, {
       boxType: 'full',
@@ -337,7 +343,7 @@ onEvent('block.registry', (event) => {
   const keys = Object.keys(COLORS);
 
   /** 父模型路径 */
-  const parent = `${PATH_MODEL}/lamp/modern`;
+  const parent = `${P_BLOCK}/lamp/modern`;
 
   keys.forEach((key) => {
 
@@ -347,7 +353,7 @@ onEvent('block.registry', (event) => {
 
     // 纹理文件路径前缀
     // wheat_plus:block/lamp_modern/color_
-    const tBase = `${PATH_TEXTURE}/lamp_modern/${color.CODE}`;
+    const tBase = `${P_BLOCK}/lamp_modern/${color.CODE}`;
 
     setBlockProps(block, {
       boxType: 'full',
@@ -407,7 +413,7 @@ onEvent('block.registry', (event) => {
     const block = event.create(blockId, 'stone_button');
 
     // 用于替换默认模型
-    const modelJSON = { parent: `${PATH_MODEL}/${config.model}` };
+    const modelJSON = { parent: `${P_BLOCK}/${config.model}` };
 
     setBlockProps(block, {
       displayName: config.label,
@@ -418,19 +424,19 @@ onEvent('block.registry', (event) => {
 
     // 按钮方块默认状态
     JSON_ASSETS.push({
-      PATH: `${MOD_ID}:models/block/${blockName}`,
+      PATH: `${P_BLOCK_MODEL}/${blockName}`,
       DATA: modelJSON,
     });
 
     // 按钮方块按下状态
     JSON_ASSETS.push({
-      PATH: `${MOD_ID}:models/block/${blockName}_pressed`,
+      PATH: `${P_BLOCK_MODEL}/${blockName}_pressed`,
       DATA: modelJSON,
     });
 
     // 按钮物品状态
     JSON_ASSETS.push({
-      PATH: `${MOD_ID}:models/item/${blockName}`,
+      PATH: `${P_ITEM_MODEL}/${blockName}`,
       DATA: modelJSON,
     });
 
