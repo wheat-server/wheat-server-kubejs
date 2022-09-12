@@ -478,6 +478,12 @@ onEvent('block.registry', (event) => {
 
   const blocks = [
     {
+      name: 'isolation_pile_a',
+      box: [5, 0, 5, 11, 16, 11, true],
+      label: '隔离桩',
+      model: 'common/isolation_pile_a',
+    },
+    {
       name: 'statue_player_alex',
       box: [4, 0, 6, 12, 31, 10, true],
       label: '模型（Alex）',
