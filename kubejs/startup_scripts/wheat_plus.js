@@ -471,6 +471,78 @@ onEvent('block.registry', (event) => {
 
 });
 
+// 注册方块 - 纯色方块
+onEvent('block.registry', (event) => {
+
+  console.info(`${LOG_PREFIX} 注册方块 - 纯色方块 - 开始`);
+
+  const blocks = [
+    {
+      name: 'color_black',
+      label: '纯色方块（黑色）',
+      color: [0, 0, 0, 1],
+    },
+    {
+      name: 'color_white',
+      label: '纯色方块（白色）',
+      color: [255, 255, 255, 1],
+    },
+    {
+      name: 'color_blue',
+      label: '纯色方块（蓝色）',
+      color: [0, 0, 255, 1],
+    },
+    {
+      name: 'color_green',
+      label: '纯色方块（绿色）',
+      color: [0, 255, 0, 1],
+    },
+    {
+      name: 'color_red',
+      label: '纯色方块（红色）',
+      color: [255, 0, 0, 1],
+    },
+    {
+      name: 'color_yellow',
+      label: '纯色方块（黄色）',
+      color: [255, 255, 0, 1],
+    },
+    {
+      name: 'color_39c5bb',
+      label: '纯色方块（#39C5BB）',
+      color: [57, 197, 187, 1],
+    },
+    {
+      name: 'color_66ccff',
+      label: '纯色方块（#66CCFF）',
+      color: [102, 204, 255, 1],
+    },
+  ];
+  const texture = `${P_BLOCK}/common/color_base`;
+
+  blocks.forEach((config) => {
+
+    const id = `${MOD_ID}:${config.name}`;
+    const block = event.create(id, 'basic');
+
+    setBlockProps(block, {
+      displayName: config.label,
+      isSolid: false,
+      material: 'stone',
+    });
+
+    block.textureAll(texture);
+    block.color(0, Color.rgba.apply(Color, config.color));
+    block.item((item) => {
+      item.color(0, Color.rgba.apply(Color, config.color));
+    });
+
+  });
+
+  console.info(`${LOG_PREFIX} 注册方块 - 纯色方块 - 完成`);
+
+});
+
 // 注册方块 - 其它
 onEvent('block.registry', (event) => {
 

@@ -17,6 +17,7 @@
 ### Wiki
 
 - [自定义方块](https://mods.latvian.dev/books/kubejs/page/custom-blocks)
+- [tintindex | 森罗万象](https://sqwatermark.com/resguide/vanilla/model/tintindex.html)
 
 ## 代码
 
