@@ -471,6 +471,47 @@ onEvent('block.registry', (event) => {
 
 });
 
+// 注册方块 - 其它
+onEvent('block.registry', (event) => {
+
+  console.info(`${LOG_PREFIX} 注册方块 - 其它 - 开始`);
+
+  const blocks = [
+    {
+      name: 'statue_player_alex',
+      box: [4, 0, 6, 12, 31, 10, true],
+      label: '模型（Alex）',
+      model: 'statue/player_alex',
+    },
+    {
+      name: 'statue_player_steve',
+      box: [4, 0, 6, 12, 31, 10, true],
+      label: '模型（Steve）',
+      model: 'statue/player_steve',
+    },
+  ];
+
+  blocks.forEach((config) => {
+
+    const id = `${MOD_ID}:${config.name}`;
+    const block = event.create(id, 'basic');
+
+    setBlockProps(block, {
+      boxConfig: config.box,
+      boxType: 'custom',
+      displayName: config.label,
+      isSolid: false,
+      material: 'stone',
+      modelPath: `${P_BLOCK}/${config.model}`,
+      renderType: 'cutout',
+    });
+
+  });
+
+  console.info(`${LOG_PREFIX} 注册方块 - 其它 - 完成`);
+
+});
+
 // 注册物品
 // onEvent('item.registry', (event) => {
 //   console.info(`${LOG_PREFIX} 注册物品 - 开始`);

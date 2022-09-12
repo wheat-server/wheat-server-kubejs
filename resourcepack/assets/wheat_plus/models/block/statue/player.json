@@ -1,0 +1,39 @@
+{
+  "credit": "Created by Frost-ZX using Blockbench.",
+  "ambientocclusion": false,
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [70, 0, 0],
+      "scale": [0.4, 0.4, 0.4]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [70, 0, 0],
+      "scale": [0.4, 0.4, 0.4]
+    },
+    "firstperson_righthand": {
+      "translation": [1, 0, 0],
+      "scale": [0.5, 0.5, 0.5]
+    },
+    "firstperson_lefthand": {
+      "translation": [1, 0, 0],
+      "scale": [0.5, 0.5, 0.5]
+    },
+    "ground": {
+      "translation": [0, 2, 0],
+      "scale": [0.5, 0.5, 0.5]
+    },
+    "gui": {
+      "rotation": [20, -145, 0],
+      "translation": [0, -3, 0],
+      "scale": [0.4, 0.4, 0.4]
+    },
+    "head": {
+      "translation": [11, 0, 0],
+      "scale": [0.4, 0.4, 0.4]
+    },
+    "fixed": {
+      "translation": [0, -4, -1],
+      "scale": [0.5, 0.5, 0.5]
+    }
+  }
+}
