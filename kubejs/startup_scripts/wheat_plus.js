@@ -134,7 +134,7 @@ onEvent('block.registry', (event) => {
     {
       name: 'road_blank',
       label: '路 - 空白',
-      texturePath: 'transparent',
+      texturePath: 'common/transparent',
       hasNormal: true, // 普通 / 直线
       hasSlant: false, // 斜线
       hasSide: false,  // 侧边纹理

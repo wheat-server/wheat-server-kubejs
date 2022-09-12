@@ -6,7 +6,7 @@
 		"particle": "wheat_plus:block/road/base",
 		"base": "wheat_plus:block/road/base",
 		"content": "wheat_plus:block/road/content_gray",
-		"side": "wheat_plus:block/transparent"
+		"side": "wheat_plus:block/common/transparent"
 	},
 	"elements": [
 		{
