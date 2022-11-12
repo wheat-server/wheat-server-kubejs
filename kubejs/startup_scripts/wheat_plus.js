@@ -1,35 +1,11 @@
 // priority: 0
 
 const defaults = global.defaults;
+const setBlockProps = global.setBlockProps;
+
 const COLORS = global.COLORS;
 const JSON_ASSETS = global.JSON_ASSETS;
 const LOG_PREFIX = global.LOG_PREFIX;
-
-/**
- * @desc 方块构造器
- * @typedef B.Builder
- * @type {Internal.BlockBuilder}
- */
-
-/**
- * @desc 方块碰撞箱类型
- * @typedef B.BoxType
- * @type {'custom'|'full'|'half'}
- */
-
-/**
- * @desc 方块材质类型
- * @typedef B.Material
- * @type {Internal.MaterialJS_}
- */
-
-/**
- * @desc 方块渲染类型
- * - `cutout`: required for blocks with texture like glass
- * - `translucent`: required for blocks like stained glass
- * @typedef B.RenderType
- * @type {'solid'|'cutout'|'cutout_mipped'|'translucent'}
- */
 
 /** 模组 ID */
 const MOD_ID = 'wheat_plus';
@@ -45,82 +21,6 @@ const P_ITEM = `${MOD_ID}:item`;
 
 /** 物品模型文件基础长路径 */
 const P_ITEM_MODEL = `${MOD_ID}:models/item`;
-
-/**
- * @description 设置方块基础属性
- * @param {B.Builder}    block
- * @param {object}       options
- * @param {number[]}     options.boxConfig   碰撞箱配置（自定义）
- * @param {B.BoxType}    options.boxType     碰撞箱类型（内置）
- * @param {boolean}      options.collision   开启碰撞箱，默认：true
- * @param {string}       options.displayName 方块显示名称
- * @param {number}       options.hardness    默认：8
- * @param {boolean}      options.isSolid     是否为完整方块，默认：true
- * @param {number}       options.lightLevel  范围：0 ~ 1
- * @param {B.Material}   options.material    默认：stone
- * @param {string}       options.modelPath   模型文件路径
- * @param {B.RenderType} options.renderType  默认：solid
- * @param {number}       options.resistance  默认：16
- * @param {boolean}      options.isFull      fullBlock（未使用）
- * @param {boolean}      options.isOpaque    opaque（未使用）
- * @param {boolean}      options.transparent transparent（未使用）
- */
-const setBlockProps = function (block, options) {
-
-  if (!block) {
-    console.error(`${LOG_PREFIX} 设置方块属性失败：缺少“block”参数`);
-    return false;
-  }
-
-  if (!options) {
-    options = {};
-  }
-
-  const boxConfig = defaults(options.boxConfig, null);
-  const boxType = defaults(options.boxType, '');
-  const collision = defaults(options.collision, true);
-  const displayName = defaults(options.displayName, '');
-  const hardness = defaults(options.hardness, 8);
-  const isSolid = defaults(options.isSolid, true);
-  const lightLevel = defaults(options.lightLevel, 0);
-  const material = defaults(options.material, 'stone');
-  const modelPath = defaults(options.modelPath, '');
-  const renderType = defaults(options.renderType, 'solid');
-  const resistance = defaults(options.resistance, 16);
-
-  if (boxConfig) {
-    block.box.apply(block, boxConfig);
-  } else if (boxType === 'full') {
-    block.box(0, 0, 0, 16, 16, 16, true);
-  } else if (boxType === 'half') {
-    block.box(0, 0, 0, 16, 8, 16, true);
-  }
-
-  if (!collision) {
-    block.noCollision();
-  }
-
-  if (displayName) {
-    block.displayName(displayName);
-  }
-
-  if (!isSolid) {
-    block.notSolid();
-  }
-
-  if (modelPath) {
-    block.model(modelPath);
-  }
-
-  block.hardness(hardness);
-  block.lightLevel(lightLevel);
-  block.material(material);
-  block.renderType(renderType);
-  block.resistance(resistance);
-
-  return true;
-
-};
 
 console.info(`${LOG_PREFIX} 处理 ${MOD_ID} 相关内容`);
 

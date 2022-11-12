@@ -5,12 +5,67 @@ global.defaults = function (v, d) {
   return ((typeof v === 'undefined' || v === null) ? d : v);
 };
 
+global.setBlockProps = function (block, opts) {
+
+  if (!block) {
+    console.error(`${LOG_PREFIX} 设置方块属性失败：缺少“block”参数`);
+    return false;
+  }
+
+  if (!opts) {
+    opts = {};
+  }
+
+  const boxConfig = defaults(opts.boxConfig, null);
+  const boxType = defaults(opts.boxType, '');
+  const collision = defaults(opts.collision, true);
+  const displayName = defaults(opts.displayName, '');
+  const hardness = defaults(opts.hardness, 8);
+  const isSolid = defaults(opts.isSolid, true);
+  const lightLevel = defaults(opts.lightLevel, 0);
+  const material = defaults(opts.material, 'stone');
+  const modelPath = defaults(opts.modelPath, '');
+  const renderType = defaults(opts.renderType, 'solid');
+  const resistance = defaults(opts.resistance, 16);
+
+  if (boxConfig) {
+    block.box.apply(block, boxConfig);
+  } else if (boxType === 'full') {
+    block.box(0, 0, 0, 16, 16, 16, true);
+  } else if (boxType === 'half') {
+    block.box(0, 0, 0, 16, 8, 16, true);
+  }
+
+  if (!collision) {
+    block.noCollision();
+  }
+
+  if (displayName) {
+    block.displayName(displayName);
+  }
+
+  if (!isSolid) {
+    block.notSolid();
+  }
+
+  if (modelPath) {
+    block.model(modelPath);
+  }
+
+  block.hardness(hardness);
+  block.lightLevel(lightLevel);
+  block.material(material);
+  block.renderType(renderType);
+  block.resistance(resistance);
+
+  return true;
+
+};
+
 global.writeJSON = function (path, data) {
   JsonIO.write(path, data);
 };
 
-// 参考：
-// https://github.com/Railcraft/Railcraft/blob/mc-1.12.2/src/main/java/mods/railcraft/common/plugins/color/EnumColor.java
 global.COLORS = {
   WHITE: {
     CODE: 'white',
