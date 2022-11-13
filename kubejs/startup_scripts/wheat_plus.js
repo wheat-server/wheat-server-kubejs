@@ -30,8 +30,7 @@ onEvent('block.registry', (event) => {
 
   console.info(`${LOG_PREFIX} 注册方块 - 路 - 开始`);
 
-  /** 普通路方块 */
-  const roadBlocksNormal = [
+  const blockList = [
     {
       name: 'road_blank',
       label: '路 - 空白',
@@ -97,12 +96,12 @@ onEvent('block.registry', (event) => {
     },
   ];
 
-  roadBlocksNormal.forEach((config) => {
+  blockList.forEach((config) => {
 
-    /** 方块 ID，包含模组 ID */
-    const id = `${MOD_ID}:${config.name}`;
+    /** 方块名称 */
+    const blockName = config.name;
 
-    /** 方块名称文本 */
+    /** 方块文本 */
     const label = (config.label || 'Unknown');
 
     /** 纹理文件相对路径 */
@@ -111,99 +110,123 @@ onEvent('block.registry', (event) => {
     /** 是否存在侧边纹理 */
     const tSide = config.hasSide;
 
-    // 完整，直线
+    // 完整，普通 / 直线
     if (config.hasNormal) {
 
-      const block = event.create(`${id}_full`, 'basic');
+      const blockId = `${blockName}_full`;
+      const fullId = `${MOD_ID}:${blockId}`;
+      const block = event.create(fullId, 'basic');
       const suffix = (config.isBlank ? '' : '，直线');
+
+      const modelPathL = `${P_BLOCK_MODEL}/${blockId}`;
+      const modelPathS = `${P_BLOCK}/${blockId}`;
+      const modelJSON = {
+        parent: `${P_BLOCK}/road/base_full`,
+        textures: {
+          content: `${P_BLOCK}/${tPath}`,
+          side: tSide ? `${P_BLOCK}/${tPath}` : undefined
+        }
+      };
+
+      JSON_ASSETS.push({ PATH: modelPathL, DATA: modelJSON });
 
       setBlockProps(block, {
         boxType: 'full',
         displayName: `${label}，完整${suffix}`,
+        modelPath: modelPathS,
         renderType: 'cutout',
       });
-
-      if (tPath) {
-        block.modelJson = {
-          parent: `${P_BLOCK}/road/base_full`,
-          textures: {
-            content: `${P_BLOCK}/${tPath}`,
-            side: tSide ? `${P_BLOCK}/${tPath}` : undefined
-          }
-        };
-      }
 
     }
 
     // 完整，斜线
     if (config.hasSlant) {
 
-      const block = event.create(`${id}_full_slant`, 'basic');
-      const suffix = (config.isBlank ? '' : '，斜线');
+      const blockId = `${blockName}_full_slant`;
+      const fullId = `${MOD_ID}:${blockId}`;
+      const block = event.create(fullId, 'basic');
+      const suffix = '，斜线';
+
+      const modelPathL = `${P_BLOCK_MODEL}/${blockId}`;
+      const modelPathS = `${P_BLOCK}/${blockId}`;
+      const modelJSON = {
+        parent: `${P_BLOCK}/road/base_full`,
+        textures: {
+          content: `${P_BLOCK}/${tPath}_slant`,
+          side: tSide ? `${P_BLOCK}/${tPath}` : undefined
+        }
+      };
+
+      JSON_ASSETS.push({ PATH: modelPathL, DATA: modelJSON });
 
       setBlockProps(block, {
         boxType: 'full',
         displayName: `${label}，完整${suffix}`,
+        modelPath: modelPathS,
         renderType: 'cutout',
       });
 
-      if (tPath) {
-        block.modelJson = {
-          parent: `${P_BLOCK}/road/base_full`,
-          textures: {
-            content: `${P_BLOCK}/${tPath}_slant`,
-            side: tSide ? `${P_BLOCK}/${tPath}` : undefined
-          }
-        };
-      }
+      setHorizontalFacing(block, 'same', modelPathS);
 
     }
 
-    // 一半，直线
+    // 一半，普通 / 直线
     if (config.hasNormal) {
 
-      const block = event.create(`${id}_half`, 'basic');
+      const blockId = `${blockName}_half`;
+      const fullId = `${MOD_ID}:${blockId}`;
+      const block = event.create(fullId, 'basic');
       const suffix = (config.isBlank ? '' : '，直线');
+
+      const modelPathL = `${P_BLOCK_MODEL}/${blockId}`;
+      const modelPathS = `${P_BLOCK}/${blockId}`;
+      const modelJSON = {
+        parent: `${P_BLOCK}/road/base_half`,
+        textures: {
+          content: `${P_BLOCK}/${tPath}`,
+          side: tSide ? `${P_BLOCK}/${tPath}` : undefined
+        }
+      };
+
+      JSON_ASSETS.push({ PATH: modelPathL, DATA: modelJSON });
 
       setBlockProps(block, {
         boxType: 'half',
         displayName: `${label}，一半${suffix}`,
+        modelPath: modelPathS,
         renderType: 'cutout',
       });
-
-      if (tPath) {
-        block.modelJson = {
-          parent: `${P_BLOCK}/road/base_half`,
-          textures: {
-            content: `${P_BLOCK}/${tPath}`,
-            side: tSide ? `${P_BLOCK}/${tPath}` : undefined
-          }
-        };
-      }
 
     }
 
     // 一半，斜线
     if (config.hasSlant) {
 
-      const block = event.create(`${id}_half_slant`, 'basic');
-      const suffix = (config.isBlank ? '' : '，斜线');
+      const blockId = `${blockName}_half_slant`;
+      const fullId = `${MOD_ID}:${blockId}`;
+      const block = event.create(fullId, 'basic');
+      const suffix = '，斜线';
+
+      const modelPathL = `${P_BLOCK_MODEL}/${blockId}`;
+      const modelPathS = `${P_BLOCK}/${blockId}`;
+      const modelJSON = {
+        parent: `${P_BLOCK}/road/base_half`,
+        textures: {
+          content: `${P_BLOCK}/${tPath}_slant`,
+          side: tSide ? `${P_BLOCK}/${tPath}` : undefined
+        }
+      };
+
+      JSON_ASSETS.push({ PATH: modelPathL, DATA: modelJSON });
 
       setBlockProps(block, {
         boxType: 'half',
         displayName: `${label}，一半${suffix}`,
+        modelPath: modelPathS,
         renderType: 'cutout',
       });
 
-      if (tPath) {
-        block.modelJson = {
-          parent: `${P_BLOCK}/road/base_half`,
-          textures: {
-            content: `${P_BLOCK}/${tPath}_slant`,
-            side: tSide ? `${P_BLOCK}/${tPath}` : undefined
-          }
-        };
-      }
+      setHorizontalFacing(block, 'same', modelPathS);
 
     }
 
