@@ -26,6 +26,8 @@
   - [BlockBuilder.java](https://github.com/KubeJS-Mods/KubeJS/blob/1.18/main/common/src/main/java/dev/latvian/mods/kubejs/block/BlockBuilder.java)
   - [BasicBlockJS.java](https://github.com/KubeJS-Mods/KubeJS/blob/1.18/main/common/src/main/java/dev/latvian/mods/kubejs/block/custom/BasicBlockJS.java)
   - [WoodenButtonBlockBuilder.java](https://github.com/KubeJS-Mods/KubeJS/blob/1.18/main/common/src/main/java/dev/latvian/mods/kubejs/block/custom/WoodenButtonBlockBuilder.java)
+- [Cardinally Orientable Blocks and Shuffle Asset Generation](https://github.com/KubeJS-Mods/KubeJS/pull/459)
+- [Basic BlockState Support and Misc Delegate Methods](https://github.com/KubeJS-Mods/KubeJS/pull/464)
 
 ### 颜色列表
 

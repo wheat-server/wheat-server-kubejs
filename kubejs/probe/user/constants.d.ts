@@ -63,6 +63,18 @@ declare const global: {
   setBlockProps(block: B_Builder, opts: SetBlockPropsOpts): boolean;
 
   /**
+   * @desc 设置方块水平旋转属性
+   * @param block 方块
+   * @param type  旋转类型
+   * @param model 模型路径
+   */
+  setHorizontalFacing(
+    block: B_Builder,
+    type: 'revert' | 'same',
+    model: string
+  ): boolean;
+
+  /**
    * @desc 写入 JSON 文件
    * @param path 文件路径，相对于 `.minecraft`
    * @param data JSON 内容对象

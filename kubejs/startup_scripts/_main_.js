@@ -62,6 +62,54 @@ global.setBlockProps = function (block, opts) {
 
 };
 
+global.setHorizontalFacing = function (block, type, model) {
+
+  const prop = BlockProperties.HORIZONTAL_FACING;
+
+  // 设置模型旋转
+  block.blockstateJson = {
+    'variants': {
+      'facing=north': { model: model, y: 0 },
+      'facing=east': { model: model, y: 90 },
+      'facing=south': { model: model, y: 180 },
+      'facing=west': { model: model, y: 270 }
+    }
+  };
+
+  // 添加属性
+  block.property(prop);
+
+  // 处理默认状态
+  block.defaultState((ev) => {
+    ev.set(prop, 'north');
+  });
+
+  // 处理放置状态
+  switch (type) {
+    // 与玩家朝向相反
+    case 'revert':
+      block.placementState((ev) => {
+        const d = ev.getHorizontalDirection().getOpposite().toString();
+        ev.set(prop, d);
+      });
+      break;
+    // 与玩家朝向相同
+    case 'same':
+      block.placementState((ev) => {
+        const d = ev.getHorizontalDirection().toString();
+        ev.set(prop, d);
+      });
+      break;
+    // 其它
+    default:
+      console.error(`${LOG_PREFIX} 设置旋转属性失败：参数“type”错误`);
+      return false;
+  }
+
+  return true;
+
+};
+
 global.writeJSON = function (path, data) {
   JsonIO.write(path, data);
 };

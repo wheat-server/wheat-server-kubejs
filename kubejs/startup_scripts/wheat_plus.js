@@ -2,6 +2,7 @@
 
 const defaults = global.defaults;
 const setBlockProps = global.setBlockProps;
+const setHorizontalFacing = global.setHorizontalFacing;
 
 const COLORS = global.COLORS;
 const JSON_ASSETS = global.JSON_ASSETS;
@@ -454,18 +455,21 @@ onEvent('block.registry', (event) => {
       box: [5, 0, 5, 11, 16, 11, true],
       label: '隔离桩',
       model: 'common/isolation_pile_a',
+      orientable: false,
     },
     {
       name: 'statue_player_alex',
       box: [4, 0, 6, 12, 31, 10, true],
       label: '模型（Alex）',
       model: 'statue/player_alex',
+      orientable: true,
     },
     {
       name: 'statue_player_steve',
       box: [4, 0, 6, 12, 31, 10, true],
       label: '模型（Steve）',
       model: 'statue/player_steve',
+      orientable: true,
     },
   ];
 
@@ -473,6 +477,7 @@ onEvent('block.registry', (event) => {
 
     const id = `${MOD_ID}:${config.name}`;
     const block = event.create(id, 'basic');
+    const model = `${P_BLOCK}/${config.model}`;
 
     setBlockProps(block, {
       boxConfig: config.box,
@@ -480,9 +485,13 @@ onEvent('block.registry', (event) => {
       displayName: config.label,
       isSolid: false,
       material: 'stone',
-      modelPath: `${P_BLOCK}/${config.model}`,
+      modelPath: model,
       renderType: 'cutout',
     });
+
+    if (config.orientable) {
+      setHorizontalFacing(block, 'revert', model);
+    }
 
   });
 
@@ -494,4 +503,10 @@ onEvent('block.registry', (event) => {
 // onEvent('item.registry', (event) => {
 //   console.info(`${LOG_PREFIX} 注册物品 - 开始`);
 //   console.info(`${LOG_PREFIX} 注册物品 - 完成`);
+// });
+
+// 注册声音
+// onEvent('sound.registry', (event) => {
+//   console.info(`${LOG_PREFIX} 注册声音 - 开始`);
+//   console.info(`${LOG_PREFIX} 注册声音 - 完成`);
 // });
