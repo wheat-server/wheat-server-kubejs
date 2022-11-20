@@ -209,6 +209,71 @@ onEvent('block.registry', function (event) {
 
 });
 
+// 注册方块 - 矿车方块
+onEvent('block.registry', function (event) {
+
+  /** 父模型路径 */
+  const modelParent = `${P_BLOCK}/minecart/main`;
+
+  /** 纹理文件路径前缀 */
+  const texturePrefix = `${P_BLOCK}/minecart/`;
+
+  const blocks = [
+    { name: 'mtr_gz_gf_1', label: '广州地铁 - 广佛线' },
+    { name: 'mtr_gz_gf_2', label: '广州地铁 - 广佛线' },
+    { name: 'mtr_gz_l1_1', label: '广州地铁 - 一号线' },
+    { name: 'mtr_gz_l1_2', label: '广州地铁 - 一号线' },
+    { name: 'mtr_gz_l2_1', label: '广州地铁 - 二号线' },
+    { name: 'mtr_gz_l3_1', label: '广州地铁 - 三号线' },
+    { name: 'mtr_gz_l3_2', label: '广州地铁 - 三号线' },
+    { name: 'mtr_gz_l4_1', label: '广州地铁 - 四号线' },
+    { name: 'mtr_gz_l5_1', label: '广州地铁 - 五号线' },
+    { name: 'mtr_gz_l6_1', label: '广州地铁 - 六号线' },
+    { name: 'mtr_gz_l7_1', label: '广州地铁 - 七号线' },
+    { name: 'mtr_gz_l8_1', label: '广州地铁 - 八号线' },
+    { name: 'mtr_gz_l9_1', label: '广州地铁 - 九号线' },
+    { name: 'mtr_gz_l13_1', label: '广州地铁 - 十三号线' },
+    { name: 'mtr_gz_l14_1', label: '广州地铁 - 十四号线' },
+    { name: 'mtr_gz_l21_1', label: '广州地铁 - 二十一号线' },
+  ];
+
+  blocks.forEach((config) => {
+
+    const blockName = config.name;
+    const blockId = `${MOD_ID}:minecart_${blockName}`;
+    const block = event.create(blockId, 'basic');
+
+    const modelPathL = `${P_BLOCK_MODEL}/minecart/${blockName}`;
+    const modelPathS = `${P_BLOCK}/minecart/${blockName}`;
+    const modelJSON = {
+      parent: modelParent,
+      textures: {
+        main: `${texturePrefix}${blockName}`
+      }
+    };
+
+    // 生成模型 JSON 文件
+    JSON_ASSETS.push({ PATH: modelPathL, DATA: modelJSON });
+
+    // 设置基础属性
+    setBlockProps(block, {
+      boxConfig: [-3, 0, -6, 19, 16, 22],
+      boxType: 'custom',
+      collision: false,
+      displayName: config.label,
+      isSolid: false,
+      material: 'metal',
+      modelPath: modelPathS,
+      renderType: 'cutout',
+    });
+
+    // 设置旋转属性
+    setHorizontalFacing(block, 'same', modelPathS);
+
+  });
+
+});
+
 // 注册方块 - 路
 onEvent('block.registry', function (event) {
 
