@@ -25,8 +25,192 @@ const P_ITEM_MODEL = `${MOD_ID}:models/item`;
 
 console.info(`${LOG_PREFIX} 处理 ${MOD_ID} 相关内容`);
 
+// 注册方块 - 纯色方块
+onEvent('block.registry', function (event) {
+
+  console.info(`${LOG_PREFIX} 注册方块 - 纯色方块 - 开始`);
+
+  const blocks = [
+    {
+      name: 'color_black',
+      label: '纯色方块（黑色）',
+      color: [0, 0, 0, 1],
+    },
+    {
+      name: 'color_white',
+      label: '纯色方块（白色）',
+      color: [255, 255, 255, 1],
+    },
+    {
+      name: 'color_blue',
+      label: '纯色方块（蓝色）',
+      color: [0, 0, 255, 1],
+    },
+    {
+      name: 'color_green',
+      label: '纯色方块（绿色）',
+      color: [0, 255, 0, 1],
+    },
+    {
+      name: 'color_red',
+      label: '纯色方块（红色）',
+      color: [255, 0, 0, 1],
+    },
+    {
+      name: 'color_yellow',
+      label: '纯色方块（黄色）',
+      color: [255, 255, 0, 1],
+    },
+    {
+      name: 'color_39c5bb',
+      label: '纯色方块（#39C5BB）',
+      color: [57, 197, 187, 1],
+    },
+    {
+      name: 'color_66ccff',
+      label: '纯色方块（#66CCFF）',
+      color: [102, 204, 255, 1],
+    },
+  ];
+  const texture = `${P_BLOCK}/common/color_base`;
+
+  blocks.forEach((config) => {
+
+    const id = `${MOD_ID}:${config.name}`;
+    const block = event.create(id, 'basic');
+
+    setBlockProps(block, {
+      displayName: config.label,
+      isSolid: false,
+      material: 'stone',
+    });
+
+    block.textureAll(texture);
+    block.color(0, Color.rgba.apply(Color, config.color));
+    block.item((item) => {
+      item.color(0, Color.rgba.apply(Color, config.color));
+    });
+
+  });
+
+  console.info(`${LOG_PREFIX} 注册方块 - 纯色方块 - 完成`);
+
+});
+
+// 注册方块 - 灯（简约）
+onEvent('block.registry', function (event) {
+
+  console.info(`${LOG_PREFIX} 注册方块 - 简约灯 - 开始`);
+
+  const blocks = [
+    {
+      name: 'lamp_simple_large',
+      label: '简约灯（大）',
+      model: 'lamp/simple_large',
+    },
+    {
+      name: 'lamp_simple_medium',
+      label: '简约灯（中）',
+      model: 'lamp/simple_medium',
+    },
+    {
+      name: 'lamp_simple_small',
+      label: '简约灯（小）',
+      model: 'lamp/simple_small',
+    },
+    {
+      name: 'lamp_simple_stripe',
+      label: '简约灯（条状）',
+      model: 'lamp/simple_stripe',
+    },
+  ];
+
+  blocks.forEach((config) => {
+
+    const blockName = config.name;
+    const blockId = `${MOD_ID}:${blockName}`;
+    const block = event.create(blockId, 'stone_button');
+
+    // 用于替换默认模型
+    const modelJSON = { parent: `${P_BLOCK}/${config.model}` };
+
+    setBlockProps(block, {
+      displayName: config.label,
+      lightLevel: 0.8,
+      material: 'glass',
+      renderType: 'translucent',
+    });
+
+    // 按钮方块默认状态
+    JSON_ASSETS.push({
+      PATH: `${P_BLOCK_MODEL}/${blockName}`,
+      DATA: modelJSON,
+    });
+
+    // 按钮方块按下状态
+    JSON_ASSETS.push({
+      PATH: `${P_BLOCK_MODEL}/${blockName}_pressed`,
+      DATA: modelJSON,
+    });
+
+    // 按钮物品状态
+    JSON_ASSETS.push({
+      PATH: `${P_ITEM_MODEL}/${blockName}`,
+      DATA: modelJSON,
+    });
+
+  });
+
+  console.info(`${LOG_PREFIX} 注册方块 - 简约灯 - 完成`);
+
+});
+
+// 注册方块 - 灯（现代）
+onEvent('block.registry', function (event) {
+
+  console.info(`${LOG_PREFIX} 注册方块 - 现代灯 - 开始`);
+
+  const keys = Object.keys(COLORS);
+
+  /** 父模型路径 */
+  const parent = `${P_BLOCK}/lamp/modern`;
+
+  keys.forEach((key) => {
+
+    const color = COLORS[key];
+    const id = `${MOD_ID}:lamp_modern_${color.CODE}`;
+    const block = event.create(id, 'basic');
+
+    // 纹理文件路径前缀
+    // wheat_plus:block/lamp_modern/color_
+    const tBase = `${P_BLOCK}/lamp_modern/${color.CODE}`;
+
+    setBlockProps(block, {
+      boxType: 'full',
+      displayName: `现代${color.LABEL_CN}灯`,
+      isSolid: false,
+      lightLevel: 1,
+      material: 'glass',
+      renderType: 'translucent',
+    });
+
+    block.modelJson = {
+      parent: parent,
+      textures: {
+        glow: `${tBase}_glow`,
+        core: `${tBase}_core`,
+        particle: `${tBase}_core`
+      }
+    };
+
+  });
+
+  console.info(`${LOG_PREFIX} 注册方块 - 现代灯 - 完成`);
+
+});
+
 // 注册方块 - 路
-onEvent('block.registry', (event) => {
+onEvent('block.registry', function (event) {
 
   console.info(`${LOG_PREFIX} 注册方块 - 路 - 开始`);
 
@@ -237,7 +421,7 @@ onEvent('block.registry', (event) => {
 });
 
 // 注册方块 - 强化混凝土
-onEvent('block.registry', (event) => {
+onEvent('block.registry', function (event) {
 
   console.info(`${LOG_PREFIX} 注册方块 - 强化混凝土 - 开始`);
 
@@ -283,192 +467,8 @@ onEvent('block.registry', (event) => {
 
 });
 
-// 注册方块 - 现代灯
-onEvent('block.registry', (event) => {
-
-  console.info(`${LOG_PREFIX} 注册方块 - 现代灯 - 开始`);
-
-  const keys = Object.keys(COLORS);
-
-  /** 父模型路径 */
-  const parent = `${P_BLOCK}/lamp/modern`;
-
-  keys.forEach((key) => {
-
-    const color = COLORS[key];
-    const id = `${MOD_ID}:lamp_modern_${color.CODE}`;
-    const block = event.create(id, 'basic');
-
-    // 纹理文件路径前缀
-    // wheat_plus:block/lamp_modern/color_
-    const tBase = `${P_BLOCK}/lamp_modern/${color.CODE}`;
-
-    setBlockProps(block, {
-      boxType: 'full',
-      displayName: `现代${color.LABEL_CN}灯`,
-      isSolid: false,
-      lightLevel: 1,
-      material: 'glass',
-      renderType: 'translucent',
-    });
-
-    block.modelJson = {
-      parent: parent,
-      textures: {
-        glow: `${tBase}_glow`,
-        core: `${tBase}_core`,
-        particle: `${tBase}_core`
-      }
-    };
-
-  });
-
-  console.info(`${LOG_PREFIX} 注册方块 - 现代灯 - 完成`);
-
-});
-
-// 注册方块 - 简约灯
-onEvent('block.registry', (event) => {
-
-  console.info(`${LOG_PREFIX} 注册方块 - 简约灯 - 开始`);
-
-  const blocks = [
-    {
-      name: 'lamp_simple_large',
-      label: '简约灯（大）',
-      model: 'lamp/simple_large',
-    },
-    {
-      name: 'lamp_simple_medium',
-      label: '简约灯（中）',
-      model: 'lamp/simple_medium',
-    },
-    {
-      name: 'lamp_simple_small',
-      label: '简约灯（小）',
-      model: 'lamp/simple_small',
-    },
-    {
-      name: 'lamp_simple_stripe',
-      label: '简约灯（条状）',
-      model: 'lamp/simple_stripe',
-    },
-  ];
-
-  blocks.forEach((config) => {
-
-    const blockName = config.name;
-    const blockId = `${MOD_ID}:${blockName}`;
-    const block = event.create(blockId, 'stone_button');
-
-    // 用于替换默认模型
-    const modelJSON = { parent: `${P_BLOCK}/${config.model}` };
-
-    setBlockProps(block, {
-      displayName: config.label,
-      lightLevel: 0.8,
-      material: 'glass',
-      renderType: 'translucent',
-    });
-
-    // 按钮方块默认状态
-    JSON_ASSETS.push({
-      PATH: `${P_BLOCK_MODEL}/${blockName}`,
-      DATA: modelJSON,
-    });
-
-    // 按钮方块按下状态
-    JSON_ASSETS.push({
-      PATH: `${P_BLOCK_MODEL}/${blockName}_pressed`,
-      DATA: modelJSON,
-    });
-
-    // 按钮物品状态
-    JSON_ASSETS.push({
-      PATH: `${P_ITEM_MODEL}/${blockName}`,
-      DATA: modelJSON,
-    });
-
-  });
-
-  console.info(`${LOG_PREFIX} 注册方块 - 简约灯 - 完成`);
-
-});
-
-// 注册方块 - 纯色方块
-onEvent('block.registry', (event) => {
-
-  console.info(`${LOG_PREFIX} 注册方块 - 纯色方块 - 开始`);
-
-  const blocks = [
-    {
-      name: 'color_black',
-      label: '纯色方块（黑色）',
-      color: [0, 0, 0, 1],
-    },
-    {
-      name: 'color_white',
-      label: '纯色方块（白色）',
-      color: [255, 255, 255, 1],
-    },
-    {
-      name: 'color_blue',
-      label: '纯色方块（蓝色）',
-      color: [0, 0, 255, 1],
-    },
-    {
-      name: 'color_green',
-      label: '纯色方块（绿色）',
-      color: [0, 255, 0, 1],
-    },
-    {
-      name: 'color_red',
-      label: '纯色方块（红色）',
-      color: [255, 0, 0, 1],
-    },
-    {
-      name: 'color_yellow',
-      label: '纯色方块（黄色）',
-      color: [255, 255, 0, 1],
-    },
-    {
-      name: 'color_39c5bb',
-      label: '纯色方块（#39C5BB）',
-      color: [57, 197, 187, 1],
-    },
-    {
-      name: 'color_66ccff',
-      label: '纯色方块（#66CCFF）',
-      color: [102, 204, 255, 1],
-    },
-  ];
-  const texture = `${P_BLOCK}/common/color_base`;
-
-  blocks.forEach((config) => {
-
-    const id = `${MOD_ID}:${config.name}`;
-    const block = event.create(id, 'basic');
-
-    setBlockProps(block, {
-      displayName: config.label,
-      isSolid: false,
-      material: 'stone',
-    });
-
-    block.textureAll(texture);
-    block.color(0, Color.rgba.apply(Color, config.color));
-    block.item((item) => {
-      item.color(0, Color.rgba.apply(Color, config.color));
-    });
-
-  });
-
-  console.info(`${LOG_PREFIX} 注册方块 - 纯色方块 - 完成`);
-
-});
-
 // 注册方块 - 其它
-onEvent('block.registry', (event) => {
+onEvent('block.registry', function (event) {
 
   console.info(`${LOG_PREFIX} 注册方块 - 其它 - 开始`);
 
@@ -523,13 +523,13 @@ onEvent('block.registry', (event) => {
 });
 
 // 注册物品
-// onEvent('item.registry', (event) => {
+// onEvent('item.registry', function (event) {
 //   console.info(`${LOG_PREFIX} 注册物品 - 开始`);
 //   console.info(`${LOG_PREFIX} 注册物品 - 完成`);
 // });
 
 // 注册声音
-// onEvent('sound.registry', (event) => {
+// onEvent('sound.registry', function (event) {
 //   console.info(`${LOG_PREFIX} 注册声音 - 开始`);
 //   console.info(`${LOG_PREFIX} 注册声音 - 完成`);
 // });
