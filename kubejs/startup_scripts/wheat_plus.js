@@ -212,6 +212,8 @@ onEvent('block.registry', function (event) {
 // 注册方块 - 矿车方块
 onEvent('block.registry', function (event) {
 
+  console.info(`${LOG_PREFIX} 注册方块 - 矿车方块 - 开始`);
+
   /** 父模型路径 */
   const modelParent = `${P_BLOCK}/minecart/main`;
 
@@ -235,6 +237,40 @@ onEvent('block.registry', function (event) {
     { name: 'mtr_gz_l13_1', label: '广州地铁 - 十三号线' },
     { name: 'mtr_gz_l14_1', label: '广州地铁 - 十四号线' },
     { name: 'mtr_gz_l21_1', label: '广州地铁 - 二十一号线' },
+    { name: 'cr_ca25g_red', label: '中国铁路 - CA25G_RED' },
+    { name: 'cr_cr200j_we', label: '中国铁路 - CR200J_WE' },
+    { name: 'cr_cr200j_ze', label: '中国铁路 - CR200J_ZE' },
+    { name: 'cr_kd25g_red', label: '中国铁路 - KD25G_RED' },
+    { name: 'cr_rw25g_red', label: '中国铁路 - RW25G_RED' },
+    { name: 'cr_rz25g_red', label: '中国铁路 - RZ25G_RED' },
+    { name: 'cr_rz125z_bj', label: '中国铁路 - RZ125Z_BJ' },
+    { name: 'cr_rz125z_gz', label: '中国铁路 - RZ125Z_GZ' },
+    { name: 'cr_rz125z_new', label: '中国铁路 - RZ125Z_NEW' },
+    { name: 'cr_rz125z_sh', label: '中国铁路 - RZ125Z_SH' },
+    { name: 'cr_uz25g_red', label: '中国铁路 - UZ25G_RED' },
+    { name: 'cr_xl25g_red', label: '中国铁路 - XL25G_RED' },
+    { name: 'cr_yw22b_new', label: '中国铁路 - YW22B_NEW' },
+    { name: 'cr_yw22b_old', label: '中国铁路 - YW22B_OLD' },
+    { name: 'cr_yw25b_new', label: '中国铁路 - YW25B_NEW' },
+    { name: 'cr_yw25b_old', label: '中国铁路 - YW25B_OLD' },
+    { name: 'cr_yw25g_new', label: '中国铁路 - YW25G_NEW' },
+    { name: 'cr_yw25g_red', label: '中国铁路 - YW25G_RED' },
+    { name: 'cr_yw25k_blue', label: '中国铁路 - YW25K_BLUE' },
+    { name: 'cr_yw25k_new', label: '中国铁路 - YW25K_NEW' },
+    { name: 'cr_yw25t_new', label: '中国铁路 - YW25T_NEW' },
+    { name: 'cr_yw25t_white', label: '中国铁路 - YW25T_WHITE' },
+    { name: 'cr_yz22b_new', label: '中国铁路 - YZ22B_NEW' },
+    { name: 'cr_yz22b_old', label: '中国铁路 - YZ22B_OLD' },
+    { name: 'cr_yz25b_new', label: '中国铁路 - YZ25B_NEW' },
+    { name: 'cr_yz25b_old', label: '中国铁路 - YZ25B_OLD' },
+    { name: 'cr_yz25dt_jl', label: '中国铁路 - YZ25DT_JL' },
+    { name: 'cr_yz25g_new', label: '中国铁路 - YZ25G_NEW' },
+    { name: 'cr_yz25g_red', label: '中国铁路 - YZ25G_RED' },
+    { name: 'cr_yz25k_blue', label: '中国铁路 - YZ25K_BLUE' },
+    { name: 'cr_yz25k_new', label: '中国铁路 - YZ25K_NEW' },
+    { name: 'cr_yz25t_new', label: '中国铁路 - YZ25T_NEW' },
+    { name: 'cr_yz25t_white', label: '中国铁路 - YZ25T_WHITE' },
+    { name: 'cr_yz25z_wh', label: '中国铁路 - YZ25Z_WH' },
   ];
 
   blocks.forEach((config) => {
@@ -271,6 +307,8 @@ onEvent('block.registry', function (event) {
     setHorizontalFacing(block, 'same', modelPathS);
 
   });
+
+  console.info(`${LOG_PREFIX} 注册方块 - 矿车方块 - 完成`);
 
 });
 

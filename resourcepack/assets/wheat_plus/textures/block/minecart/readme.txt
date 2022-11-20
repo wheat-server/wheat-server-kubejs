@@ -25,3 +25,46 @@
     Frost-ZX  (bilibili UID 936757)
 
 ————————————————————————
+
+中国铁路
+
+  包含文件：
+    cr_ca25g_red.png
+    cr200j_we.png
+    cr200j_ze.png
+    cr_kd25g_red.png
+    cr_rw25g_red.png
+    cr_rz125z_bj.png
+    cr_rz125z_gz.png
+    cr_rz125z_new.png
+    cr_rz125z_sh.png
+    cr_rz25g_red.png
+    cr_uz25g_red.png
+    cr_xl25g_red.png
+    cr_yw22b_new.png
+    cr_yw22b_old.png
+    cr_yw25b_new.png
+    cr_yw25b_old.png
+    cr_yw25g_new.png
+    cr_yw25g_red.png
+    cr_yw25k_blue.png
+    cr_yw25k_new.png
+    cr_yw25t_new.png
+    cr_yw25t_white.png
+    cr_yz22b_new.png
+    cr_yz22b_old.png
+    cr_yz25b_new.png
+    cr_yz25b_old.png
+    cr_yz25dt_jl.png
+    cr_yz25g_new.png
+    cr_yz25g_red.png
+    cr_yz25k_blue.png
+    cr_yz25k_new.png
+    cr_yz25t_new.png
+    cr_yz25t_white.png
+    cr_yz25z_wh.png
+
+  作者：
+    胡椒 (bilibili UID 182460849)
+
+————————————————————————
