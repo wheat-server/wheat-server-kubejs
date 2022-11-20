@@ -584,6 +584,13 @@ onEvent('block.registry', function (event) {
       orientable: false,
     },
     {
+      name: 'ticket_machine_a',
+      box: [6, 0, 6, 10, 16, 10, true],
+      label: '售票机',
+      model: 'common/ticket_machine_a',
+      orientable: true,
+    },
+    {
       name: 'statue_player_alex',
       box: [4, 0, 6, 12, 31, 10, true],
       label: '模型（Alex）',
