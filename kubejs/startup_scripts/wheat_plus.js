@@ -32,63 +32,154 @@ onEvent('block.registry', function (event) {
 
   const blocks = [
     {
+      name: 'color_white_grow',
+      label: '纯色方块（白色，发光）',
+      color: [255, 255, 255, 1],
+      grow: true,
+    },
+    {
+      name: 'color_blue_grow',
+      label: '纯色方块（蓝色，发光）',
+      color: [0, 0, 255, 1],
+      grow: true,
+    },
+    {
+      name: 'color_green_grow',
+      label: '纯色方块（绿色，发光）',
+      color: [0, 255, 0, 1],
+      grow: true,
+    },
+    {
+      name: 'color_red_grow',
+      label: '纯色方块（红色）',
+      color: [255, 0, 0, 1],
+      grow: true,
+    },
+    {
       name: 'color_black',
       label: '纯色方块（黑色）',
       color: [0, 0, 0, 1],
+      grow: false,
     },
     {
       name: 'color_white',
       label: '纯色方块（白色）',
       color: [255, 255, 255, 1],
+      grow: false,
     },
     {
       name: 'color_blue',
       label: '纯色方块（蓝色）',
       color: [0, 0, 255, 1],
+      grow: false,
     },
     {
       name: 'color_green',
       label: '纯色方块（绿色）',
       color: [0, 255, 0, 1],
+      grow: false,
     },
     {
       name: 'color_red',
       label: '纯色方块（红色）',
       color: [255, 0, 0, 1],
+      grow: false,
     },
     {
       name: 'color_yellow',
       label: '纯色方块（黄色）',
       color: [255, 255, 0, 1],
+      grow: false,
     },
     {
       name: 'color_39c5bb',
       label: '纯色方块（#39C5BB）',
       color: [57, 197, 187, 1],
+      grow: false,
     },
     {
       name: 'color_66ccff',
       label: '纯色方块（#66CCFF）',
       color: [102, 204, 255, 1],
+      grow: false,
+    },
+    {
+      name: 'color_gz_line_one',
+      label: '纯色方块（广州地铁一号线，#F3D03E）',
+      color: [243, 208, 62, 1],
+      grow: false,
+    },
+    {
+      name: 'color_gz_line_two',
+      label: '纯色方块（广州地铁二号线，#00629B）',
+      color: [0, 98, 155, 1],
+      grow: false,
+    },
+    {
+      name: 'color_gz_line_three',
+      label: '纯色方块（广州地铁三号线，#ECA154）',
+      color: [236, 161, 84, 1],
+      grow: false,
+    },
+    {
+      name: 'color_gz_line_four',
+      label: '纯色方块（广州地铁四号线，#00843D）',
+      color: [0, 132, 61, 1],
+      grow: false,
+    },
+    {
+      name: 'color_gz_line_five',
+      label: '纯色方块（广州地铁五号线，#C5003E）',
+      color: [197, 0, 62, 1],
+      grow: false,
+    },
+    {
+      name: 'color_gz_line_six',
+      label: '纯色方块（广州地铁六号线，#80225F）',
+      color: [128, 34, 95, 1],
+      grow: false,
+    },
+    {
+      name: 'color_gz_line_seven',
+      label: '纯色方块（广州地铁七号线，#97D700）',
+      color: [151, 215, 0, 1],
+      grow: false,
+    },
+    {
+      name: 'color_gz_line_eight',
+      label: '纯色方块（广州地铁八号线，#008C95）',
+      color: [0, 140, 149, 1],
+      grow: false,
+    },
+    {
+      name: 'color_gz_line_nine',
+      label: '纯色方块（广州地铁九号线，#71CC98）',
+      color: [113, 204, 152, 1],
+      grow: false,
     },
   ];
-  const texture = `${P_BLOCK}/common/color_base`;
+
+  const tGrow = `${P_BLOCK}/common/color_grow`;
+  const tNormal = `${P_BLOCK}/common/color_normal`;
 
   blocks.forEach((config) => {
 
     const id = `${MOD_ID}:${config.name}`;
     const block = event.create(id, 'basic');
+    const colorCfg = config.color;
+    const isGrow = config.grow;
 
     setBlockProps(block, {
       displayName: config.label,
       isSolid: false,
+      lightLevel: (isGrow ? 1 : 0),
       material: 'stone',
     });
 
-    block.textureAll(texture);
-    block.color(0, Color.rgba.apply(Color, config.color));
+    block.textureAll(isGrow ? tGrow : tNormal);
+    block.color(0, Color.rgba.apply(Color, colorCfg));
     block.item((item) => {
-      item.color(0, Color.rgba.apply(Color, config.color));
+      item.color(0, Color.rgba.apply(Color, colorCfg));
     });
 
   });
@@ -570,6 +661,36 @@ onEvent('block.registry', function (event) {
 
 });
 
+// 注册方块 - 砖块
+onEvent('block.registry', function (event) {
+
+  console.info(`${LOG_PREFIX} 注册方块 - 砖块 - 开始`);
+
+  const blocks = [
+    { name: 'brick_a', texture: 'brick/brick_a' },
+    { name: 'brick_b', texture: 'brick/brick_b' },
+    { name: 'brick_c', texture: 'brick/brick_c' },
+    { name: 'brick_d', texture: 'brick/brick_d' },
+  ];
+
+  blocks.forEach((config) => {
+
+    const id = `${MOD_ID}:${config.name}`;
+    const block = event.create(id, 'basic');
+
+    setBlockProps(block, {
+      displayName: '砖块',
+      material: 'stone',
+    });
+
+    block.textureAll(`${P_BLOCK}/${config.texture}`);
+
+  });
+
+  console.info(`${LOG_PREFIX} 注册方块 - 砖块 - 完成`);
+
+});
+
 // 注册方块 - 其它
 onEvent('block.registry', function (event) {
 
@@ -577,24 +698,27 @@ onEvent('block.registry', function (event) {
 
   const blocks = [
     {
+      name: 'crate_a',
+      box: null,
+      label: '板条箱',
+      model: '',
+      texture: 'common/crate_a',
+      orientable: false,
+    },
+    {
       name: 'isolation_pile_a',
       box: [5, 0, 5, 11, 16, 11, true],
       label: '隔离桩',
       model: 'common/isolation_pile_a',
+      texture: '',
       orientable: false,
-    },
-    {
-      name: 'ticket_machine_a',
-      box: [6, 0, 6, 10, 16, 10, true],
-      label: '售票机',
-      model: 'common/ticket_machine_a',
-      orientable: true,
     },
     {
       name: 'statue_player_alex',
       box: [4, 0, 6, 12, 31, 10, true],
       label: '模型（Alex）',
       model: 'statue/player_alex',
+      texture: '',
       orientable: true,
     },
     {
@@ -602,6 +726,15 @@ onEvent('block.registry', function (event) {
       box: [4, 0, 6, 12, 31, 10, true],
       label: '模型（Steve）',
       model: 'statue/player_steve',
+      texture: '',
+      orientable: true,
+    },
+    {
+      name: 'ticket_machine_a',
+      box: [6, 0, 6, 10, 16, 10, true],
+      label: '售票机',
+      model: 'common/ticket_machine_a',
+      texture: '',
       orientable: true,
     },
   ];
@@ -610,20 +743,42 @@ onEvent('block.registry', function (event) {
 
     const id = `${MOD_ID}:${config.name}`;
     const block = event.create(id, 'basic');
-    const model = `${P_BLOCK}/${config.model}`;
+    const box = config.box;
+    const label = config.label;
+    const mPath = config.model;
+    const tPath = config.texture;
 
-    setBlockProps(block, {
-      boxConfig: config.box,
-      boxType: 'custom',
-      displayName: config.label,
-      isSolid: false,
-      material: 'stone',
-      modelPath: model,
-      renderType: 'cutout',
-    });
+    // 设置基础属性
+    if (box) {
+      setBlockProps(block, {
+        boxConfig: box,
+        boxType: 'custom',
+        displayName: label,
+        isSolid: false,
+        material: 'stone',
+        renderType: 'cutout',
+      });
+    } else {
+      setBlockProps(block, {
+        boxConfig: null,
+        boxType: 'full',
+        displayName: label,
+        isSolid: true,
+        material: 'stone',
+        renderType: 'solid',
+      });
+    }
 
+    // 设置模型或纹理文件路径
+    if (mPath) {
+      block.model(`${P_BLOCK}/${mPath}`);
+    } else if (tPath) {
+      block.textureAll(`${P_BLOCK}/${tPath}`);
+    }
+
+    // 设置方块旋转
     if (config.orientable) {
-      setHorizontalFacing(block, 'revert', model);
+      setHorizontalFacing(block, 'revert', `${P_BLOCK}/${mPath}`);
     }
 
   });
