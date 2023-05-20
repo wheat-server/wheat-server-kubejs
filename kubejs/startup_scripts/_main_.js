@@ -100,7 +100,7 @@ global.setHorizontalFacing = function (block, type, model) {
         ev.set(prop, d);
       });
       break;
-    // 其它
+    // 其他
     default:
       console.error(`${LOG_PREFIX} 设置旋转属性失败：参数“type”错误`);
       return false;
