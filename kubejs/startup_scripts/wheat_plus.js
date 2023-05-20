@@ -713,12 +713,12 @@ function regBlockRoad(event) {
 }
 
 /**
- * @description 注册方块 - 其它
+ * @description 注册方块 - 其他 - 基础
  * @param {Registry.Block} event
  */
-function regBlockOther(event) {
+function regBlockOtherBasic(event) {
 
-  console.info(`${LOG_PREFIX} 注册方块 - 其它 - 开始`);
+  console.info(`${LOG_PREFIX} 注册方块 - 其他 - 基础 - 开始`);
 
   const blocks = [
     {
@@ -807,7 +807,57 @@ function regBlockOther(event) {
 
   });
 
-  console.info(`${LOG_PREFIX} 注册方块 - 其它 - 完成`);
+  console.info(`${LOG_PREFIX} 注册方块 - 其他 - 基础 - 完成`);
+
+}
+
+/**
+ * @description 注册方块 - 其他 - 特殊
+ * @param {Registry.Block} event
+ */
+function regBlockOtherShaped(event) {
+
+  console.info(`${LOG_PREFIX} 注册方块 - 其他 - 特殊 - 开始`);
+
+  const blocks = [
+    {
+      name: 'gravel_stairs',
+      label: '沙砾楼梯',
+      texture: 'minecraft:block/gravel',
+      type: 'stairs',
+    },
+    {
+      name: 'gravel_slab',
+      label: '沙砾半砖',
+      texture: 'minecraft:block/gravel',
+      type: 'slab',
+    },
+    {
+      name: 'oak_leaves_wall',
+      label: '橡木树叶墙',
+      texture: `${P_BLOCK}/common/oak_leaves`,
+      type: 'wall',
+    },
+  ];
+
+  blocks.forEach((config) => {
+
+    const id = `${MOD_ID}:${config.name}`;
+    const block = event.create(id, config.type);
+
+    // 设置基础属性
+    setBlockProps(block, {
+      displayName: config.label,
+      material: 'stone',
+      renderType: 'cutout_mipped',
+    });
+
+    // 设置方块纹理
+    block.textureAll(config.texture);
+
+  });
+
+  console.info(`${LOG_PREFIX} 注册方块 - 其他 - 特殊 - 完成`);
 
 }
 
@@ -819,7 +869,8 @@ onEvent('block.registry', regBlockLampSimple);
 onEvent('block.registry', regBlockMinecart);
 onEvent('block.registry', regBlockRoad);
 onEvent('block.registry', regBlockReinforcedConcrete);
-onEvent('block.registry', regBlockOther);
+onEvent('block.registry', regBlockOtherBasic);
+onEvent('block.registry', regBlockOtherShaped);
 
 // 注册物品
 // onEvent('item.registry', function (event) {
