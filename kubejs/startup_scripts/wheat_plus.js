@@ -25,8 +25,44 @@ const P_ITEM_MODEL = `${MOD_ID}:models/item`;
 
 console.info(`${LOG_PREFIX} 处理 ${MOD_ID} 相关内容`);
 
-// 注册方块 - 纯色方块
-onEvent('block.registry', function (event) {
+/**
+ * @description 注册方块 - 砖块
+ * @param {Registry.Block} event
+ */
+function regBlockBrick(event) {
+
+  console.info(`${LOG_PREFIX} 注册方块 - 砖块 - 开始`);
+
+  const blocks = [
+    { name: 'brick_a', texture: 'brick/brick_a' },
+    { name: 'brick_b', texture: 'brick/brick_b' },
+    { name: 'brick_c', texture: 'brick/brick_c' },
+    { name: 'brick_d', texture: 'brick/brick_d' },
+  ];
+
+  blocks.forEach((config) => {
+
+    const id = `${MOD_ID}:${config.name}`;
+    const block = event.create(id, 'basic');
+
+    setBlockProps(block, {
+      displayName: '砖块',
+      material: 'stone',
+    });
+
+    block.textureAll(`${P_BLOCK}/${config.texture}`);
+
+  });
+
+  console.info(`${LOG_PREFIX} 注册方块 - 砖块 - 完成`);
+
+}
+
+/**
+ * @description 注册方块 - 纯色方块
+ * @param {Registry.Block} event
+ */
+function regBlockColor(event) {
 
   console.info(`${LOG_PREFIX} 注册方块 - 纯色方块 - 开始`);
 
@@ -186,10 +222,60 @@ onEvent('block.registry', function (event) {
 
   console.info(`${LOG_PREFIX} 注册方块 - 纯色方块 - 完成`);
 
-});
+}
 
-// 注册方块 - 灯（简约）
-onEvent('block.registry', function (event) {
+/**
+ * @description 注册方块 - 灯（现代）
+ * @param {Registry.Block} event
+ */
+function regBlockLampModern(event) {
+
+  console.info(`${LOG_PREFIX} 注册方块 - 现代灯 - 开始`);
+
+  const keys = Object.keys(COLORS);
+
+  /** 父模型路径 */
+  const parent = `${P_BLOCK}/lamp/modern`;
+
+  keys.forEach((key) => {
+
+    const color = COLORS[key];
+    const id = `${MOD_ID}:lamp_modern_${color.CODE}`;
+    const block = event.create(id, 'basic');
+
+    // 纹理文件路径前缀
+    // wheat_plus:block/lamp_modern/color_
+    const tBase = `${P_BLOCK}/lamp_modern/${color.CODE}`;
+
+    setBlockProps(block, {
+      boxType: 'full',
+      displayName: `现代${color.LABEL_CN}灯`,
+      isSolid: false,
+      lightLevel: 1,
+      material: 'glass',
+      renderType: 'translucent',
+    });
+
+    block.modelJson = {
+      parent: parent,
+      textures: {
+        glow: `${tBase}_glow`,
+        core: `${tBase}_core`,
+        particle: `${tBase}_core`
+      }
+    };
+
+  });
+
+  console.info(`${LOG_PREFIX} 注册方块 - 现代灯 - 完成`);
+
+}
+
+/**
+ * @description 注册方块 - 灯（简约）
+ * @param {Registry.Block} event
+ */
+function regBlockLampSimple(event) {
 
   console.info(`${LOG_PREFIX} 注册方块 - 简约灯 - 开始`);
 
@@ -254,54 +340,13 @@ onEvent('block.registry', function (event) {
 
   console.info(`${LOG_PREFIX} 注册方块 - 简约灯 - 完成`);
 
-});
+}
 
-// 注册方块 - 灯（现代）
-onEvent('block.registry', function (event) {
-
-  console.info(`${LOG_PREFIX} 注册方块 - 现代灯 - 开始`);
-
-  const keys = Object.keys(COLORS);
-
-  /** 父模型路径 */
-  const parent = `${P_BLOCK}/lamp/modern`;
-
-  keys.forEach((key) => {
-
-    const color = COLORS[key];
-    const id = `${MOD_ID}:lamp_modern_${color.CODE}`;
-    const block = event.create(id, 'basic');
-
-    // 纹理文件路径前缀
-    // wheat_plus:block/lamp_modern/color_
-    const tBase = `${P_BLOCK}/lamp_modern/${color.CODE}`;
-
-    setBlockProps(block, {
-      boxType: 'full',
-      displayName: `现代${color.LABEL_CN}灯`,
-      isSolid: false,
-      lightLevel: 1,
-      material: 'glass',
-      renderType: 'translucent',
-    });
-
-    block.modelJson = {
-      parent: parent,
-      textures: {
-        glow: `${tBase}_glow`,
-        core: `${tBase}_core`,
-        particle: `${tBase}_core`
-      }
-    };
-
-  });
-
-  console.info(`${LOG_PREFIX} 注册方块 - 现代灯 - 完成`);
-
-});
-
-// 注册方块 - 矿车方块
-onEvent('block.registry', function (event) {
+/**
+ * @description 注册方块 - 矿车方块
+ * @param {Registry.Block} event
+ */
+function regBlockMinecart(event) {
 
   console.info(`${LOG_PREFIX} 注册方块 - 矿车方块 - 开始`);
 
@@ -401,10 +446,63 @@ onEvent('block.registry', function (event) {
 
   console.info(`${LOG_PREFIX} 注册方块 - 矿车方块 - 完成`);
 
-});
+}
 
-// 注册方块 - 路
-onEvent('block.registry', function (event) {
+/**
+ * @description 注册方块 - 强化混凝土
+ * @param {Registry.Block} event
+ */
+function regBlockReinforcedConcrete(event) {
+
+  console.info(`${LOG_PREFIX} 注册方块 - 强化混凝土 - 开始`);
+
+  const keys = Object.keys(COLORS);
+
+  keys.forEach((key) => {
+
+    const color = COLORS[key];
+    const id = `${MOD_ID}:reinforced_concrete_${color.CODE}`;
+    const block = event.create(id, 'basic');
+    const texture = `${P_BLOCK}/reinforced_concrete/${color.CODE}`;
+
+    setBlockProps(block, {
+      boxType: 'full',
+      displayName: `${color.LABEL_CN}强化混凝土`,
+    });
+
+    block.textureAll(texture);
+
+  });
+
+  // 覆盖默认语言（en_US）
+  JSON_ASSETS.push({
+    PATH: 'minecraft:lang/en_us',
+    DATA: {
+      'block.minecraft.ancient_debris': 'White Reinforced Concrete',
+      'block.minecraft.raw_copper_block': 'Gray Reinforced Concrete',
+      'block.minecraft.raw_iron_block': 'Light Gray Reinforced Concrete',
+    },
+  });
+
+  // 覆盖默认语言（zh_CN）
+  JSON_ASSETS.push({
+    PATH: 'minecraft:lang/zh_cn',
+    DATA: {
+      'block.minecraft.ancient_debris': '白色强化混凝土',
+      'block.minecraft.raw_copper_block': '灰色强化混凝土',
+      'block.minecraft.raw_iron_block': '淡灰色强化混凝土',
+    },
+  });
+
+  console.info(`${LOG_PREFIX} 注册方块 - 强化混凝土 - 完成`);
+
+}
+
+/**
+ * @description 注册方块 - 路
+ * @param {Registry.Block} event
+ */
+function regBlockRoad(event) {
 
   console.info(`${LOG_PREFIX} 注册方块 - 路 - 开始`);
 
@@ -612,87 +710,13 @@ onEvent('block.registry', function (event) {
 
   console.info(`${LOG_PREFIX} 注册方块 - 路 - 完成`);
 
-});
+}
 
-// 注册方块 - 强化混凝土
-onEvent('block.registry', function (event) {
-
-  console.info(`${LOG_PREFIX} 注册方块 - 强化混凝土 - 开始`);
-
-  const keys = Object.keys(COLORS);
-
-  keys.forEach((key) => {
-
-    const color = COLORS[key];
-    const id = `${MOD_ID}:reinforced_concrete_${color.CODE}`;
-    const block = event.create(id, 'basic');
-    const texture = `${P_BLOCK}/reinforced_concrete/${color.CODE}`;
-
-    setBlockProps(block, {
-      boxType: 'full',
-      displayName: `${color.LABEL_CN}强化混凝土`,
-    });
-
-    block.textureAll(texture);
-
-  });
-
-  // 覆盖默认语言（en_US）
-  JSON_ASSETS.push({
-    PATH: 'minecraft:lang/en_us',
-    DATA: {
-      'block.minecraft.ancient_debris': 'White Reinforced Concrete',
-      'block.minecraft.raw_copper_block': 'Gray Reinforced Concrete',
-      'block.minecraft.raw_iron_block': 'Light Gray Reinforced Concrete',
-    },
-  });
-
-  // 覆盖默认语言（zh_CN）
-  JSON_ASSETS.push({
-    PATH: 'minecraft:lang/zh_cn',
-    DATA: {
-      'block.minecraft.ancient_debris': '白色强化混凝土',
-      'block.minecraft.raw_copper_block': '灰色强化混凝土',
-      'block.minecraft.raw_iron_block': '淡灰色强化混凝土',
-    },
-  });
-
-  console.info(`${LOG_PREFIX} 注册方块 - 强化混凝土 - 完成`);
-
-});
-
-// 注册方块 - 砖块
-onEvent('block.registry', function (event) {
-
-  console.info(`${LOG_PREFIX} 注册方块 - 砖块 - 开始`);
-
-  const blocks = [
-    { name: 'brick_a', texture: 'brick/brick_a' },
-    { name: 'brick_b', texture: 'brick/brick_b' },
-    { name: 'brick_c', texture: 'brick/brick_c' },
-    { name: 'brick_d', texture: 'brick/brick_d' },
-  ];
-
-  blocks.forEach((config) => {
-
-    const id = `${MOD_ID}:${config.name}`;
-    const block = event.create(id, 'basic');
-
-    setBlockProps(block, {
-      displayName: '砖块',
-      material: 'stone',
-    });
-
-    block.textureAll(`${P_BLOCK}/${config.texture}`);
-
-  });
-
-  console.info(`${LOG_PREFIX} 注册方块 - 砖块 - 完成`);
-
-});
-
-// 注册方块 - 其它
-onEvent('block.registry', function (event) {
+/**
+ * @description 注册方块 - 其它
+ * @param {Registry.Block} event
+ */
+function regBlockOther(event) {
 
   console.info(`${LOG_PREFIX} 注册方块 - 其它 - 开始`);
 
@@ -785,7 +809,17 @@ onEvent('block.registry', function (event) {
 
   console.info(`${LOG_PREFIX} 注册方块 - 其它 - 完成`);
 
-});
+}
+
+// 注册方块
+onEvent('block.registry', regBlockBrick);
+onEvent('block.registry', regBlockColor);
+onEvent('block.registry', regBlockLampModern);
+onEvent('block.registry', regBlockLampSimple);
+onEvent('block.registry', regBlockMinecart);
+onEvent('block.registry', regBlockRoad);
+onEvent('block.registry', regBlockReinforcedConcrete);
+onEvent('block.registry', regBlockOther);
 
 // 注册物品
 // onEvent('item.registry', function (event) {
