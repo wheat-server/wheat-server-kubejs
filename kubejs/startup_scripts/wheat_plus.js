@@ -738,6 +738,14 @@ function regBlockOtherBasic(event) {
       orientable: false,
     },
     {
+      name: 'station_sign_a',
+      box: [5, -16, 5, 11, 32, 11, true],
+      label: '站牌',
+      model: 'common/station_sign_a',
+      texture: '',
+      orientable: true,
+    },
+    {
       name: 'statue_player_alex',
       box: [4, 0, 6, 12, 31, 10, true],
       label: '模型（Alex）',
