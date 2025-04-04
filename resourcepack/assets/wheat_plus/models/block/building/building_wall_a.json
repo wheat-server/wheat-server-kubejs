@@ -1,0 +1,39 @@
+{
+  "credit": "Created by Frost-ZX using Blockbench.",
+  "parent": "block/block",
+  "textures": {
+    "0": "wheat_plus:block/brick/brick_d",
+    "1": "block/quartz_block_bottom",
+    "2": "block/quartz_block_side",
+    "3": "block/quartz_block_top",
+    "particle": "wheat_plus:block/brick/brick_d"
+  },
+  "elements": [
+    {
+      "from": [0, 0, 0],
+      "to": [16, 16, 8],
+      "rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 8]},
+      "faces": {
+        "north": {"uv": [0, 0, 16, 16], "texture": "#0", "cullface": "north"},
+        "east": {"uv": [8, 0, 16, 16], "texture": "#0", "cullface": "east"},
+        "south": {"uv": [0, 0, 16, 16], "texture": "#0"},
+        "west": {"uv": [0, 0, 8, 16], "texture": "#0", "cullface": "west"},
+        "up": {"uv": [0, 0, 16, 8], "texture": "#0", "cullface": "up"},
+        "down": {"uv": [0, 8, 16, 16], "texture": "#0", "cullface": "down"}
+      }
+    },
+    {
+      "from": [0, 0, 8],
+      "to": [16, 16, 16],
+      "rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 8]},
+      "faces": {
+        "north": {"uv": [0, 0, 16, 16], "texture": "#2"},
+        "east": {"uv": [0, 0, 8, 16], "texture": "#2", "cullface": "east"},
+        "south": {"uv": [0, 0, 16, 16], "texture": "#2", "cullface": "south"},
+        "west": {"uv": [8, 0, 16, 16], "texture": "#2", "cullface": "west"},
+        "up": {"uv": [0, 8, 16, 16], "texture": "#3", "cullface": "up"},
+        "down": {"uv": [0, 0, 16, 8], "texture": "#1", "cullface": "down"}
+      }
+    }
+  ]
+}
