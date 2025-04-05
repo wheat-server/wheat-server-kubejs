@@ -1,0 +1,36 @@
+{
+  "credit": "Created by Frost-ZX using Blockbench.",
+  "parent": "block/block",
+  "textures": {
+    "stone": "block/polished_andesite",
+    "particle": "block/birch_planks",
+    "planks": "block/birch_planks"
+  },
+  "elements": [
+    {
+      "from": [0, 0, 2],
+      "to": [16, 12, 16],
+      "rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 8]},
+      "faces": {
+        "north": {"uv": [0, 4, 16, 16], "texture": "#planks"},
+        "east": {"uv": [0, 4, 14, 16], "texture": "#planks", "cullface": "east"},
+        "south": {"uv": [0, 4, 16, 16], "texture": "#planks", "cullface": "south"},
+        "west": {"uv": [2, 4, 16, 16], "texture": "#planks", "cullface": "west"},
+        "down": {"uv": [0, 0, 16, 14], "texture": "#planks", "cullface": "down"}
+      }
+    },
+    {
+      "from": [0, 12, 0],
+      "to": [16, 16, 16],
+      "rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 8]},
+      "faces": {
+        "north": {"uv": [0, 0, 16, 4], "texture": "#stone", "cullface": "north"},
+        "east": {"uv": [0, 0, 16, 4], "texture": "#stone", "cullface": "east"},
+        "south": {"uv": [0, 0, 16, 4], "texture": "#stone", "cullface": "south"},
+        "west": {"uv": [0, 0, 16, 4], "texture": "#stone", "cullface": "west"},
+        "up": {"uv": [0, 0, 16, 16], "texture": "#stone", "cullface": "up"},
+        "down": {"uv": [0, 0, 16, 16], "texture": "#stone"}
+      }
+    }
+  ]
+}
