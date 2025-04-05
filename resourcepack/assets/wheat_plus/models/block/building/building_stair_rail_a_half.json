@@ -1,6 +1,7 @@
 {
   "credit": "Created by Frost-ZX using Blockbench.",
   "parent": "block/block",
+  "ambientocclusion": false,
   "textures": {
     "0": "block/iron_block",
     "particle": "block/iron_block"
