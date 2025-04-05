@@ -1,6 +1,5 @@
 {
   "credit": "Created by HuJiao & Frost-ZX using Blockbench.",
-  "parent": "block/block",
   "ambientocclusion": false,
   "textures": {
     "particle": "wheat_plus:block/common/ticket_machine_a",

@@ -111,7 +111,7 @@ function regBlockBuildingAndFurniture(event) {
     {
       name: 'building_brick_d',
       box: [2, 0, 2, 14, 16, 14, true],
-      label: '砖块（1/4）',
+      label: '砖块（砖块，1/4）',
       model: 'building/building_brick_d',
       texture: '',
       orientable: true,
@@ -119,7 +119,7 @@ function regBlockBuildingAndFurniture(event) {
     {
       name: 'building_brick_d_tall',
       box: [2, 0, 2, 14, 16, 14, true],
-      label: '砖块（1/4，高）',
+      label: '砖块（砖块，1/4，高）',
       model: 'building/building_brick_d_tall',
       texture: '',
       orientable: true,
@@ -127,7 +127,7 @@ function regBlockBuildingAndFurniture(event) {
     {
       name: 'building_brick_e',
       box: [2, 0, 2, 14, 16, 14, true],
-      label: '砖块（1/4）',
+      label: '砖块（青色陶瓦，1/4）',
       model: 'building/building_brick_e',
       texture: '',
       orientable: true,
@@ -135,7 +135,7 @@ function regBlockBuildingAndFurniture(event) {
     {
       name: 'building_brick_e_tall',
       box: [2, 0, 2, 14, 16, 14, true],
-      label: '砖块（1/4，高）',
+      label: '砖块（青色陶瓦，1/4，高）',
       model: 'building/building_brick_e_tall',
       texture: '',
       orientable: true,
@@ -190,7 +190,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_ground_a',
-      box: null,
+      box: [0, 0, 0, 16, 16, 16, true],
       label: '地面（红色混凝土 + 磨制闪长岩）',
       model: 'building/building_ground_a',
       texture: '',
@@ -207,7 +207,7 @@ function regBlockBuildingAndFurniture(event) {
     {
       name: 'building_misc_a',
       box: [2, 0, 2, 14, 16, 14, true],
-      label: '石英块',
+      label: '石英片',
       model: 'building/building_misc_a',
       texture: '',
       orientable: true,
@@ -374,7 +374,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_wall_a',
-      box: null,
+      box: [0, 0, 0, 16, 16, 16, true],
       label: '墙（石砖 + 石英）',
       model: 'building/building_wall_a',
       texture: '',
@@ -382,8 +382,8 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_wall_b',
-      box: null,
-      label: '墙（灰色混凝土 + 石英）',
+      box: [0, 0, 0, 16, 16, 16, true],
+      label: '墙（青色陶瓦 + 石英）',
       model: 'building/building_wall_b',
       texture: '',
       orientable: true,

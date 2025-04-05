@@ -1,6 +1,6 @@
 {
   "credit": "Created by Frost-ZX using Blockbench.",
-  "parent": "block/block",
+  "parent": "wheat_plus:block/base/normal_ao_off",
   "textures": {
     "1": "block/quartz_block_bottom",
     "2": "block/quartz_block_side",

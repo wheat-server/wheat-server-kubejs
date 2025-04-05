@@ -1,7 +1,6 @@
 {
 	"credit": "Created by Frost-ZX using Blockbench.",
 	"parent": "wheat_plus:block/statue/player",
-	"ambientocclusion": false,
 	"textures": {
 		"particle": "wheat_plus:block/statue/alex",
 		"texture": "wheat_plus:block/statue/alex"
