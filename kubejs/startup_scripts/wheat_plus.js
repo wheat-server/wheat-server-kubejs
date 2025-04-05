@@ -59,6 +59,459 @@ function regBlockBrick(event) {
 }
 
 /**
+ * @description 注册方块 - 建筑和家具
+ * @param {Registry.Block} event
+ */
+function regBlockBuildingAndFurniture(event) {
+
+  console.info(`${LOG_PREFIX} 注册方块 - 建筑和家具 - 开始`);
+
+  const blocks = [
+    // 建筑方块
+    {
+      name: 'building_brick_a',
+      box: [2, 0, 2, 14, 16, 14, true],
+      label: '砖块（大三角）',
+      model: 'building/building_brick_a',
+      texture: '',
+      orientable: true,
+    },
+    {
+      name: 'building_brick_a_half_down',
+      box: [2, 0, 2, 14, 16, 14, true],
+      label: '砖块（大三角，下半部分）',
+      model: 'building/building_brick_a_half_down',
+      texture: '',
+      orientable: true,
+    },
+    {
+      name: 'building_brick_a_half_up',
+      box: [2, 0, 2, 14, 16, 14, true],
+      label: '砖块（大三角，上半部分）',
+      model: 'building/building_brick_a_half_up',
+      texture: '',
+      orientable: true,
+    },
+    {
+      name: 'building_brick_b',
+      box: [2, 0, 2, 14, 16, 14, true],
+      label: '砖块（小三角）',
+      model: 'building/building_brick_b',
+      texture: '',
+      orientable: true,
+    },
+    {
+      name: 'building_brick_c',
+      box: [2, 0, 2, 14, 16, 14, true],
+      label: '砖块（缺一角）',
+      model: 'building/building_brick_c',
+      texture: '',
+      orientable: true,
+    },
+    {
+      name: 'building_brick_d',
+      box: [2, 0, 2, 14, 16, 14, true],
+      label: '砖块（1/4）',
+      model: 'building/building_brick_d',
+      texture: '',
+      orientable: true,
+    },
+    {
+      name: 'building_brick_d_tall',
+      box: [2, 0, 2, 14, 16, 14, true],
+      label: '砖块（1/4，高）',
+      model: 'building/building_brick_d_tall',
+      texture: '',
+      orientable: true,
+    },
+    {
+      name: 'building_brick_e',
+      box: [2, 0, 2, 14, 16, 14, true],
+      label: '砖块（1/4）',
+      model: 'building/building_brick_e',
+      texture: '',
+      orientable: true,
+    },
+    {
+      name: 'building_brick_e_tall',
+      box: [2, 0, 2, 14, 16, 14, true],
+      label: '砖块（1/4，高）',
+      model: 'building/building_brick_e_tall',
+      texture: '',
+      orientable: true,
+    },
+    {
+      name: 'building_cover_a',
+      box: [2, 0, 2, 14, 16, 14, true],
+      label: '井盖',
+      model: 'building/building_cover_a',
+      texture: '',
+      orientable: false,
+    },
+    {
+      name: 'building_fence_a_bottom',
+      box: [2, 0, 2, 14, 16, 14, true],
+      label: '围栏（下）',
+      model: 'building/building_fence_a_bottom',
+      texture: '',
+      orientable: true,
+    },
+    {
+      name: 'building_fence_a_top',
+      box: [2, 0, 2, 14, 16, 14, true],
+      label: '围栏（上）',
+      model: 'building/building_fence_a_top',
+      texture: '',
+      orientable: true,
+    },
+    {
+      name: 'building_fence_b',
+      box: [2, 0, 2, 14, 16, 14, true],
+      label: '白色栅栏',
+      model: 'building/building_fence_b',
+      texture: '',
+      orientable: true,
+    },
+    {
+      name: 'building_fence_b_corner_inner',
+      box: [2, 0, 2, 14, 16, 14, true],
+      label: '白色栅栏（角落，向内）',
+      model: 'building/building_fence_b_corner_inner',
+      texture: '',
+      orientable: true,
+    },
+    {
+      name: 'building_fence_b_corner_outer',
+      box: [2, 0, 2, 14, 16, 14, true],
+      label: '白色栅栏（角落，向外）',
+      model: 'building/building_fence_b_corner_outer',
+      texture: '',
+      orientable: true,
+    },
+    {
+      name: 'building_ground_a',
+      box: null,
+      label: '地面（红色混凝土 + 磨制闪长岩）',
+      model: 'building/building_ground_a',
+      texture: '',
+      orientable: true,
+    },
+    {
+      name: 'building_iron_pole_a',
+      box: [2, 0, 2, 14, 16, 14, true],
+      label: '铁杆',
+      model: 'building/building_iron_pole_a',
+      texture: '',
+      orientable: false,
+    },
+    {
+      name: 'building_misc_a',
+      box: [2, 0, 2, 14, 16, 14, true],
+      label: '石英块',
+      model: 'building/building_misc_a',
+      texture: '',
+      orientable: true,
+    },
+    {
+      name: 'building_misc_b',
+      box: [2, 0, 2, 14, 16, 14, true],
+      label: '石英块',
+      model: 'building/building_misc_b',
+      texture: '',
+      orientable: true,
+    },
+    {
+      name: 'building_misc_c',
+      box: [2, 0, 2, 14, 16, 14, true],
+      label: '石英块',
+      model: 'building/building_misc_c',
+      texture: '',
+      orientable: true,
+    },
+    {
+      name: 'building_pillar_a',
+      box: [2, 0, 2, 14, 16, 14, true],
+      label: '柱子',
+      model: 'building/building_pillar_a',
+      texture: '',
+      orientable: false,
+    },
+    {
+      name: 'building_pillar_a_tall',
+      box: [2, 0, 2, 14, 16, 14, true],
+      label: '柱子（高）',
+      model: 'building/building_pillar_a_tall',
+      texture: '',
+      orientable: false,
+    },
+    {
+      name: 'building_pillar_b',
+      box: [2, 0, 2, 14, 16, 14, true],
+      label: '粗柱子',
+      model: 'building/building_pillar_b',
+      texture: '',
+      orientable: false,
+    },
+    {
+      name: 'building_pillar_b_tall',
+      box: [2, 0, 2, 14, 16, 14, true],
+      label: '粗柱子（高）',
+      model: 'building/building_pillar_b_tall',
+      texture: '',
+      orientable: false,
+    },
+    {
+      name: 'building_rail_a',
+      box: [2, 0, 2, 14, 16, 14, true],
+      label: '铁扶手',
+      model: 'building/building_rail_a',
+      texture: '',
+      orientable: true,
+    },
+    {
+      name: 'building_rail_b',
+      box: [2, 0, 2, 14, 16, 14, true],
+      label: '铁扶手',
+      model: 'building/building_rail_b',
+      texture: '',
+      orientable: true,
+    },
+    {
+      name: 'building_rail_c',
+      box: [2, 0, 2, 14, 16, 14, true],
+      label: '铁扶手',
+      model: 'building/building_rail_c',
+      texture: '',
+      orientable: true,
+    },
+    {
+      name: 'building_rail_d',
+      box: [2, 0, 2, 14, 16, 14, true],
+      label: '铁扶手',
+      model: 'building/building_rail_d',
+      texture: '',
+      orientable: true,
+    },
+    {
+      name: 'building_rail_e',
+      box: [2, 0, 2, 14, 16, 14, true],
+      label: '铁扶手（斜向）',
+      model: 'building/building_rail_e',
+      texture: '',
+      orientable: true,
+    },
+    {
+      name: 'building_rail_f',
+      box: [2, 0, 2, 14, 16, 14, true],
+      label: '铁扶手（斜向）',
+      model: 'building/building_rail_f',
+      texture: '',
+      orientable: true,
+    },
+    {
+      name: 'building_rail_g',
+      box: [2, 0, 2, 14, 16, 14, true],
+      label: '铁扶手（石英）',
+      model: 'building/building_rail_g',
+      texture: '',
+      orientable: true,
+    },
+    {
+      name: 'building_stair_rail_a',
+      box: [2, 0, 2, 14, 16, 14, true],
+      label: '楼梯铁扶手',
+      model: 'building/building_stair_rail_a',
+      texture: '',
+      orientable: true,
+    },
+    {
+      name: 'building_stair_rail_a_half',
+      box: [2, 0, 2, 14, 16, 14, true],
+      label: '楼梯铁扶手（半高）',
+      model: 'building/building_stair_rail_a_half',
+      texture: '',
+      orientable: true,
+    },
+    {
+      name: 'building_stair_rail_b',
+      box: [2, 0, 2, 14, 16, 14, true],
+      label: '楼梯铁扶手',
+      model: 'building/building_stair_rail_b',
+      texture: '',
+      orientable: true,
+    },
+    {
+      name: 'building_stair_rail_b_half',
+      box: [2, 0, 2, 14, 16, 14, true],
+      label: '楼梯铁扶手（半高）',
+      model: 'building/building_stair_rail_b_half',
+      texture: '',
+      orientable: true,
+    },
+    {
+      name: 'building_stair_rail_c',
+      box: [2, 0, 2, 14, 16, 14, true],
+      label: '楼梯铁扶手',
+      model: 'building/building_stair_rail_c',
+      texture: '',
+      orientable: true,
+    },
+    {
+      name: 'building_stair_rail_d',
+      box: [2, 0, 2, 14, 16, 14, true],
+      label: '楼梯铁扶手',
+      model: 'building/building_stair_rail_d',
+      texture: '',
+      orientable: true,
+    },
+    {
+      name: 'building_stair_rail_e',
+      box: [2, 0, 2, 14, 16, 14, true],
+      label: '楼梯铁扶手',
+      model: 'building/building_stair_rail_e',
+      texture: '',
+      orientable: true,
+    },
+    {
+      name: 'building_wall_a',
+      box: null,
+      label: '墙（石砖 + 石英）',
+      model: 'building/building_wall_a',
+      texture: '',
+      orientable: true,
+    },
+    {
+      name: 'building_wall_b',
+      box: null,
+      label: '墙（灰色混凝土 + 石英）',
+      model: 'building/building_wall_b',
+      texture: '',
+      orientable: true,
+    },
+    {
+      name: 'building_wall_c',
+      box: [2, 0, 2, 14, 16, 14, true],
+      label: '墙（石英）',
+      model: 'building/building_wall_c',
+      texture: '',
+      orientable: true,
+    },
+    // 家具方块
+    {
+      name: 'furniture_birch_chair_a',
+      box: [2, 0, 2, 14, 16, 14, true],
+      label: '白桦木椅子',
+      model: 'furniture/furniture_birch_chair_a',
+      texture: '',
+      orientable: true,
+    },
+    {
+      name: 'furniture_birch_table_a',
+      box: [2, 0, 2, 14, 16, 14, true],
+      label: '白桦木桌子',
+      model: 'furniture/furniture_birch_table_a',
+      texture: '',
+      orientable: true,
+    },
+    {
+      name: 'furniture_faucet_a',
+      box: [2, 0, 2, 14, 16, 14, true],
+      label: '水龙头',
+      model: 'furniture/furniture_faucet_a',
+      texture: '',
+      orientable: true,
+    },
+    {
+      name: 'furniture_kitchen_counter_a',
+      box: [2, 0, 2, 14, 16, 14, true],
+      label: '白桦木厨房柜台',
+      model: 'furniture/furniture_kitchen_counter_a',
+      texture: '',
+      orientable: true,
+    },
+    {
+      name: 'furniture_kitchen_sink_a',
+      box: [2, 0, 2, 14, 16, 14, true],
+      label: '白桦木厨房水槽',
+      model: 'furniture/furniture_kitchen_sink_a',
+      texture: '',
+      orientable: true,
+    },
+    {
+      name: 'furniture_tv_a',
+      box: [2, 0, 2, 14, 16, 14, true],
+      label: '电视机',
+      model: 'furniture/furniture_tv_a',
+      texture: '',
+      orientable: true,
+    },
+    {
+      name: 'furniture_tv_b',
+      box: [2, 0, 2, 14, 16, 14, true],
+      label: '电视机',
+      model: 'furniture/furniture_tv_b',
+      texture: '',
+      orientable: true,
+    },
+    {
+      name: 'furniture_tv_c',
+      box: [2, 0, 2, 14, 16, 14, true],
+      label: '电视机',
+      model: 'furniture/furniture_tv_c',
+      texture: '',
+      orientable: true,
+    },
+  ];
+
+  blocks.forEach((config) => {
+
+    const id = `${MOD_ID}:${config.name}`;
+    const block = event.create(id, 'basic');
+    const box = config.box;
+    const label = config.label;
+    const mPath = config.model;
+    const tPath = config.texture;
+
+    // 设置基础属性
+    if (box) {
+      setBlockProps(block, {
+        boxConfig: box,
+        boxType: 'custom',
+        displayName: label,
+        isSolid: false,
+        material: 'stone',
+        renderType: 'cutout',
+      });
+    } else {
+      setBlockProps(block, {
+        boxConfig: null,
+        boxType: 'full',
+        displayName: label,
+        isSolid: true,
+        material: 'stone',
+        renderType: 'solid',
+      });
+    }
+
+    // 设置模型或纹理文件路径
+    if (mPath) {
+      block.model(`${P_BLOCK}/${mPath}`);
+    } else if (tPath) {
+      block.textureAll(`${P_BLOCK}/${tPath}`);
+    }
+
+    // 设置方块旋转
+    if (config.orientable) {
+      setHorizontalFacing(block, 'revert', `${P_BLOCK}/${mPath}`);
+    }
+
+  });
+
+  console.info(`${LOG_PREFIX} 注册方块 - 建筑和家具 - 完成`);
+
+}
+
+/**
  * @description 注册方块 - 纯色方块
  * @param {Registry.Block} event
  */
@@ -871,6 +1324,7 @@ function regBlockOtherShaped(event) {
 
 // 注册方块
 onEvent('block.registry', regBlockBrick);
+onEvent('block.registry', regBlockBuildingAndFurniture);
 onEvent('block.registry', regBlockColor);
 onEvent('block.registry', regBlockLampModern);
 onEvent('block.registry', regBlockLampSimple);
