@@ -325,6 +325,14 @@ function regBlockBuildingAndFurniture(event) {
       orientable: true,
     },
     {
+      name: 'building_rail_f_extend',
+      box: [2, 0, 2, 14, 16, 14, true],
+      label: '铁扶手（斜向，扩展）',
+      model: 'building/building_rail_f_extend',
+      texture: '',
+      orientable: true,
+    },
+    {
       name: 'building_rail_g',
       box: [2, 0, 2, 14, 16, 14, true],
       label: '铁扶手（石英）',
