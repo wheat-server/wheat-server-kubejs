@@ -229,6 +229,14 @@ function regBlockBuildingAndFurniture(event) {
       orientable: true,
     },
     {
+      name: 'building_misc_d',
+      box: [2, 0, 2, 14, 16, 14, true],
+      label: '石英块',
+      model: 'building/building_misc_d',
+      texture: '',
+      orientable: true,
+    },
+    {
       name: 'building_pillar_a',
       box: [2, 0, 2, 14, 16, 14, true],
       label: '柱子',
@@ -259,6 +267,14 @@ function regBlockBuildingAndFurniture(event) {
       model: 'building/building_pillar_b_tall',
       texture: '',
       orientable: false,
+    },
+    {
+      name: 'building_quartz_vertical_slab',
+      box: [2, 0, 2, 14, 16, 14, true],
+      label: '垂直石英台阶',
+      model: 'building/building_quartz_vertical_slab',
+      texture: '',
+      orientable: true,
     },
     {
       name: 'building_rail_a',
@@ -396,6 +412,14 @@ function regBlockBuildingAndFurniture(event) {
       texture: '',
       orientable: true,
     },
+    {
+      name: 'building_wall_d',
+      box: [2, 0, 2, 14, 16, 14, true],
+      label: '墙（石英）',
+      model: 'building/building_wall_d',
+      texture: '',
+      orientable: true,
+    },
     // 家具方块
     {
       name: 'furniture_birch_chair_a',
@@ -418,6 +442,14 @@ function regBlockBuildingAndFurniture(event) {
       box: [2, 0, 2, 14, 16, 14, true],
       label: '水龙头',
       model: 'furniture/furniture_faucet_a',
+      texture: '',
+      orientable: true,
+    },
+    {
+      name: 'furniture_black_board_a',
+      box: [2, 0, 2, 14, 16, 14, true],
+      label: '黑板',
+      model: 'furniture/furniture_black_board_a',
       texture: '',
       orientable: true,
     },
