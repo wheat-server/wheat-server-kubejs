@@ -1,119 +1,5 @@
 // priority: 100
 
-global.defaults = function (v, d) {
-  (typeof d === 'undefined') && (d = null);
-  return ((typeof v === 'undefined' || v === null) ? d : v);
-};
-
-global.setBlockProps = function (block, opts) {
-
-  if (!block) {
-    console.error(`${LOG_PREFIX} 设置方块属性失败：缺少“block”参数`);
-    return false;
-  }
-
-  if (!opts) {
-    opts = {};
-  }
-
-  const boxConfig = defaults(opts.boxConfig, null);
-  const boxType = defaults(opts.boxType, '');
-  const collision = defaults(opts.collision, true);
-  const displayName = defaults(opts.displayName, '');
-  const hardness = defaults(opts.hardness, 8);
-  const isSolid = defaults(opts.isSolid, true);
-  const lightLevel = defaults(opts.lightLevel, 0);
-  const material = defaults(opts.material, 'stone');
-  const modelPath = defaults(opts.modelPath, '');
-  const renderType = defaults(opts.renderType, 'solid');
-  const resistance = defaults(opts.resistance, 16);
-
-  if (boxConfig) {
-    block.box.apply(block, boxConfig);
-  } else if (boxType === 'full') {
-    block.box(0, 0, 0, 16, 16, 16, true);
-  } else if (boxType === 'half') {
-    block.box(0, 0, 0, 16, 8, 16, true);
-  }
-
-  if (!collision) {
-    block.noCollision();
-  }
-
-  if (displayName) {
-    block.displayName(displayName);
-  }
-
-  if (!isSolid) {
-    block.notSolid();
-  }
-
-  if (modelPath) {
-    block.model(modelPath);
-  }
-
-  block.hardness(hardness);
-  block.lightLevel(lightLevel);
-  block.material(material);
-  block.renderType(renderType);
-  block.resistance(resistance);
-
-  return true;
-
-};
-
-global.setHorizontalFacing = function (block, type, model) {
-
-  const prop = BlockProperties.HORIZONTAL_FACING;
-
-  // 设置模型旋转
-  block.blockstateJson = {
-    'variants': {
-      'facing=north': { model: model, y: 0 },
-      'facing=east': { model: model, y: 90 },
-      'facing=south': { model: model, y: 180 },
-      'facing=west': { model: model, y: 270 }
-    }
-  };
-
-  // 添加属性
-  block.property(prop);
-
-  // 处理默认状态
-  block.defaultState((ev) => {
-    ev.set(prop, 'north');
-  });
-
-  // 处理放置状态
-  switch (type) {
-    // 与玩家朝向相反
-    case 'revert':
-      block.placementState((ev) => {
-        const d = ev.getHorizontalDirection().getOpposite().toString();
-        ev.set(prop, d);
-      });
-      break;
-    // 与玩家朝向相同
-    case 'same':
-      block.placementState((ev) => {
-        const d = ev.getHorizontalDirection().toString();
-        ev.set(prop, d);
-      });
-      break;
-    // 其他
-    default:
-      console.error(`${LOG_PREFIX} 设置旋转属性失败：参数“type”错误`);
-      return false;
-  }
-
-  return true;
-
-};
-
-global.writeJSON = function (path, data) {
-  JsonIO.write(path, data);
-};
-
 global.COLORS = {
   WHITE: {
     CODE: 'white',
@@ -215,5 +101,141 @@ global.COLORS = {
 
 global.JSON_ASSETS = [];
 global.LOG_PREFIX = '[KubeJS]';
+
+global.defaults = function (v, d) {
+  (typeof d === 'undefined') && (d = null);
+  return ((typeof v === 'undefined' || v === null) ? d : v);
+};
+
+global.setBlockProps = function (block, opts) {
+
+  if (!block) {
+    console.error(`${LOG_PREFIX} 设置方块属性失败：缺少“block”参数`);
+    return false;
+  }
+
+  if (!opts) {
+    opts = {};
+  }
+
+  const boxConfig = defaults(opts.boxConfig, null);
+  const boxType = defaults(opts.boxType, 'full');
+  const displayName = defaults(opts.displayName, '');
+  const hardness = defaults(opts.hardness, 8);
+  const hasCollision = defaults(opts.hasCollision, true);
+  const isSolid = defaults(opts.isSolid, true);
+  const lightLevel = defaults(opts.lightLevel, 0);
+  const mapColor = defaults(opts.mapColor, 'none');
+  const modelPath = defaults(opts.modelPath, null);
+  const renderType = defaults(opts.renderType, 'solid');
+  const resistance = defaults(opts.resistance, 16);
+  const soundType = defaults(opts.soundType, 'stone');
+  const textureAll = defaults(opts.textureAll, '');
+
+  if (boxType === 'custom') {
+    boxConfig && block.box.apply(block, boxConfig);
+  } else if (boxType === 'full') {
+    block.box(0, 0, 0, 16, 16, 16, true);
+  } else if (boxType === 'half') {
+    block.box(0, 0, 0, 16, 8, 16, true);
+  }
+
+  if (displayName) {
+    block.displayName(displayName);
+  }
+
+  if (!hasCollision) {
+    block.noCollision();
+  }
+
+  if (!isSolid) {
+    block.notSolid();
+  }
+
+  if (modelPath) {
+
+    // 生成模型 JSON 文件
+    JSON_ASSETS.push({
+      path: `${modelPath.blockNamespace}:models/block/${modelPath.blockName}`,
+      data: { parent: modelPath.filePath },
+    });
+
+    // // 注：不完全有效，无法使用，会导致方块显示为黑紫方块
+    // block.parentModel(modelPath.filePath);
+
+  }
+
+  if (textureAll) {
+    block.texture(textureAll);
+    // block.texture(Direction.UP, textureAll);
+    // block.texture(Direction.DOWN, textureAll);
+    // block.texture(Direction.NORTH, textureAll);
+    // block.texture(Direction.SOUTH, textureAll);
+    // block.texture(Direction.WEST, textureAll);
+    // block.texture(Direction.EAST, textureAll);
+  }
+
+  block.hardness(hardness);
+  block.lightLevel(lightLevel);
+  block.mapColor(mapColor);
+  block.soundType(soundType);
+  block.renderType(renderType);
+  block.resistance(resistance);
+
+  return true;
+
+};
+
+global.setHorizontalFacing = function (block, type, model) {
+
+  const prop = BlockProperties.HORIZONTAL_FACING;
+
+  // // 设置模型旋转
+  // block.blockstateJson = {
+  //   'variants': {
+  //     'facing=north': { model: model, y: 0 },
+  //     'facing=east': { model: model, y: 90 },
+  //     'facing=south': { model: model, y: 180 },
+  //     'facing=west': { model: model, y: 270 }
+  //   }
+  // };
+
+  // 添加属性
+  block.property(prop);
+
+  // 处理默认状态
+  block.defaultState((ev) => {
+    ev.set(prop, 'north');
+  });
+
+  // 处理放置状态
+  switch (type) {
+    // 与玩家朝向相反
+    case 'revert':
+      block.placementState((ev) => {
+        const d = ev.getHorizontalDirection().getOpposite().toString();
+        ev.set(prop, d);
+      });
+      break;
+    // 与玩家朝向相同
+    case 'same':
+      block.placementState((ev) => {
+        const d = ev.getHorizontalDirection().toString();
+        ev.set(prop, d);
+      });
+      break;
+    // 其他
+    default:
+      console.error(`${LOG_PREFIX} 设置旋转属性失败：参数“type”错误`);
+      return false;
+  }
+
+  return true;
+
+};
+
+global.writeJSON = function (path, data) {
+  JsonIO.write(path, data);
+};
 
 console.info(`${global.LOG_PREFIX} 启动`);

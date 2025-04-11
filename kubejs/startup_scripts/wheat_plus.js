@@ -2,7 +2,6 @@
 
 const defaults = global.defaults;
 const setBlockProps = global.setBlockProps;
-const setHorizontalFacing = global.setHorizontalFacing;
 
 const COLORS = global.COLORS;
 const JSON_ASSETS = global.JSON_ASSETS;
@@ -17,6 +16,9 @@ const P_BLOCK = `${MOD_ID}:block`;
 /** 方块模型文件基础长路径 */
 const P_BLOCK_MODEL = `${MOD_ID}:models/block`;
 
+/** 方块透明纹理文件路径 */
+const P_BLOCK_TRANSPARENT = `${P_BLOCK}/common/transparent`;
+
 /** 物品模型、纹理文件基础短路径*/
 const P_ITEM = `${MOD_ID}:item`;
 
@@ -27,7 +29,7 @@ console.info(`${LOG_PREFIX} 处理 ${MOD_ID} 相关内容`);
 
 /**
  * @description 注册方块 - 砖块
- * @param {Registry.Block} event
+ * @param {_RegistryBlock} event
  */
 function regBlockBrick(event) {
 
@@ -43,14 +45,12 @@ function regBlockBrick(event) {
   blocks.forEach((config) => {
 
     const id = `${MOD_ID}:${config.name}`;
-    const block = event.create(id, 'basic');
+    const block = event.create(id);
 
     setBlockProps(block, {
       displayName: '砖块',
-      material: 'stone',
+      textureAll: `${P_BLOCK}/${config.texture}`,
     });
-
-    block.textureAll(`${P_BLOCK}/${config.texture}`);
 
   });
 
@@ -60,13 +60,13 @@ function regBlockBrick(event) {
 
 /**
  * @description 注册方块 - 建筑和家具
- * @param {Registry.Block} event
+ * @param {_RegistryBlock} event
  */
 function regBlockBuildingAndFurniture(event) {
 
   console.info(`${LOG_PREFIX} 注册方块 - 建筑和家具 - 开始`);
 
-  const blocks = [
+  const blockList = [
     // 建筑方块
     {
       name: 'building_brick_a',
@@ -543,46 +543,50 @@ function regBlockBuildingAndFurniture(event) {
     },
   ];
 
-  blocks.forEach((config) => {
+  blockList.forEach((config) => {
 
-    const id = `${MOD_ID}:${config.name}`;
-    const block = event.create(id, 'basic');
-    const box = config.box;
-    const label = config.label;
-    const mPath = config.model;
-    const tPath = config.texture;
+    const blockBox = config.box;
+    const blockLabel = config.label;
+    const blockName = config.name;
+    const blockId = `${MOD_ID}:${blockName}`;
+
+    const block = config.orientable ? event.create(blockId, 'cardinal') : event.create(blockId);
+
+    const modelPath0 = config.model;
+    const modelPath1 = modelPath0 ? `${P_BLOCK}/${modelPath0}` : '';
+
+    const texturePath0 = config.texture;
+    const texturePath1 = texturePath0 ? `${P_BLOCK}/${texturePath0}` : '';
 
     // 设置基础属性
-    if (box) {
+    if (blockBox) {
       setBlockProps(block, {
-        boxConfig: box,
+        boxConfig: blockBox,
         boxType: 'custom',
-        displayName: label,
+        displayName: blockLabel,
         isSolid: false,
-        material: 'stone',
+        modelPath: modelPath1 ? {
+          blockName: blockName,
+          blockNamespace: MOD_ID,
+          filePath: modelPath1,
+        } : null,
         renderType: 'cutout',
+        textureAll: texturePath1,
       });
     } else {
       setBlockProps(block, {
         boxConfig: null,
         boxType: 'full',
-        displayName: label,
+        displayName: blockLabel,
         isSolid: true,
-        material: 'stone',
+        modelPath: modelPath1 ? {
+          blockName: blockName,
+          blockNamespace: MOD_ID,
+          filePath: modelPath1,
+        } : null,
         renderType: 'solid',
+        textureAll: texturePath1,
       });
-    }
-
-    // 设置模型或纹理文件路径
-    if (mPath) {
-      block.model(`${P_BLOCK}/${mPath}`);
-    } else if (tPath) {
-      block.textureAll(`${P_BLOCK}/${tPath}`);
-    }
-
-    // 设置方块旋转
-    if (config.orientable) {
-      setHorizontalFacing(block, 'revert', `${P_BLOCK}/${mPath}`);
     }
 
   });
@@ -593,7 +597,7 @@ function regBlockBuildingAndFurniture(event) {
 
 /**
  * @description 注册方块 - 纯色方块
- * @param {Registry.Block} event
+ * @param {_RegistryBlock} event
  */
 function regBlockColor(event) {
 
@@ -728,13 +732,13 @@ function regBlockColor(event) {
     },
   ];
 
-  const tGrow = `${P_BLOCK}/common/color_grow`;
-  const tNormal = `${P_BLOCK}/common/color_normal`;
+  const textureGrow = `${P_BLOCK}/common/color_grow`;
+  const textureNormal = `${P_BLOCK}/common/color_normal`;
 
   blocks.forEach((config) => {
 
     const id = `${MOD_ID}:${config.name}`;
-    const block = event.create(id, 'basic');
+    const block = event.create(id);
     const colorCfg = config.color;
     const isGrow = config.grow;
 
@@ -742,10 +746,9 @@ function regBlockColor(event) {
       displayName: config.label,
       isSolid: false,
       lightLevel: (isGrow ? 1 : 0),
-      material: 'stone',
+      textureAll: (isGrow ? textureGrow : textureNormal),
     });
 
-    block.textureAll(isGrow ? tGrow : tNormal);
     block.color(0, Color.rgba.apply(Color, colorCfg));
     block.item((item) => {
       item.color(0, Color.rgba.apply(Color, colorCfg));
@@ -759,44 +762,49 @@ function regBlockColor(event) {
 
 /**
  * @description 注册方块 - 灯（现代）
- * @param {Registry.Block} event
+ * @param {_RegistryBlock} event
  */
 function regBlockLampModern(event) {
 
   console.info(`${LOG_PREFIX} 注册方块 - 现代灯 - 开始`);
 
+  /** 颜色 key 列表 */
   const keys = Object.keys(COLORS);
 
   /** 父模型路径 */
-  const parent = `${P_BLOCK}/lamp/modern`;
+  const parentModel = `${P_BLOCK}/lamp/modern`;
 
   keys.forEach((key) => {
 
     const color = COLORS[key];
-    const id = `${MOD_ID}:lamp_modern_${color.CODE}`;
-    const block = event.create(id, 'basic');
+    const blockName = `lamp_modern_${color.CODE}`;
+    const blockId = `${MOD_ID}:${blockName}`;
+    const block = event.create(blockId);
 
     // 纹理文件路径前缀
     // wheat_plus:block/lamp_modern/color_
-    const tBase = `${P_BLOCK}/lamp_modern/${color.CODE}`;
+    const textureBase = `${P_BLOCK}/lamp_modern/${color.CODE}`;
 
     setBlockProps(block, {
       boxType: 'full',
       displayName: `现代${color.LABEL_CN}灯`,
       isSolid: false,
       lightLevel: 1,
-      material: 'glass',
       renderType: 'translucent',
+      soundType: 'glass',
     });
 
-    block.modelJson = {
-      parent: parent,
-      textures: {
-        glow: `${tBase}_glow`,
-        core: `${tBase}_core`,
-        particle: `${tBase}_core`
-      }
-    };
+    JSON_ASSETS.push({
+      path: `${P_BLOCK_MODEL}/${blockName}`,
+      data: {
+        parent: parentModel,
+        textures: {
+          glow: `${textureBase}_glow`,
+          core: `${textureBase}_core`,
+          particle: `${textureBase}_core`,
+        },
+      },
+    });
 
   });
 
@@ -806,7 +814,7 @@ function regBlockLampModern(event) {
 
 /**
  * @description 注册方块 - 灯（简约）
- * @param {Registry.Block} event
+ * @param {_RegistryBlock} event
  */
 function regBlockLampSimple(event) {
 
@@ -839,7 +847,7 @@ function regBlockLampSimple(event) {
 
     const blockName = config.name;
     const blockId = `${MOD_ID}:${blockName}`;
-    const block = event.create(blockId, 'stone_button');
+    const block = event.create(blockId, 'button');
 
     // 用于替换默认模型
     const modelJSON = { parent: `${P_BLOCK}/${config.model}` };
@@ -847,26 +855,26 @@ function regBlockLampSimple(event) {
     setBlockProps(block, {
       displayName: config.label,
       lightLevel: 0.8,
-      material: 'glass',
       renderType: 'translucent',
+      soundType: 'glass',
     });
 
     // 按钮方块默认状态
     JSON_ASSETS.push({
-      PATH: `${P_BLOCK_MODEL}/${blockName}`,
-      DATA: modelJSON,
+      path: `${P_BLOCK_MODEL}/${blockName}`,
+      data: modelJSON,
     });
 
     // 按钮方块按下状态
     JSON_ASSETS.push({
-      PATH: `${P_BLOCK_MODEL}/${blockName}_pressed`,
-      DATA: modelJSON,
+      path: `${P_BLOCK_MODEL}/${blockName}_pressed`,
+      data: modelJSON,
     });
 
     // 按钮物品状态
     JSON_ASSETS.push({
-      PATH: `${P_ITEM_MODEL}/${blockName}`,
-      DATA: modelJSON,
+      path: `${P_ITEM_MODEL}/${blockName}`,
+      data: modelJSON,
     });
 
   });
@@ -877,7 +885,7 @@ function regBlockLampSimple(event) {
 
 /**
  * @description 注册方块 - 矿车方块
- * @param {Registry.Block} event
+ * @param {_RegistryBlock} event
  */
 function regBlockMinecart(event) {
 
@@ -889,7 +897,7 @@ function regBlockMinecart(event) {
   /** 纹理文件路径前缀 */
   const texturePrefix = `${P_BLOCK}/minecart/`;
 
-  const blocks = [
+  const blockList = [
     { name: 'mtr_gz_gf_1', label: '广州地铁 - 广佛线' },
     { name: 'mtr_gz_gf_2', label: '广州地铁 - 广佛线' },
     { name: 'mtr_gz_l1_1', label: '广州地铁 - 一号线' },
@@ -942,38 +950,36 @@ function regBlockMinecart(event) {
     { name: 'cr_yz25z_wh', label: '中国铁路 - YZ25Z_WH' },
   ];
 
-  blocks.forEach((config) => {
+  blockList.forEach((config) => {
 
     const blockName = config.name;
     const blockId = `${MOD_ID}:minecart_${blockName}`;
-    const block = event.create(blockId, 'basic');
+    const block = event.create(blockId, 'cardinal');
 
-    const modelPathL = `${P_BLOCK_MODEL}/minecart/${blockName}`;
-    const modelPathS = `${P_BLOCK}/minecart/${blockName}`;
-    const modelJSON = {
-      parent: modelParent,
-      textures: {
-        main: `${texturePrefix}${blockName}`
-      }
-    };
+    const modelPathL = `${P_BLOCK_MODEL}/minecart_${blockName}`;
+    const modelPathS = `${P_BLOCK}/minecart_${blockName}`;
 
     // 生成模型 JSON 文件
-    JSON_ASSETS.push({ PATH: modelPathL, DATA: modelJSON });
+    JSON_ASSETS.push({
+      path: modelPathL,
+      data: {
+        parent: modelParent,
+        textures: {
+          main: `${texturePrefix}${blockName}`,
+        },
+      },
+    });
 
     // 设置基础属性
     setBlockProps(block, {
-      boxConfig: [-3, 0, -6, 19, 16, 22],
+      boxConfig: [-3, 0, -6, 19, 16, 22, true],
       boxType: 'custom',
-      collision: false,
       displayName: config.label,
+      hasCollision: false,
       isSolid: false,
-      material: 'metal',
-      modelPath: modelPathS,
       renderType: 'cutout',
+      soundType: 'metal',
     });
-
-    // 设置旋转属性
-    setHorizontalFacing(block, 'same', modelPathS);
 
   });
 
@@ -983,7 +989,7 @@ function regBlockMinecart(event) {
 
 /**
  * @description 注册方块 - 强化混凝土
- * @param {Registry.Block} event
+ * @param {_RegistryBlock} event
  */
 function regBlockReinforcedConcrete(event) {
 
@@ -995,22 +1001,21 @@ function regBlockReinforcedConcrete(event) {
 
     const color = COLORS[key];
     const id = `${MOD_ID}:reinforced_concrete_${color.CODE}`;
-    const block = event.create(id, 'basic');
+    const block = event.create(id);
     const texture = `${P_BLOCK}/reinforced_concrete/${color.CODE}`;
 
     setBlockProps(block, {
       boxType: 'full',
       displayName: `${color.LABEL_CN}强化混凝土`,
+      textureAll: texture,
     });
-
-    block.textureAll(texture);
 
   });
 
   // // 覆盖默认语言（en_US）
   // JSON_ASSETS.push({
-  //   PATH: 'minecraft:lang/en_us',
-  //   DATA: {
+  //   path: 'minecraft:lang/en_us',
+  //   data: {
   //     'block.minecraft.ancient_debris': 'White Reinforced Concrete',
   //     'block.minecraft.raw_copper_block': 'Gray Reinforced Concrete',
   //     'block.minecraft.raw_iron_block': 'Light Gray Reinforced Concrete',
@@ -1019,8 +1024,8 @@ function regBlockReinforcedConcrete(event) {
 
   // // 覆盖默认语言（zh_CN）
   // JSON_ASSETS.push({
-  //   PATH: 'minecraft:lang/zh_cn',
-  //   DATA: {
+  //   path: 'minecraft:lang/zh_cn',
+  //   data: {
   //     'block.minecraft.ancient_debris': '白色强化混凝土',
   //     'block.minecraft.raw_copper_block': '灰色强化混凝土',
   //     'block.minecraft.raw_iron_block': '淡灰色强化混凝土',
@@ -1033,7 +1038,7 @@ function regBlockReinforcedConcrete(event) {
 
 /**
  * @description 注册方块 - 路
- * @param {Registry.Block} event
+ * @param {_RegistryBlock} event
  */
 function regBlockRoad(event) {
 
@@ -1114,35 +1119,33 @@ function regBlockRoad(event) {
     const label = (config.label || 'Unknown');
 
     /** 纹理文件相对路径 */
-    const tPath = config.texturePath;
+    const texturePath = config.texturePath;
 
     /** 是否存在侧边纹理 */
-    const tSide = config.hasSide;
+    const textureSide = config.hasSide;
 
     // 完整，普通 / 直线
     if (config.hasNormal) {
 
       const blockId = `${blockName}_full`;
       const fullId = `${MOD_ID}:${blockId}`;
-      const block = event.create(fullId, 'basic');
+      const block = event.create(fullId);
       const suffix = (config.isBlank ? '' : '，直线');
 
-      const modelPathL = `${P_BLOCK_MODEL}/${blockId}`;
-      const modelPathS = `${P_BLOCK}/${blockId}`;
-      const modelJSON = {
-        parent: `${P_BLOCK}/road/base_full`,
-        textures: {
-          content: `${P_BLOCK}/${tPath}`,
-          side: tSide ? `${P_BLOCK}/${tPath}` : undefined
-        }
-      };
-
-      JSON_ASSETS.push({ PATH: modelPathL, DATA: modelJSON });
+      JSON_ASSETS.push({
+        path: `${P_BLOCK_MODEL}/${blockId}`,
+        data: {
+          parent: `${P_BLOCK}/road/base_full`,
+          textures: {
+            content: `${P_BLOCK}/${texturePath}`,
+            side: textureSide ? `${P_BLOCK}/${texturePath}` : P_BLOCK_TRANSPARENT,
+          },
+        },
+      });
 
       setBlockProps(block, {
         boxType: 'full',
         displayName: `${label}，完整${suffix}`,
-        modelPath: modelPathS,
         renderType: 'cutout',
       });
 
@@ -1153,29 +1156,25 @@ function regBlockRoad(event) {
 
       const blockId = `${blockName}_full_slant`;
       const fullId = `${MOD_ID}:${blockId}`;
-      const block = event.create(fullId, 'basic');
+      const block = event.create(fullId, 'cardinal');
       const suffix = '，斜线';
 
-      const modelPathL = `${P_BLOCK_MODEL}/${blockId}`;
-      const modelPathS = `${P_BLOCK}/${blockId}`;
-      const modelJSON = {
-        parent: `${P_BLOCK}/road/base_full`,
-        textures: {
-          content: `${P_BLOCK}/${tPath}_slant`,
-          side: tSide ? `${P_BLOCK}/${tPath}` : undefined
-        }
-      };
-
-      JSON_ASSETS.push({ PATH: modelPathL, DATA: modelJSON });
+      JSON_ASSETS.push({
+        path: `${P_BLOCK_MODEL}/${blockId}`,
+        data: {
+          parent: `${P_BLOCK}/road/base_full`,
+          textures: {
+            content: `${P_BLOCK}/${texturePath}_slant`,
+            side: textureSide ? `${P_BLOCK}/${texturePath}` : P_BLOCK_TRANSPARENT,
+          },
+        },
+      });
 
       setBlockProps(block, {
         boxType: 'full',
         displayName: `${label}，完整${suffix}`,
-        modelPath: modelPathS,
         renderType: 'cutout',
       });
-
-      setHorizontalFacing(block, 'same', modelPathS);
 
     }
 
@@ -1184,25 +1183,23 @@ function regBlockRoad(event) {
 
       const blockId = `${blockName}_half`;
       const fullId = `${MOD_ID}:${blockId}`;
-      const block = event.create(fullId, 'basic');
+      const block = event.create(fullId);
       const suffix = (config.isBlank ? '' : '，直线');
 
-      const modelPathL = `${P_BLOCK_MODEL}/${blockId}`;
-      const modelPathS = `${P_BLOCK}/${blockId}`;
-      const modelJSON = {
-        parent: `${P_BLOCK}/road/base_half`,
-        textures: {
-          content: `${P_BLOCK}/${tPath}`,
-          side: tSide ? `${P_BLOCK}/${tPath}` : undefined
-        }
-      };
-
-      JSON_ASSETS.push({ PATH: modelPathL, DATA: modelJSON });
+      JSON_ASSETS.push({
+        path: `${P_BLOCK_MODEL}/${blockId}`,
+        data: {
+          parent: `${P_BLOCK}/road/base_half`,
+          textures: {
+            content: `${P_BLOCK}/${texturePath}`,
+            side: textureSide ? `${P_BLOCK}/${texturePath}` : P_BLOCK_TRANSPARENT,
+          },
+        },
+      });
 
       setBlockProps(block, {
         boxType: 'half',
         displayName: `${label}，一半${suffix}`,
-        modelPath: modelPathS,
         renderType: 'cutout',
       });
 
@@ -1213,29 +1210,25 @@ function regBlockRoad(event) {
 
       const blockId = `${blockName}_half_slant`;
       const fullId = `${MOD_ID}:${blockId}`;
-      const block = event.create(fullId, 'basic');
+      const block = event.create(fullId, 'cardinal');
       const suffix = '，斜线';
 
-      const modelPathL = `${P_BLOCK_MODEL}/${blockId}`;
-      const modelPathS = `${P_BLOCK}/${blockId}`;
-      const modelJSON = {
-        parent: `${P_BLOCK}/road/base_half`,
-        textures: {
-          content: `${P_BLOCK}/${tPath}_slant`,
-          side: tSide ? `${P_BLOCK}/${tPath}` : undefined
-        }
-      };
-
-      JSON_ASSETS.push({ PATH: modelPathL, DATA: modelJSON });
+      JSON_ASSETS.push({
+        path: `${P_BLOCK_MODEL}/${blockId}`,
+        data: {
+          parent: `${P_BLOCK}/road/base_half`,
+          textures: {
+            content: `${P_BLOCK}/${texturePath}_slant`,
+            side: textureSide ? `${P_BLOCK}/${texturePath}` : P_BLOCK_TRANSPARENT,
+          },
+        },
+      });
 
       setBlockProps(block, {
         boxType: 'half',
         displayName: `${label}，一半${suffix}`,
-        modelPath: modelPathS,
         renderType: 'cutout',
       });
-
-      setHorizontalFacing(block, 'same', modelPathS);
 
     }
 
@@ -1247,7 +1240,7 @@ function regBlockRoad(event) {
 
 /**
  * @description 注册方块 - 其他 - 基础
- * @param {Registry.Block} event
+ * @param {_RegistryBlock} event
  */
 function regBlockOtherBasic(event) {
 
@@ -1306,44 +1299,48 @@ function regBlockOtherBasic(event) {
 
   blocks.forEach((config) => {
 
-    const id = `${MOD_ID}:${config.name}`;
-    const block = event.create(id, 'basic');
-    const box = config.box;
-    const label = config.label;
-    const mPath = config.model;
-    const tPath = config.texture;
+    const blockBox = config.box;
+    const blockLabel = config.label;
+    const blockName = config.name;
+    const blockId = `${MOD_ID}:${blockName}`;
+
+    const block = config.orientable ? event.create(blockId, 'cardinal') : event.create(blockId);
+
+    const modelPath0 = config.model;
+    const modelPath1 = modelPath0 ? `${P_BLOCK}/${modelPath0}` : '';
+
+    const texturePath0 = config.texture;
+    const texturePath1 = texturePath0 ? `${P_BLOCK}/${texturePath0}` : '';
 
     // 设置基础属性
-    if (box) {
+    if (blockBox) {
       setBlockProps(block, {
-        boxConfig: box,
+        boxConfig: blockBox,
         boxType: 'custom',
-        displayName: label,
+        displayName: blockLabel,
         isSolid: false,
-        material: 'stone',
+        modelPath: modelPath1 ? {
+          blockName: blockName,
+          blockNamespace: MOD_ID,
+          filePath: modelPath1,
+        } : null,
         renderType: 'cutout',
+        textureAll: texturePath1,
       });
     } else {
       setBlockProps(block, {
         boxConfig: null,
         boxType: 'full',
-        displayName: label,
+        displayName: blockLabel,
         isSolid: true,
-        material: 'stone',
+        modelPath: modelPath1 ? {
+          blockName: blockName,
+          blockNamespace: MOD_ID,
+          filePath: modelPath1,
+        } : null,
         renderType: 'solid',
+        textureAll: texturePath1,
       });
-    }
-
-    // 设置模型或纹理文件路径
-    if (mPath) {
-      block.model(`${P_BLOCK}/${mPath}`);
-    } else if (tPath) {
-      block.textureAll(`${P_BLOCK}/${tPath}`);
-    }
-
-    // 设置方块旋转
-    if (config.orientable) {
-      setHorizontalFacing(block, 'revert', `${P_BLOCK}/${mPath}`);
     }
 
   });
@@ -1354,7 +1351,7 @@ function regBlockOtherBasic(event) {
 
 /**
  * @description 注册方块 - 其他 - 特殊
- * @param {Registry.Block} event
+ * @param {_RegistryBlock} event
  */
 function regBlockOtherShaped(event) {
 
@@ -1389,12 +1386,9 @@ function regBlockOtherShaped(event) {
     // 设置基础属性
     setBlockProps(block, {
       displayName: config.label,
-      material: 'stone',
       renderType: 'cutout_mipped',
+      textureAll: config.texture,
     });
-
-    // 设置方块纹理
-    block.textureAll(config.texture);
 
   });
 
@@ -1403,16 +1397,16 @@ function regBlockOtherShaped(event) {
 }
 
 // 注册方块
-onEvent('block.registry', regBlockBrick);
-onEvent('block.registry', regBlockBuildingAndFurniture);
-onEvent('block.registry', regBlockColor);
-onEvent('block.registry', regBlockLampModern);
-onEvent('block.registry', regBlockLampSimple);
-onEvent('block.registry', regBlockMinecart);
-onEvent('block.registry', regBlockRoad);
-onEvent('block.registry', regBlockReinforcedConcrete);
-onEvent('block.registry', regBlockOtherBasic);
-onEvent('block.registry', regBlockOtherShaped);
+StartupEvents.registry('block', regBlockBrick);
+StartupEvents.registry('block', regBlockBuildingAndFurniture);
+StartupEvents.registry('block', regBlockColor);
+StartupEvents.registry('block', regBlockLampModern);
+StartupEvents.registry('block', regBlockLampSimple);
+StartupEvents.registry('block', regBlockMinecart);
+StartupEvents.registry('block', regBlockRoad);
+StartupEvents.registry('block', regBlockReinforcedConcrete);
+StartupEvents.registry('block', regBlockOtherBasic);
+StartupEvents.registry('block', regBlockOtherShaped);
 
 // 注册物品
 // onEvent('item.registry', function (event) {

@@ -1,10 +1,11 @@
 {
+    "typescript.tsserver.maxTsServerMemory": 4096,
     "json.schemas": [
         {
             "fileMatch": [
-                "/probe/docs/*.json"
+                "/recipe_schemas/*.json"
             ],
-            "url": "./.vscode/probe.doc-schema.json"
+            "url": "./.vscode/recipe.json"
         }
     ]
 }
