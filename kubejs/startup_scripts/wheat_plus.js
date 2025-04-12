@@ -70,7 +70,7 @@ function regBlockBuildingAndFurniture(event) {
     // 建筑方块
     {
       name: 'building_brick_a',
-      box: [2, 0, 2, 14, 16, 14, true],
+      box: [0, 0, 0, 16, 16, 16, true],
       label: '砖块（大三角）',
       model: 'building/building_brick_a',
       texture: '',
@@ -78,7 +78,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_brick_a_half_down',
-      box: [2, 0, 2, 14, 16, 14, true],
+      box: [0, 0, 0, 16, 8, 16, true],
       label: '砖块（大三角，下半部分）',
       model: 'building/building_brick_a_half_down',
       texture: '',
@@ -86,7 +86,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_brick_a_half_up',
-      box: [2, 0, 2, 14, 16, 14, true],
+      box: [0, 8, 0, 16, 16, 16, true],
       label: '砖块（大三角，上半部分）',
       model: 'building/building_brick_a_half_up',
       texture: '',
@@ -94,7 +94,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_brick_b',
-      box: [2, 0, 2, 14, 16, 14, true],
+      box: [8, 0, 8, 16, 16, 16, true],
       label: '砖块（小三角）',
       model: 'building/building_brick_b',
       texture: '',
@@ -102,7 +102,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_brick_c',
-      box: [2, 0, 2, 14, 16, 14, true],
+      box: [0, 0, 0, 16, 16, 16, true],
       label: '砖块（缺一角）',
       model: 'building/building_brick_c',
       texture: '',
@@ -110,7 +110,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_brick_d',
-      box: [2, 0, 2, 14, 16, 14, true],
+      box: [0, 0, 12, 16, 16, 16, true],
       label: '砖块（砖块，1/4）',
       model: 'building/building_brick_d',
       texture: '',
@@ -118,7 +118,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_brick_d_tall',
-      box: [2, 0, 2, 14, 16, 14, true],
+      box: [0, 0, 12, 16, 24, 16, true],
       label: '砖块（砖块，1/4，高）',
       model: 'building/building_brick_d_tall',
       texture: '',
@@ -126,7 +126,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_brick_e',
-      box: [2, 0, 2, 14, 16, 14, true],
+      box: [0, 0, 12, 16, 16, 16, true],
       label: '砖块（青色陶瓦，1/4）',
       model: 'building/building_brick_e',
       texture: '',
@@ -134,7 +134,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_brick_e_tall',
-      box: [2, 0, 2, 14, 16, 14, true],
+      box: [0, 0, 12, 16, 24, 16, true],
       label: '砖块（青色陶瓦，1/4，高）',
       model: 'building/building_brick_e_tall',
       texture: '',
@@ -142,7 +142,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_cover_a',
-      box: [2, 0, 2, 14, 16, 14, true],
+      box: [0, 13, 0, 16, 15, 16, true],
       label: '井盖',
       model: 'building/building_cover_a',
       texture: '',
@@ -150,7 +150,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_fence_a_bottom',
-      box: [2, 0, 2, 14, 16, 14, true],
+      box: [0, 0, 0, 16, 32, 16, true],
       label: '围栏（下）',
       model: 'building/building_fence_a_bottom',
       texture: '',
@@ -158,7 +158,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_fence_a_top',
-      box: [2, 0, 2, 14, 16, 14, true],
+      box: [0, 0, 0, 16, 32, 16, true],
       label: '围栏（上）',
       model: 'building/building_fence_a_top',
       texture: '',
@@ -166,7 +166,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_fence_b',
-      box: [2, 0, 2, 14, 16, 14, true],
+      box: [0, 0, 7, 16, 16, 9, true],
       label: '白色栅栏',
       model: 'building/building_fence_b',
       texture: '',
@@ -174,7 +174,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_fence_b_corner_inner',
-      box: [2, 0, 2, 14, 16, 14, true],
+      box: [6, 0, 0, 16, 16, 10, true],
       label: '白色栅栏（角落，向内）',
       model: 'building/building_fence_b_corner_inner',
       texture: '',
@@ -182,7 +182,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_fence_b_corner_outer',
-      box: [2, 0, 2, 14, 16, 14, true],
+      box: [0, 0, 6, 10, 16, 16, true],
       label: '白色栅栏（角落，向外）',
       model: 'building/building_fence_b_corner_outer',
       texture: '',
@@ -206,7 +206,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_misc_a',
-      box: [2, 0, 2, 14, 16, 14, true],
+      box: [0, 8, 14, 16, 16, 16, true],
       label: '石英片',
       model: 'building/building_misc_a',
       texture: '',
@@ -214,7 +214,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_misc_b',
-      box: [2, 0, 2, 14, 16, 14, true],
+      box: [0, 0, 0, 16, 16, 16, true],
       label: '石英块',
       model: 'building/building_misc_b',
       texture: '',
@@ -222,7 +222,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_misc_c',
-      box: [2, 0, 2, 14, 16, 14, true],
+      box: [0, 0, 0, 16, 16, 16, true],
       label: '石英块',
       model: 'building/building_misc_c',
       texture: '',
@@ -230,7 +230,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_misc_d',
-      box: [2, 0, 2, 14, 16, 14, true],
+      box: [0, 8, 8, 16, 16, 16, true],
       label: '石英块',
       model: 'building/building_misc_d',
       texture: '',
@@ -238,7 +238,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_pillar_a',
-      box: [2, 0, 2, 14, 16, 14, true],
+      box: [1, 0, 1, 15, 16, 15, true],
       label: '柱子',
       model: 'building/building_pillar_a',
       texture: '',
@@ -246,7 +246,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_pillar_a_tall',
-      box: [2, 0, 2, 14, 16, 14, true],
+      box: [1, 0, 1, 15, 24, 15, true],
       label: '柱子（高）',
       model: 'building/building_pillar_a_tall',
       texture: '',
@@ -254,7 +254,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_pillar_b',
-      box: [2, 0, 2, 14, 16, 14, true],
+      box: [-8, 0, -8, 24, 16, 24, true],
       label: '粗柱子',
       model: 'building/building_pillar_b',
       texture: '',
@@ -262,7 +262,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_pillar_b_tall',
-      box: [2, 0, 2, 14, 16, 14, true],
+      box: [-8, 0, -8, 24, 24, 24, true],
       label: '粗柱子（高）',
       model: 'building/building_pillar_b_tall',
       texture: '',
@@ -270,7 +270,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_quartz_vertical_slab',
-      box: [2, 0, 2, 14, 16, 14, true],
+      box: [0, 0, 8, 16, 16, 16, true],
       label: '垂直石英台阶',
       model: 'building/building_quartz_vertical_slab',
       texture: '',
@@ -278,7 +278,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_rail_a',
-      box: [2, 0, 2, 14, 16, 14, true],
+      box: [0, 6, 6, 16, 10, 10, true],
       label: '铁扶手',
       model: 'building/building_rail_a',
       texture: '',
@@ -286,7 +286,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_rail_b',
-      box: [2, 0, 2, 14, 16, 14, true],
+      box: [0, 0, 6, 16, 10, 10, true],
       label: '铁扶手',
       model: 'building/building_rail_b',
       texture: '',
@@ -294,7 +294,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_rail_c',
-      box: [2, 0, 2, 14, 16, 14, true],
+      box: [0, 0, 6, 10, 10, 10, true],
       label: '铁扶手',
       model: 'building/building_rail_c',
       texture: '',
@@ -302,7 +302,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_rail_d',
-      box: [2, 0, 2, 14, 16, 14, true],
+      box: [0, 6, 0, 10, 10, 10, true],
       label: '铁扶手',
       model: 'building/building_rail_d',
       texture: '',
@@ -310,7 +310,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_rail_e',
-      box: [2, 0, 2, 14, 16, 14, true],
+      box: [-3, 6, 0, 10, 10, 15, true],
       label: '铁扶手（斜向）',
       model: 'building/building_rail_e',
       texture: '',
@@ -318,7 +318,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_rail_f',
-      box: [2, 0, 2, 14, 16, 14, true],
+      box: [0, 6, -3, 15, 10, 10, true],
       label: '铁扶手（斜向）',
       model: 'building/building_rail_f',
       texture: '',
@@ -326,7 +326,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_rail_f_extend',
-      box: [2, 0, 2, 14, 16, 14, true],
+      box: [0, 6, 0, 16, 10, 16, true],
       label: '铁扶手（斜向，扩展）',
       model: 'building/building_rail_f_extend',
       texture: '',
@@ -334,7 +334,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_rail_g',
-      box: [2, 0, 2, 14, 16, 14, true],
+      box: [0, 0, 1, 16, 10, 16, true],
       label: '铁扶手（石英）',
       model: 'building/building_rail_g',
       texture: '',
@@ -342,7 +342,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_stair_rail_a',
-      box: [2, 0, 2, 14, 16, 14, true],
+      box: [7, 0, 7, 9, 16, 9, true],
       label: '楼梯铁扶手',
       model: 'building/building_stair_rail_a',
       texture: '',
@@ -350,7 +350,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_stair_rail_a_half',
-      box: [2, 0, 2, 14, 16, 14, true],
+      box: [7, 0, 7, 9, 8, 9, true],
       label: '楼梯铁扶手（半高）',
       model: 'building/building_stair_rail_a_half',
       texture: '',
@@ -358,7 +358,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_stair_rail_b',
-      box: [2, 0, 2, 14, 16, 14, true],
+      box: [7, 0, 7, 9, 16, 9, true],
       label: '楼梯铁扶手',
       model: 'building/building_stair_rail_b',
       texture: '',
@@ -366,7 +366,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_stair_rail_b_half',
-      box: [2, 0, 2, 14, 16, 14, true],
+      box: [7, 0, 7, 9, 8, 9, true],
       label: '楼梯铁扶手（半高）',
       model: 'building/building_stair_rail_b_half',
       texture: '',
@@ -374,7 +374,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_stair_rail_c',
-      box: [2, 0, 2, 14, 16, 14, true],
+      box: [7, 0, 7, 9, 16, 9, true],
       label: '楼梯铁扶手',
       model: 'building/building_stair_rail_c',
       texture: '',
@@ -382,7 +382,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_stair_rail_c_half',
-      box: [2, 0, 2, 14, 16, 14, true],
+      box: [7, 0, 7, 9, 8, 9, true],
       label: '楼梯铁扶手（半高）',
       model: 'building/building_stair_rail_c_half',
       texture: '',
@@ -390,7 +390,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_stair_rail_d',
-      box: [2, 0, 2, 14, 16, 14, true],
+      box: [7, 0, 7, 9, 16, 9, true],
       label: '楼梯铁扶手',
       model: 'building/building_stair_rail_d',
       texture: '',
@@ -398,7 +398,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_stair_rail_e',
-      box: [2, 0, 2, 14, 16, 14, true],
+      box: [7, 0, 7, 9, 16, 9, true],
       label: '楼梯铁扶手',
       model: 'building/building_stair_rail_e',
       texture: '',
@@ -406,7 +406,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_stair_rail_f',
-      box: [2, 0, 2, 14, 16, 14, true],
+      box: [7, 0, 7, 9, 16, 9, true],
       label: '楼梯铁扶手',
       model: 'building/building_stair_rail_f',
       texture: '',
@@ -414,7 +414,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_stair_rail_g',
-      box: [6, 0, 6, 10, 16, 10, true],
+      box: [7, 0, 7, 9, 16, 9, true],
       label: '楼梯铁扶手（垂直杆子）',
       model: 'building/building_stair_rail_g',
       texture: '',
@@ -422,7 +422,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_stair_rail_h',
-      box: [2, 0, 2, 14, 16, 14, true],
+      box: [0, 14, 7, 16, 16, 9, true],
       label: '楼梯铁扶手（水平杆子）',
       model: 'building/building_stair_rail_h',
       texture: '',
@@ -430,7 +430,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_stair_rail_h_half',
-      box: [2, 0, 2, 14, 16, 14, true],
+      box: [0, 6, 7, 16, 8, 9, true],
       label: '楼梯铁扶手（水平杆子，半高）',
       model: 'building/building_stair_rail_h_half',
       texture: '',
@@ -454,7 +454,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_wall_c',
-      box: [2, 0, 2, 14, 16, 14, true],
+      box: [0, 0, 3, 16, 16, 14, true],
       label: '墙（石英）',
       model: 'building/building_wall_c',
       texture: '',
@@ -462,7 +462,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_wall_d',
-      box: [2, 0, 2, 14, 16, 14, true],
+      box: [0, 0, 3, 16, 16, 16, true],
       label: '墙（石英）',
       model: 'building/building_wall_d',
       texture: '',
@@ -471,7 +471,7 @@ function regBlockBuildingAndFurniture(event) {
     // 家具方块
     {
       name: 'furniture_birch_chair_a',
-      box: [2, 0, 2, 14, 16, 14, true],
+      box: [4, 0, 4, 12, 16, 12, true],
       label: '白桦木椅子',
       model: 'furniture/furniture_birch_chair_a',
       texture: '',
@@ -479,7 +479,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'furniture_birch_table_a',
-      box: [2, 0, 2, 14, 16, 14, true],
+      box: [0, 0, 0, 16, 16, 16, true],
       label: '白桦木桌子',
       model: 'furniture/furniture_birch_table_a',
       texture: '',
@@ -487,7 +487,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'furniture_faucet_a',
-      box: [2, 0, 2, 14, 16, 14, true],
+      box: [0, 0, 5, 16, 9, 16, true],
       label: '水龙头',
       model: 'furniture/furniture_faucet_a',
       texture: '',
@@ -495,7 +495,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'furniture_black_board_a',
-      box: [2, 0, 2, 14, 16, 14, true],
+      box: [0, 0, 15, 16, 16, 16, true],
       label: '黑板',
       model: 'furniture/furniture_black_board_a',
       texture: '',
@@ -503,7 +503,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'furniture_kitchen_counter_a',
-      box: [2, 0, 2, 14, 16, 14, true],
+      box: [0, 0, 0, 16, 16, 16, true],
       label: '白桦木厨房柜台',
       model: 'furniture/furniture_kitchen_counter_a',
       texture: '',
@@ -511,7 +511,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'furniture_kitchen_sink_a',
-      box: [2, 0, 2, 14, 16, 14, true],
+      box: [0, 0, 0, 16, 16, 16, true],
       label: '白桦木厨房水槽',
       model: 'furniture/furniture_kitchen_sink_a',
       texture: '',
@@ -519,7 +519,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'furniture_tv_a',
-      box: [2, 0, 2, 14, 16, 14, true],
+      box: [0, 3, 13, 16, 16, 16, true],
       label: '电视机',
       model: 'furniture/furniture_tv_a',
       texture: '',
@@ -527,7 +527,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'furniture_tv_b',
-      box: [2, 0, 2, 14, 16, 14, true],
+      box: [0, 0, 0, 16, 16, 16, true],
       label: '电视机',
       model: 'furniture/furniture_tv_b',
       texture: '',
@@ -535,7 +535,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'furniture_tv_c',
-      box: [2, 0, 2, 14, 16, 14, true],
+      box: [3, 0, 2, 13, 14, 13, true],
       label: '电视机',
       model: 'furniture/furniture_tv_c',
       texture: '',
@@ -1265,7 +1265,7 @@ function regBlockOtherBasic(event) {
     },
     {
       name: 'station_sign_a',
-      box: [5, -16, 5, 11, 32, 11, true],
+      box: [0, 0, 6, 16, 16, 10, true],
       label: '站牌',
       model: 'common/station_sign_a',
       texture: '',
@@ -1273,7 +1273,7 @@ function regBlockOtherBasic(event) {
     },
     {
       name: 'statue_player_alex',
-      box: [4, 0, 6, 12, 31, 10, true],
+      box: [0, 0, 5, 16, 32, 11, true],
       label: '模型（Alex）',
       model: 'statue/player_alex',
       texture: '',
@@ -1281,7 +1281,7 @@ function regBlockOtherBasic(event) {
     },
     {
       name: 'statue_player_steve',
-      box: [4, 0, 6, 12, 31, 10, true],
+      box: [0, 0, 5, 16, 32, 11, true],
       label: '模型（Steve）',
       model: 'statue/player_steve',
       texture: '',
@@ -1289,7 +1289,7 @@ function regBlockOtherBasic(event) {
     },
     {
       name: 'ticket_machine_a',
-      box: [6, 0, 6, 10, 16, 10, true],
+      box: [3, 0, 6, 13, 30, 16, true],
       label: '售票机',
       model: 'common/ticket_machine_a',
       texture: '',
