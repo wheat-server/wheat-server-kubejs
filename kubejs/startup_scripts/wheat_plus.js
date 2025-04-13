@@ -25,6 +25,15 @@ const P_ITEM = `${MOD_ID}:item`;
 /** 物品模型文件基础长路径 */
 const P_ITEM_MODEL = `${MOD_ID}:models/item`;
 
+/** 属于创造模式标签页 wheat_plus:blocks 的方块 ID 列表 */
+const TAB_BLOCKS_ITEMS = [];
+
+/** 属于创造模式标签页 wheat_plus:minecart 的方块 ID 列表 */
+const TAB_MINECART_ITEMS = [];
+
+/** 属于创造模式标签页 wheat_plus:roads 的方块 ID 列表 */
+const TAB_ROADS_ITEMS = [];
+
 console.info(`${LOG_PREFIX} 处理 ${MOD_ID} 相关内容`);
 
 /**
@@ -46,6 +55,8 @@ function regBlockBrick(event) {
 
     const id = `${MOD_ID}:${config.name}`;
     const block = event.create(id);
+
+    TAB_BLOCKS_ITEMS.push(id);
 
     setBlockProps(block, {
       displayName: '砖块',
@@ -558,6 +569,8 @@ function regBlockBuildingAndFurniture(event) {
     const texturePath0 = config.texture;
     const texturePath1 = texturePath0 ? `${P_BLOCK}/${texturePath0}` : '';
 
+    TAB_BLOCKS_ITEMS.push(blockId);
+
     // 设置基础属性
     if (blockBox) {
       setBlockProps(block, {
@@ -742,6 +755,8 @@ function regBlockColor(event) {
     const colorCfg = config.color;
     const isGrow = config.grow;
 
+    TAB_BLOCKS_ITEMS.push(id);
+
     setBlockProps(block, {
       displayName: config.label,
       isSolid: false,
@@ -785,15 +800,6 @@ function regBlockLampModern(event) {
     // wheat_plus:block/lamp_modern/color_
     const textureBase = `${P_BLOCK}/lamp_modern/${color.CODE}`;
 
-    setBlockProps(block, {
-      boxType: 'full',
-      displayName: `现代${color.LABEL_CN}灯`,
-      isSolid: false,
-      lightLevel: 1,
-      renderType: 'translucent',
-      soundType: 'glass',
-    });
-
     JSON_ASSETS.push({
       path: `${P_BLOCK_MODEL}/${blockName}`,
       data: {
@@ -804,6 +810,17 @@ function regBlockLampModern(event) {
           particle: `${textureBase}_core`,
         },
       },
+    });
+
+    TAB_BLOCKS_ITEMS.push(blockId);
+
+    setBlockProps(block, {
+      boxType: 'full',
+      displayName: `现代${color.LABEL_CN}灯`,
+      isSolid: false,
+      lightLevel: 1,
+      renderType: 'translucent',
+      soundType: 'glass',
     });
 
   });
@@ -852,13 +869,6 @@ function regBlockLampSimple(event) {
     // 用于替换默认模型
     const modelJSON = { parent: `${P_BLOCK}/${config.model}` };
 
-    setBlockProps(block, {
-      displayName: config.label,
-      lightLevel: 0.8,
-      renderType: 'translucent',
-      soundType: 'glass',
-    });
-
     // 按钮方块默认状态
     JSON_ASSETS.push({
       path: `${P_BLOCK_MODEL}/${blockName}`,
@@ -875,6 +885,15 @@ function regBlockLampSimple(event) {
     JSON_ASSETS.push({
       path: `${P_ITEM_MODEL}/${blockName}`,
       data: modelJSON,
+    });
+
+    TAB_BLOCKS_ITEMS.push(blockId);
+
+    setBlockProps(block, {
+      displayName: config.label,
+      lightLevel: 0.8,
+      renderType: 'translucent',
+      soundType: 'glass',
     });
 
   });
@@ -956,12 +975,9 @@ function regBlockMinecart(event) {
     const blockId = `${MOD_ID}:minecart_${blockName}`;
     const block = event.create(blockId, 'cardinal');
 
-    const modelPathL = `${P_BLOCK_MODEL}/minecart_${blockName}`;
-    const modelPathS = `${P_BLOCK}/minecart_${blockName}`;
-
     // 生成模型 JSON 文件
     JSON_ASSETS.push({
-      path: modelPathL,
+      path: `${P_BLOCK_MODEL}/minecart_${blockName}`,
       data: {
         parent: modelParent,
         textures: {
@@ -969,6 +985,8 @@ function regBlockMinecart(event) {
         },
       },
     });
+
+    TAB_MINECART_ITEMS.push(blockId);
 
     // 设置基础属性
     setBlockProps(block, {
@@ -1003,6 +1021,8 @@ function regBlockReinforcedConcrete(event) {
     const id = `${MOD_ID}:reinforced_concrete_${color.CODE}`;
     const block = event.create(id);
     const texture = `${P_BLOCK}/reinforced_concrete/${color.CODE}`;
+
+    TAB_BLOCKS_ITEMS.push(id);
 
     setBlockProps(block, {
       boxType: 'full',
@@ -1143,6 +1163,8 @@ function regBlockRoad(event) {
         },
       });
 
+      TAB_ROADS_ITEMS.push(fullId);
+
       setBlockProps(block, {
         boxType: 'full',
         displayName: `${label}，完整${suffix}`,
@@ -1169,6 +1191,8 @@ function regBlockRoad(event) {
           },
         },
       });
+
+      TAB_ROADS_ITEMS.push(fullId);
 
       setBlockProps(block, {
         boxType: 'full',
@@ -1197,6 +1221,8 @@ function regBlockRoad(event) {
         },
       });
 
+      TAB_ROADS_ITEMS.push(fullId);
+
       setBlockProps(block, {
         boxType: 'half',
         displayName: `${label}，一半${suffix}`,
@@ -1223,6 +1249,8 @@ function regBlockRoad(event) {
           },
         },
       });
+
+      TAB_ROADS_ITEMS.push(fullId);
 
       setBlockProps(block, {
         boxType: 'half',
@@ -1312,6 +1340,8 @@ function regBlockOtherBasic(event) {
     const texturePath0 = config.texture;
     const texturePath1 = texturePath0 ? `${P_BLOCK}/${texturePath0}` : '';
 
+    TAB_BLOCKS_ITEMS.push(blockId);
+
     // 设置基础属性
     if (blockBox) {
       setBlockProps(block, {
@@ -1383,6 +1413,8 @@ function regBlockOtherShaped(event) {
     const id = `${MOD_ID}:${config.name}`;
     const block = event.create(id, config.type);
 
+    TAB_BLOCKS_ITEMS.push(id);
+
     // 设置基础属性
     setBlockProps(block, {
       displayName: config.label,
@@ -1407,6 +1439,53 @@ StartupEvents.registry('block', regBlockRoad);
 StartupEvents.registry('block', regBlockReinforcedConcrete);
 StartupEvents.registry('block', regBlockOtherBasic);
 StartupEvents.registry('block', regBlockOtherShaped);
+
+// 注册创造模式标签页
+StartupEvents.registry('creative_mode_tab', (event) => {
+
+  // 创建标签页
+  const tabBlocks = event.create('wheat_plus:blocks');
+  const tabMinecart = event.create('wheat_plus:minecart');
+  const tabRoads = event.create('wheat_plus:roads');
+
+  // 设置名称
+  tabBlocks.displayName('Wheat Plus | 方块');
+  tabMinecart.displayName('Wheat Plus | 矿车');
+  tabRoads.displayName('Wheat Plus | 路');
+
+  // 设置图标
+  tabBlocks.icon(() => {
+    return 'minecraft:hay_block';
+  });
+  tabMinecart.icon(() => {
+    return 'minecraft:minecart';
+  });
+  tabRoads.icon(() => {
+    return 'minecraft:gray_concrete';
+  });
+
+  // 设置内容
+  // 注：若通过该方式添加，顺序会乱
+  tabBlocks.content(() => {
+    return ['minecraft:paper'];
+  });
+  tabMinecart.content(() => {
+    return ['minecraft:paper'];
+  });
+  tabRoads.content(() => {
+    return ['minecraft:paper'];
+  });
+
+});
+StartupEvents.modifyCreativeTab('wheat_plus:blocks', (event) => {
+  event.add(TAB_BLOCKS_ITEMS);
+});
+StartupEvents.modifyCreativeTab('wheat_plus:minecart', (event) => {
+  event.add(TAB_MINECART_ITEMS);
+});
+StartupEvents.modifyCreativeTab('wheat_plus:roads', (event) => {
+  event.add(TAB_ROADS_ITEMS);
+});
 
 // 注册物品
 // onEvent('item.registry', function (event) {
