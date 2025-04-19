@@ -353,7 +353,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_stair_rail_a',
-      box: [7, 0, 7, 9, 16, 9, true],
+      box: [0, 0, 0, 9, 16, 9, true],
       label: '楼梯铁扶手',
       model: 'building/building_stair_rail_a',
       texture: '',
@@ -361,7 +361,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_stair_rail_a_half',
-      box: [7, 0, 7, 9, 8, 9, true],
+      box: [0, 0, 0, 9, 8, 9, true],
       label: '楼梯铁扶手（半高）',
       model: 'building/building_stair_rail_a_half',
       texture: '',
@@ -369,7 +369,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_stair_rail_b',
-      box: [7, 0, 7, 9, 16, 9, true],
+      box: [0, 0, 7, 16, 16, 9, true],
       label: '楼梯铁扶手',
       model: 'building/building_stair_rail_b',
       texture: '',
@@ -377,7 +377,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_stair_rail_b_half',
-      box: [7, 0, 7, 9, 8, 9, true],
+      box: [0, 0, 7, 16, 8, 9, true],
       label: '楼梯铁扶手（半高）',
       model: 'building/building_stair_rail_b_half',
       texture: '',
@@ -385,7 +385,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_stair_rail_c',
-      box: [7, 0, 7, 9, 16, 9, true],
+      box: [0, 0, 7, 9, 16, 9, true],
       label: '楼梯铁扶手',
       model: 'building/building_stair_rail_c',
       texture: '',
@@ -393,7 +393,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_stair_rail_c_half',
-      box: [7, 0, 7, 9, 8, 9, true],
+      box: [0, 0, 7, 9, 8, 9, true],
       label: '楼梯铁扶手（半高）',
       model: 'building/building_stair_rail_c_half',
       texture: '',
@@ -401,7 +401,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_stair_rail_d',
-      box: [7, 0, 7, 9, 16, 9, true],
+      box: [0, 0, 7, 16, 16, 9, true],
       label: '楼梯铁扶手',
       model: 'building/building_stair_rail_d',
       texture: '',
@@ -409,7 +409,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_stair_rail_e',
-      box: [7, 0, 7, 9, 16, 9, true],
+      box: [0, 0, 7, 16, 16, 9, true],
       label: '楼梯铁扶手',
       model: 'building/building_stair_rail_e',
       texture: '',
@@ -417,7 +417,7 @@ function regBlockBuildingAndFurniture(event) {
     },
     {
       name: 'building_stair_rail_f',
-      box: [7, 0, 7, 9, 16, 9, true],
+      box: [0, 0, 7, 16, 16, 9, true],
       label: '楼梯铁扶手',
       model: 'building/building_stair_rail_f',
       texture: '',
