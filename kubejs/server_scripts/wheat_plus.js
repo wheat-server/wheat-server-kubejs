@@ -1,7 +1,12 @@
 // priority: 0
 
-// // 玩家切换世界时设置为冒险模式（KubeJS Additions）
-// onEvent('player.change_dimension', (event) => {
+// 阻止踩田
+BlockEvents.farmlandTrampled((event) => {
+  event.cancel();
+});
+
+// // 玩家切换世界时设置为冒险模式
+// EntityEvents.spawned('player', (event) => {
 
 //   const evServer = event.getServer();
 //   const evPlayer = event.getPlayer();
@@ -12,8 +17,13 @@
 //     return;
 //   }
 
-//   if (player.isCreativeMode()) {
+//   if (player.isCreative()) {
 //     player.setGameMode('adventure');
 //   }
 
 // });
+
+// 阻止爆炸
+LevelEvents.beforeExplosion((event) => {
+  event.cancel();
+});
