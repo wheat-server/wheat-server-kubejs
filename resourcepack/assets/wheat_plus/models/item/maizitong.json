@@ -1,0 +1,56 @@
+{
+  "credit": "Created by Frost-ZX using Blockbench.",
+  "textures": {
+    "front": "wheat_plus:item/mai_zi_tong_f",
+    "back": "wheat_plus:item/mai_zi_tong_b"
+  },
+  "elements": [
+    {
+      "name": "麦子交通一卡通",
+      "from": [0, 3, 8],
+      "to": [16, 13, 8.5],
+      "rotation": {"angle": 0, "axis": "y", "origin": [8, 11, 16]},
+      "faces": {
+        "north": {"uv": [0, 3, 16, 13], "texture": "#front"},
+        "east": {"uv": [0, 0.5, 10, 1], "rotation": 90, "texture": "#front"},
+        "south": {"uv": [0, 3, 16, 13], "texture": "#back"},
+        "west": {"uv": [0, 0.5, 10, 1], "rotation": 90, "texture": "#front"},
+        "up": {"uv": [0, 0, 16, 0.5], "texture": "#front"},
+        "down": {"uv": [0, 0, 16, 0.5], "texture": "#front"}
+      }
+    }
+  ],
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [90, 0, -105],
+      "translation": [-1, -2, -3],
+      "scale": [0.5, 0.5, 0.5]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [90, 0, -105],
+      "translation": [-1, -2, -3],
+      "scale": [0.5, 0.5, 0.5]
+    },
+    "firstperson_righthand": {
+      "rotation": [125, 0, -105],
+      "scale": [0.5, 0.5, 0.5]
+    },
+    "firstperson_lefthand": {
+      "rotation": [125, 0, -105],
+      "scale": [0.5, 0.5, 0.5]
+    },
+    "ground": {
+      "rotation": [90, 0, 0],
+      "scale": [0.8, 0.8, 0.8]
+    },
+    "gui": {
+      "rotation": [0, -180, 0]
+    },
+    "head": {
+      "translation": [0, 11, 0]
+    },
+    "fixed": {
+      "translation": [0, 0, -1]
+    }
+  }
+}

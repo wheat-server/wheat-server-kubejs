@@ -1512,6 +1512,19 @@ StartupEvents.registry('block', regBlockReinforcedConcrete);
 StartupEvents.registry('block', regBlockOtherBasic);
 StartupEvents.registry('block', regBlockOtherShaped);
 
+// 注册物品
+StartupEvents.registry('item', (event) => {
+
+  let itemMaizitong = event.create(`${MOD_ID}:maizitong`);
+
+  itemMaizitong.displayName({ text: '麦子通' });
+  itemMaizitong.tooltip({ text: '麦子交通一卡通' })
+  itemMaizitong.fireResistant();
+  itemMaizitong.maxStackSize(1);
+  itemMaizitong.parentModel(`${P_ITEM}/maizitong`);
+
+});
+
 // 注册创造模式标签页
 StartupEvents.registry('creative_mode_tab', (event) => {
 
