@@ -1,0 +1,106 @@
+{
+  "credit": "Create by Frost-ZX using Blockbench.",
+  "textures": {
+    "particle": "wheat_plus:block/common/road_sign_a_main",
+    "main": "wheat_plus:block/common/road_sign_a_main"
+  },
+  "elements": [
+    {
+      "name": "北",
+      "from": [6, -16, 5],
+      "to": [10, 32, 6],
+      "rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 8]},
+      "faces": {
+        "north": {"uv": [14.75, 0.75, 15.75, 12.75], "texture": "#main"},
+        "east": {"uv": [14, 0.75, 14.25, 12.75], "texture": "#main"},
+        "south": {"uv": [14.75, 0.75, 15.75, 12.75], "texture": "#main"},
+        "west": {"uv": [14, 0.75, 14.25, 12.75], "texture": "#main"},
+        "up": {"uv": [14.75, 0, 15.75, 0.25], "texture": "#main"},
+        "down": {"uv": [14.75, 13.25, 15.75, 13.5], "texture": "#main"}
+      }
+    },
+    {
+      "name": "东",
+      "from": [10, -16, 6],
+      "to": [11, 32, 10],
+      "rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 8]},
+      "faces": {
+        "north": {"uv": [14, 0.75, 14.25, 12.75], "texture": "#main"},
+        "east": {"uv": [14.75, 0.75, 15.75, 12.75], "texture": "#main"},
+        "south": {"uv": [14, 0.75, 14.25, 12.75], "texture": "#main"},
+        "west": {"uv": [14.75, 0.75, 15.75, 12.75], "texture": "#main"},
+        "up": {"uv": [14.75, 0, 15.75, 0.25], "texture": "#main"},
+        "down": {"uv": [14.75, 13.25, 15.75, 13.5], "texture": "#main"}
+      }
+    },
+    {
+      "name": "南",
+      "from": [6, -16, 10],
+      "to": [10, 32, 11],
+      "rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 8]},
+      "faces": {
+        "north": {"uv": [14.75, 0.75, 15.75, 12.75], "texture": "#main"},
+        "east": {"uv": [14, 0.75, 14.25, 12.75], "texture": "#main"},
+        "south": {"uv": [14.75, 0.75, 15.75, 12.75], "texture": "#main"},
+        "west": {"uv": [14, 0.75, 14.25, 12.75], "texture": "#main"},
+        "up": {"uv": [14.75, 0, 15.75, 0.25], "texture": "#main"},
+        "down": {"uv": [14.75, 13.25, 15.75, 13.5], "texture": "#main"}
+      }
+    },
+    {
+      "name": "西",
+      "from": [5, -16, 6],
+      "to": [6, 32, 10],
+      "rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 8]},
+      "faces": {
+        "north": {"uv": [14, 0.75, 14.25, 12.75], "texture": "#main"},
+        "east": {"uv": [14.75, 0.75, 15.75, 12.75], "texture": "#main"},
+        "south": {"uv": [14, 0.75, 14.25, 12.75], "texture": "#main"},
+        "west": {"uv": [14.75, 0.75, 15.75, 12.75], "texture": "#main"},
+        "up": {"uv": [14.75, 0, 15.75, 0.25], "texture": "#main"},
+        "down": {"uv": [14.75, 13.25, 15.75, 13.5], "texture": "#main"}
+      }
+    }
+  ],
+  "display": {
+    "thirdperson_righthand": {
+      "scale": [0.25, 0.25, 0.25]
+    },
+    "thirdperson_lefthand": {
+      "scale": [0.25, 0.25, 0.25]
+    },
+    "firstperson_righthand": {
+      "translation": [0, 2, 0],
+      "scale": [0.25, 0.25, 0.25]
+    },
+    "firstperson_lefthand": {
+      "translation": [0, 2, 0],
+      "scale": [0.25, 0.25, 0.25]
+    },
+    "ground": {
+      "rotation": [90, 0, 0],
+      "scale": [0.5, 0.5, 0.5]
+    },
+    "gui": {
+      "rotation": [16, -32, 0],
+      "scale": [0.25, 0.25, 0.25]
+    },
+    "head": {
+      "rotation": [90, 0, 90],
+      "translation": [0, 8.5, 0],
+      "scale": [0.5, 0.5, 0.5]
+    },
+    "fixed": {
+      "translation": [0, 0, -2],
+      "scale": [0.25, 0.25, 0.25]
+    }
+  },
+  "groups": [
+    {
+      "name": "杆子",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2, 3]
+    }
+  ]
+}
