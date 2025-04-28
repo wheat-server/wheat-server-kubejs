@@ -133,11 +133,15 @@ global.setBlockProps = function (block, opts) {
   const textureAll = defaults(opts.textureAll, '');
 
   if (boxType === 'custom') {
-    boxConfig && block.box.apply(block, boxConfig);
+    if (boxConfig) {
+      block.box.apply(block, boxConfig);
+    }
+    block.waterlogged();
   } else if (boxType === 'full') {
     block.box(0, 0, 0, 16, 16, 16, true);
   } else if (boxType === 'half') {
     block.box(0, 0, 0, 16, 8, 16, true);
+    block.waterlogged();
   }
 
   if (displayName) {
