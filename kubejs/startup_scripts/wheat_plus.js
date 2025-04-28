@@ -249,6 +249,30 @@ function regBlockBuildingAndFurniture(event) {
       type: 'cardinal',
     },
     {
+      name: 'building_fence_c_black',
+      label: '黑色栅栏',
+      blockstate: getFenceBlockstateJson(
+        `${P_BLOCK}/building/building_fence_c_black_post`,
+        `${P_BLOCK}/building/building_fence_c_black_side`,
+      ),
+      box: null,
+      model: '',
+      texture: 'minecraft:block/black_concrete',
+      type: 'fence',
+    },
+    {
+      name: 'building_fence_c_white',
+      label: '白色栅栏',
+      blockstate: getFenceBlockstateJson(
+        `${P_BLOCK}/building/building_fence_c_white_post`,
+        `${P_BLOCK}/building/building_fence_c_white_side`,
+      ),
+      box: null,
+      model: '',
+      texture: 'minecraft:block/white_concrete',
+      type: 'fence',
+    },
+    {
       name: 'building_ground_a',
       label: '地面（红色混凝土 + 磨制闪长岩）',
       blockstate: null,
@@ -653,6 +677,7 @@ function regBlockBuildingAndFurniture(event) {
     let blockLabel = config.label;
     let blockName = config.name;
     let blockId = `${MOD_ID}:${blockName}`;
+    let blockState = config.blockstate;
     let blockType = config.type;
 
     let block = null;
@@ -661,7 +686,11 @@ function regBlockBuildingAndFurniture(event) {
     let modelPath1 = modelPath0 ? `${P_BLOCK}/${modelPath0}` : '';
 
     let texturePath0 = config.texture;
-    let texturePath1 = texturePath0 ? `${P_BLOCK}/${texturePath0}` : '';
+    let texturePath1 = texturePath0 || '';
+
+    if (texturePath0 && !texturePath0.includes(':')) {
+      texturePath1 = `${P_BLOCK}/${texturePath0}`;
+    }
 
     if (blockType) {
       block = event.create(blockId, blockType);
@@ -672,41 +701,49 @@ function regBlockBuildingAndFurniture(event) {
     TAB_BLOCKS_ITEMS.push(blockId);
 
     // 设置基础属性
-    if (blockBox) {
+    if (blockType === '' || blockType === 'cardinal') {
+      if (blockBox) {
+        setBlockProps(block, {
+          boxConfig: blockBox,
+          boxType: 'custom',
+          displayName: blockLabel,
+          isSolid: false,
+          modelPath: modelPath1 ? {
+            blockName: blockName,
+            blockNamespace: MOD_ID,
+            filePath: modelPath1,
+          } : null,
+          renderType: 'cutout',
+          textureAll: texturePath1,
+        });
+      } else {
+        setBlockProps(block, {
+          boxConfig: null,
+          boxType: 'full',
+          displayName: blockLabel,
+          isSolid: true,
+          modelPath: modelPath1 ? {
+            blockName: blockName,
+            blockNamespace: MOD_ID,
+            filePath: modelPath1,
+          } : null,
+          renderType: 'solid',
+          textureAll: texturePath1,
+        });
+      }
+    } else if (blockType === 'fence') {
       setBlockProps(block, {
-        boxConfig: blockBox,
-        boxType: 'custom',
         displayName: blockLabel,
-        isSolid: false,
-        modelPath: modelPath1 ? {
-          blockName: blockName,
-          blockNamespace: MOD_ID,
-          filePath: modelPath1,
-        } : null,
-        renderType: 'cutout',
-        textureAll: texturePath1,
-      });
-    } else {
-      setBlockProps(block, {
-        boxConfig: null,
-        boxType: 'full',
-        displayName: blockLabel,
-        isSolid: true,
-        modelPath: modelPath1 ? {
-          blockName: blockName,
-          blockNamespace: MOD_ID,
-          filePath: modelPath1,
-        } : null,
-        renderType: 'solid',
+        renderType: 'cutout_mipped',
         textureAll: texturePath1,
       });
     }
 
     // 生成方块状态
-    if (config.blockstate) {
+    if (blockState) {
       JSON_ASSETS.push({
         path: `${P_BLOCK_STATE}/${blockName}`,
-        data: config.blockstate,
+        data: blockState,
       });
     }
 
@@ -1526,6 +1563,7 @@ function regBlockOtherBasic(event) {
     let blockLabel = config.label;
     let blockName = config.name;
     let blockId = `${MOD_ID}:${blockName}`;
+    let blockState = config.blockstate;
     let blockType = config.type;
 
     let block = null;
@@ -1534,7 +1572,11 @@ function regBlockOtherBasic(event) {
     let modelPath1 = modelPath0 ? `${P_BLOCK}/${modelPath0}` : '';
 
     let texturePath0 = config.texture;
-    let texturePath1 = texturePath0 ? `${P_BLOCK}/${texturePath0}` : '';
+    let texturePath1 = texturePath0 || '';
+
+    if (texturePath0 && !texturePath0.includes(':')) {
+      texturePath1 = `${P_BLOCK}/${texturePath0}`;
+    }
 
     if (blockType) {
       block = event.create(blockId, blockType);
@@ -1545,41 +1587,49 @@ function regBlockOtherBasic(event) {
     TAB_BLOCKS_ITEMS.push(blockId);
 
     // 设置基础属性
-    if (blockBox) {
+    if (blockType === '' || blockType === 'cardinal') {
+      if (blockBox) {
+        setBlockProps(block, {
+          boxConfig: blockBox,
+          boxType: 'custom',
+          displayName: blockLabel,
+          isSolid: false,
+          modelPath: modelPath1 ? {
+            blockName: blockName,
+            blockNamespace: MOD_ID,
+            filePath: modelPath1,
+          } : null,
+          renderType: 'cutout',
+          textureAll: texturePath1,
+        });
+      } else {
+        setBlockProps(block, {
+          boxConfig: null,
+          boxType: 'full',
+          displayName: blockLabel,
+          isSolid: true,
+          modelPath: modelPath1 ? {
+            blockName: blockName,
+            blockNamespace: MOD_ID,
+            filePath: modelPath1,
+          } : null,
+          renderType: 'solid',
+          textureAll: texturePath1,
+        });
+      }
+    } else if (blockType === 'fence') {
       setBlockProps(block, {
-        boxConfig: blockBox,
-        boxType: 'custom',
         displayName: blockLabel,
-        isSolid: false,
-        modelPath: modelPath1 ? {
-          blockName: blockName,
-          blockNamespace: MOD_ID,
-          filePath: modelPath1,
-        } : null,
-        renderType: 'cutout',
-        textureAll: texturePath1,
-      });
-    } else {
-      setBlockProps(block, {
-        boxConfig: null,
-        boxType: 'full',
-        displayName: blockLabel,
-        isSolid: true,
-        modelPath: modelPath1 ? {
-          blockName: blockName,
-          blockNamespace: MOD_ID,
-          filePath: modelPath1,
-        } : null,
-        renderType: 'solid',
+        renderType: 'cutout_mipped',
         textureAll: texturePath1,
       });
     }
 
     // 生成方块状态
-    if (config.blockstate) {
+    if (blockState) {
       JSON_ASSETS.push({
         path: `${P_BLOCK_STATE}/${blockName}`,
-        data: config.blockstate,
+        data: blockState,
       });
     }
 

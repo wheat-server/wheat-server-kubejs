@@ -1,0 +1,6 @@
+{
+  "parent": "wheat_plus:block/building/building_fence_c_base_post",
+  "textures": {
+    "texture": "block/black_concrete"
+  }
+}
