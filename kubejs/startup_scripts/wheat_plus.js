@@ -78,14 +78,14 @@ function regBlockBrick(event) {
 
   console.info(`${LOG_PREFIX} 注册方块 - 砖块 - 开始`);
 
-  const blocks = [
+  const blockList = [
     { name: 'brick_a', texture: 'brick/brick_a' },
     { name: 'brick_b', texture: 'brick/brick_b' },
     { name: 'brick_c', texture: 'brick/brick_c' },
     { name: 'brick_d', texture: 'brick/brick_d' },
   ];
 
-  blocks.forEach((config) => {
+  blockList.forEach((config) => {
 
     const id = `${MOD_ID}:${config.name}`;
     const block = event.create(id);
@@ -650,7 +650,7 @@ function regBlockColor(event) {
 
   console.info(`${LOG_PREFIX} 注册方块 - 纯色方块 - 开始`);
 
-  const blocks = [
+  const blockList = [
     {
       name: 'color_white_grow',
       label: '纯色方块（白色，发光）',
@@ -782,7 +782,7 @@ function regBlockColor(event) {
   const textureGrow = `${P_BLOCK}/common/color_grow`;
   const textureNormal = `${P_BLOCK}/common/color_normal`;
 
-  blocks.forEach((config) => {
+  blockList.forEach((config) => {
 
     const id = `${MOD_ID}:${config.name}`;
     const block = event.create(id);
@@ -871,7 +871,7 @@ function regBlockLampSimple(event) {
 
   console.info(`${LOG_PREFIX} 注册方块 - 简约灯 - 开始`);
 
-  const blocks = [
+  const blockList = [
     {
       name: 'lamp_simple_large',
       label: '简约灯（大）',
@@ -894,7 +894,7 @@ function regBlockLampSimple(event) {
     },
   ];
 
-  blocks.forEach((config) => {
+  blockList.forEach((config) => {
 
     const blockName = config.name;
     const blockId = `${MOD_ID}:${blockName}`;
@@ -1308,7 +1308,7 @@ function regBlockOtherBasic(event) {
 
   console.info(`${LOG_PREFIX} 注册方块 - 其他 - 基础 - 开始`);
 
-  const blocks = [
+  const blockList = [
     {
       name: 'crate_a',
       box: null,
@@ -1327,7 +1327,7 @@ function regBlockOtherBasic(event) {
     },
     {
       name: 'road_sign_a_ns',
-      box: [1, 1, 1, 15, 15, 15, true],
+      box: [6, 0, -16, 10, 16, 32, true],
       label: '路牌（NS）',
       model: 'road_sign/road_sign_a_ns',
       texture: '',
@@ -1335,7 +1335,7 @@ function regBlockOtherBasic(event) {
     },
     {
       name: 'road_sign_a_we',
-      box: [1, 1, 1, 15, 15, 15, true],
+      box: [-16, 0, 6, 32, 16, 10, true],
       label: '路牌（WE）',
       model: 'road_sign/road_sign_a_we',
       texture: '',
@@ -1343,7 +1343,7 @@ function regBlockOtherBasic(event) {
     },
     {
       name: 'road_sign_a_pole',
-      box: [1, 1, 1, 15, 15, 15, true],
+      box: [5, -16, 5, 11, 32, 11, true],
       label: '路牌（杆子）',
       model: 'road_sign/road_sign_a_pole',
       texture: '',
@@ -1383,7 +1383,7 @@ function regBlockOtherBasic(event) {
     },
     {
       name: 'traffic_light_a_pedestrian_ns',
-      box: [1, 1, 1, 15, 15, 15, true],
+      box: [0, 0, 10, 16, 16, 16, true],
       label: '人行道红绿灯（NS）',
       model: 'traffic_light/traffic_light_a_pedestrian_ns',
       texture: '',
@@ -1391,7 +1391,7 @@ function regBlockOtherBasic(event) {
     },
     {
       name: 'traffic_light_a_pedestrian_we',
-      box: [1, 1, 1, 15, 15, 15, true],
+      box: [0, 0, 10, 16, 16, 16, true],
       label: '人行道红绿灯（WE）',
       model: 'traffic_light/traffic_light_a_pedestrian_we',
       texture: '',
@@ -1399,7 +1399,7 @@ function regBlockOtherBasic(event) {
     },
     {
       name: 'traffic_light_a_traffic_h_ns',
-      box: [1, 1, 1, 15, 15, 15, true],
+      box: [0, 0, 10, 16, 16, 16, true],
       label: '交通红绿灯（水平，NS）',
       model: 'traffic_light/traffic_light_a_traffic_h_ns',
       texture: '',
@@ -1407,7 +1407,7 @@ function regBlockOtherBasic(event) {
     },
     {
       name: 'traffic_light_a_traffic_h_we',
-      box: [1, 1, 1, 15, 15, 15, true],
+      box: [0, 0, 10, 16, 16, 16, true],
       label: '交通红绿灯（水平，WE）',
       model: 'traffic_light/traffic_light_a_traffic_h_we',
       texture: '',
@@ -1415,7 +1415,7 @@ function regBlockOtherBasic(event) {
     },
     {
       name: 'traffic_light_a_traffic_v_ns',
-      box: [1, 1, 1, 15, 15, 15, true],
+      box: [0, 0, 10, 16, 16, 16, true],
       label: '交通红绿灯（垂直，NS）',
       model: 'traffic_light/traffic_light_a_traffic_v_ns',
       texture: '',
@@ -1423,15 +1423,15 @@ function regBlockOtherBasic(event) {
     },
     {
       name: 'traffic_light_a_traffic_v_we',
-      box: [1, 1, 1, 15, 15, 15, true],
-      label: '交通红绿灯（垂直，we）',
+      box: [0, 0, 10, 16, 16, 16, true],
+      label: '交通红绿灯（垂直，WE）',
       model: 'traffic_light/traffic_light_a_traffic_v_we',
       texture: '',
       orientable: true,
     },
   ];
 
-  blocks.forEach((config) => {
+  blockList.forEach((config) => {
 
     const blockBox = config.box;
     const blockLabel = config.label;
