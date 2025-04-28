@@ -16,6 +16,9 @@ const P_BLOCK = `${MOD_ID}:block`;
 /** 方块模型文件基础长路径 */
 const P_BLOCK_MODEL = `${MOD_ID}:models/block`;
 
+/** 方块状态文件基础长路径 */
+const P_BLOCK_STATE = `${MOD_ID}:blockstates`;
+
 /** 方块透明纹理文件路径 */
 const P_BLOCK_TRANSPARENT = `${P_BLOCK}/common/transparent`;
 
@@ -35,6 +38,37 @@ const TAB_MINECART_ITEMS = [];
 const TAB_ROADS_ITEMS = [];
 
 console.info(`${LOG_PREFIX} 处理 ${MOD_ID} 相关内容`);
+
+/**
+ * @description 获取栅栏方块状态 JSON
+ * @param {string} postPath 栅栏 post 模型短路径
+ * @param {string} sidePath 栅栏 side 模型短路径
+ */
+function getFenceBlockstateJson(postPath, sidePath) {
+  return {
+    multipart: [
+      {
+        apply: { model: postPath }
+      },
+      {
+        apply: { model: sidePath, uvlock: true },
+        when: { north: 'true' }
+      },
+      {
+        apply: { model: sidePath, uvlock: true, y: 90 },
+        when: { east: 'true' }
+      },
+      {
+        apply: { model: sidePath, uvlock: true, y: 180 },
+        when: { south: 'true' }
+      },
+      {
+        apply: { model: sidePath, uvlock: true, y: 270 },
+        when: { west: 'true' }
+      }
+    ]
+  };
+}
 
 /**
  * @description 注册方块 - 砖块
@@ -1459,33 +1493,57 @@ function regBlockOtherShaped(event) {
 
   console.info(`${LOG_PREFIX} 注册方块 - 其他 - 特殊 - 开始`);
 
-  const blocks = [
+  const blockList = [
     {
       name: 'gravel_stairs',
       label: '沙砾楼梯',
+      blockstate: null,
       texture: 'minecraft:block/gravel',
       type: 'stairs',
     },
     {
       name: 'gravel_slab',
       label: '沙砾半砖',
+      blockstate: null,
       texture: 'minecraft:block/gravel',
       type: 'slab',
     },
     {
       name: 'oak_leaves_wall',
       label: '橡木树叶墙',
+      blockstate: null,
       texture: `${P_BLOCK}/common/oak_leaves`,
       type: 'wall',
     },
+    {
+      name: 'pole_a_horizon',
+      label: '杆子（水平）',
+      blockstate: getFenceBlockstateJson(
+        `${P_BLOCK}/pole/pole_a_horizon_post`,
+        `${P_BLOCK}/pole/pole_a_horizon_side`,
+      ),
+      texture: 'block/light_gray_concrete',
+      type: 'fence',
+    },
+    {
+      name: 'pole_a_vertical',
+      label: '杆子（垂直）',
+      blockstate: getFenceBlockstateJson(
+        `${P_BLOCK}/pole/pole_a_vertical_post`,
+        `${P_BLOCK}/pole/pole_a_vertical_side`,
+      ),
+      texture: 'block/light_gray_concrete',
+      type: 'fence',
+    },
   ];
 
-  blocks.forEach((config) => {
+  blockList.forEach((config) => {
 
-    const id = `${MOD_ID}:${config.name}`;
-    const block = event.create(id, config.type);
+    const blockName = config.name;
+    const blockId = `${MOD_ID}:${blockName}`;
+    const block = event.create(blockId, config.type);
 
-    TAB_BLOCKS_ITEMS.push(id);
+    TAB_BLOCKS_ITEMS.push(blockId);
 
     // 设置基础属性
     setBlockProps(block, {
@@ -1493,6 +1551,14 @@ function regBlockOtherShaped(event) {
       renderType: 'cutout_mipped',
       textureAll: config.texture,
     });
+
+    // 生成方块状态
+    if (config.blockstate) {
+      JSON_ASSETS.push({
+        path: `${P_BLOCK_STATE}/${blockName}`,
+        data: config.blockstate,
+      });
+    }
 
   });
 
