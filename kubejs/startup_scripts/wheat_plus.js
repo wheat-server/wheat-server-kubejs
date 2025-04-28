@@ -281,6 +281,15 @@ function regBlockCommon(event) {
   let blockList = [
     // 普通方块
     {
+      name: 'crash_barriar_a',
+      label: '防撞墩（石头）',
+      blockstate: null,
+      box: [0, 0, 3, 16, 14, 13, true],
+      model: 'common/crash_barriar_a',
+      texture: '',
+      type: 'cardinal',
+    },
+    {
       name: 'crate_a',
       label: '板条箱',
       blockstate: null,
@@ -348,6 +357,33 @@ function regBlockCommon(event) {
       model: '',
       texture: 'minecraft:block/light_gray_concrete',
       type: 'fence',
+    },
+    {
+      name: 'rail_signal_a_main_green',
+      label: '信号灯（绿灯）',
+      blockstate: null,
+      box: [4, 0, 4, 12, 16, 12, true],
+      model: 'rail_signal/signal_a_main_green',
+      texture: '',
+      type: 'cardinal',
+    },
+    {
+      name: 'rail_signal_a_main_red',
+      label: '信号灯（红灯）',
+      blockstate: null,
+      box: [4, 0, 4, 12, 16, 12, true],
+      model: 'rail_signal/signal_a_main_red',
+      texture: '',
+      type: 'cardinal',
+    },
+    {
+      name: 'rail_signal_a_pole',
+      label: '信号灯（杆子）',
+      blockstate: null,
+      box: [6, 0, 6, 10, 16, 10, true],
+      model: 'rail_signal/signal_a_pole',
+      texture: '',
+      type: '',
     },
     {
       name: 'road_sign_a_ns',

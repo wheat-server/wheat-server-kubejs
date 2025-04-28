@@ -1,0 +1,8 @@
+{
+  "credit": "Created by Frost-ZX using Blockbench.",
+  "parent": "wheat_plus:block/rail_signal/signal_a_main",
+  "textures": {
+    "green": "block/black_concrete",
+    "red": "wheat_plus:block/common/color_red"
+  }
+}
