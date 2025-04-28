@@ -118,19 +118,19 @@ global.setBlockProps = function (block, opts) {
     opts = {};
   }
 
-  const boxConfig = defaults(opts.boxConfig, null);
-  const boxType = defaults(opts.boxType, 'full');
-  const displayName = defaults(opts.displayName, '');
-  const hardness = defaults(opts.hardness, 8);
-  const hasCollision = defaults(opts.hasCollision, true);
-  const isSolid = defaults(opts.isSolid, true);
-  const lightLevel = defaults(opts.lightLevel, 0);
-  const mapColor = defaults(opts.mapColor, 'none');
-  const modelPath = defaults(opts.modelPath, null);
-  const renderType = defaults(opts.renderType, 'solid');
-  const resistance = defaults(opts.resistance, 16);
-  const soundType = defaults(opts.soundType, 'stone');
-  const textureAll = defaults(opts.textureAll, '');
+  let boxConfig = defaults(opts.boxConfig, null);
+  let boxType = defaults(opts.boxType, 'full');
+  let displayName = defaults(opts.displayName, '');
+  let hardness = defaults(opts.hardness, 8);
+  let hasCollision = defaults(opts.hasCollision, true);
+  let isSolid = defaults(opts.isSolid, true);
+  let lightLevel = defaults(opts.lightLevel, 0);
+  let mapColor = defaults(opts.mapColor, 'none');
+  let modelPath = defaults(opts.modelPath, null);
+  let renderType = defaults(opts.renderType, 'solid');
+  let resistance = defaults(opts.resistance, 16);
+  let soundType = defaults(opts.soundType, 'stone');
+  let textureAll = defaults(opts.textureAll, '');
 
   if (boxType === 'custom') {
     if (boxConfig) {
@@ -192,7 +192,7 @@ global.setBlockProps = function (block, opts) {
 
 global.setHorizontalFacing = function (block, type, model) {
 
-  const prop = BlockProperties.HORIZONTAL_FACING;
+  let prop = BlockProperties.HORIZONTAL_FACING;
 
   // // 设置模型旋转
   // block.blockstateJson = {
@@ -217,14 +217,14 @@ global.setHorizontalFacing = function (block, type, model) {
     // 与玩家朝向相反
     case 'revert':
       block.placementState((ev) => {
-        const d = ev.getHorizontalDirection().getOpposite().toString();
+        let d = ev.getHorizontalDirection().getOpposite().toString();
         ev.set(prop, d);
       });
       break;
     // 与玩家朝向相同
     case 'same':
       block.placementState((ev) => {
-        const d = ev.getHorizontalDirection().toString();
+        let d = ev.getHorizontalDirection().toString();
         ev.set(prop, d);
       });
       break;

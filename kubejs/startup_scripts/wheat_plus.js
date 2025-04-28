@@ -78,7 +78,7 @@ function regBlockBrick(event) {
 
   console.info(`${LOG_PREFIX} 注册方块 - 砖块 - 开始`);
 
-  const blockList = [
+  let blockList = [
     { name: 'brick_a', texture: 'brick/brick_a' },
     { name: 'brick_b', texture: 'brick/brick_b' },
     { name: 'brick_c', texture: 'brick/brick_c' },
@@ -87,8 +87,8 @@ function regBlockBrick(event) {
 
   blockList.forEach((config) => {
 
-    const id = `${MOD_ID}:${config.name}`;
-    const block = event.create(id);
+    let id = `${MOD_ID}:${config.name}`;
+    let block = event.create(id);
 
     TAB_BLOCKS_ITEMS.push(id);
 
@@ -111,7 +111,7 @@ function regBlockBuildingAndFurniture(event) {
 
   console.info(`${LOG_PREFIX} 注册方块 - 建筑和家具 - 开始`);
 
-  const blockList = [
+  let blockList = [
     // 建筑方块
     {
       name: 'building_brick_a',
@@ -590,18 +590,18 @@ function regBlockBuildingAndFurniture(event) {
 
   blockList.forEach((config) => {
 
-    const blockBox = config.box;
-    const blockLabel = config.label;
-    const blockName = config.name;
-    const blockId = `${MOD_ID}:${blockName}`;
+    let blockBox = config.box;
+    let blockLabel = config.label;
+    let blockName = config.name;
+    let blockId = `${MOD_ID}:${blockName}`;
 
-    const block = config.orientable ? event.create(blockId, 'cardinal') : event.create(blockId);
+    let block = config.orientable ? event.create(blockId, 'cardinal') : event.create(blockId);
 
-    const modelPath0 = config.model;
-    const modelPath1 = modelPath0 ? `${P_BLOCK}/${modelPath0}` : '';
+    let modelPath0 = config.model;
+    let modelPath1 = modelPath0 ? `${P_BLOCK}/${modelPath0}` : '';
 
-    const texturePath0 = config.texture;
-    const texturePath1 = texturePath0 ? `${P_BLOCK}/${texturePath0}` : '';
+    let texturePath0 = config.texture;
+    let texturePath1 = texturePath0 ? `${P_BLOCK}/${texturePath0}` : '';
 
     TAB_BLOCKS_ITEMS.push(blockId);
 
@@ -650,7 +650,7 @@ function regBlockColor(event) {
 
   console.info(`${LOG_PREFIX} 注册方块 - 纯色方块 - 开始`);
 
-  const blockList = [
+  let blockList = [
     {
       name: 'color_white_grow',
       label: '纯色方块（白色，发光）',
@@ -779,15 +779,15 @@ function regBlockColor(event) {
     },
   ];
 
-  const textureGrow = `${P_BLOCK}/common/color_grow`;
-  const textureNormal = `${P_BLOCK}/common/color_normal`;
+  let textureGrow = `${P_BLOCK}/common/color_grow`;
+  let textureNormal = `${P_BLOCK}/common/color_normal`;
 
   blockList.forEach((config) => {
 
-    const id = `${MOD_ID}:${config.name}`;
-    const block = event.create(id);
-    const colorCfg = config.color;
-    const isGrow = config.grow;
+    let id = `${MOD_ID}:${config.name}`;
+    let block = event.create(id);
+    let colorCfg = config.color;
+    let isGrow = config.grow;
 
     TAB_BLOCKS_ITEMS.push(id);
 
@@ -818,21 +818,21 @@ function regBlockLampModern(event) {
   console.info(`${LOG_PREFIX} 注册方块 - 现代灯 - 开始`);
 
   /** 颜色 key 列表 */
-  const keys = Object.keys(COLORS);
+  let keys = Object.keys(COLORS);
 
   /** 父模型路径 */
-  const parentModel = `${P_BLOCK}/lamp/modern`;
+  let parentModel = `${P_BLOCK}/lamp/modern`;
 
   keys.forEach((key) => {
 
-    const color = COLORS[key];
-    const blockName = `lamp_modern_${color.CODE}`;
-    const blockId = `${MOD_ID}:${blockName}`;
-    const block = event.create(blockId);
+    let color = COLORS[key];
+    let blockName = `lamp_modern_${color.CODE}`;
+    let blockId = `${MOD_ID}:${blockName}`;
+    let block = event.create(blockId);
 
     // 纹理文件路径前缀
     // wheat_plus:block/lamp_modern/color_
-    const textureBase = `${P_BLOCK}/lamp_modern/${color.CODE}`;
+    let textureBase = `${P_BLOCK}/lamp_modern/${color.CODE}`;
 
     JSON_ASSETS.push({
       path: `${P_BLOCK_MODEL}/${blockName}`,
@@ -871,7 +871,7 @@ function regBlockLampSimple(event) {
 
   console.info(`${LOG_PREFIX} 注册方块 - 简约灯 - 开始`);
 
-  const blockList = [
+  let blockList = [
     {
       name: 'lamp_simple_large',
       label: '简约灯（大）',
@@ -896,12 +896,12 @@ function regBlockLampSimple(event) {
 
   blockList.forEach((config) => {
 
-    const blockName = config.name;
-    const blockId = `${MOD_ID}:${blockName}`;
-    const block = event.create(blockId, 'button');
+    let blockName = config.name;
+    let blockId = `${MOD_ID}:${blockName}`;
+    let block = event.create(blockId, 'button');
 
     // 用于替换默认模型
-    const modelJSON = { parent: `${P_BLOCK}/${config.model}` };
+    let modelJSON = { parent: `${P_BLOCK}/${config.model}` };
 
     // 按钮方块默认状态
     JSON_ASSETS.push({
@@ -945,12 +945,12 @@ function regBlockMinecart(event) {
   console.info(`${LOG_PREFIX} 注册方块 - 矿车方块 - 开始`);
 
   /** 父模型路径 */
-  const modelParent = `${P_BLOCK}/minecart/main`;
+  let modelParent = `${P_BLOCK}/minecart/main`;
 
   /** 纹理文件路径前缀 */
-  const texturePrefix = `${P_BLOCK}/minecart/`;
+  let texturePrefix = `${P_BLOCK}/minecart/`;
 
-  const blockList = [
+  let blockList = [
     { name: 'mtr_gz_gf_1', label: '广州地铁 - 广佛线' },
     { name: 'mtr_gz_gf_2', label: '广州地铁 - 广佛线' },
     { name: 'mtr_gz_l1_1', label: '广州地铁 - 一号线' },
@@ -1005,9 +1005,9 @@ function regBlockMinecart(event) {
 
   blockList.forEach((config) => {
 
-    const blockName = config.name;
-    const blockId = `${MOD_ID}:minecart_${blockName}`;
-    const block = event.create(blockId, 'cardinal');
+    let blockName = config.name;
+    let blockId = `${MOD_ID}:minecart_${blockName}`;
+    let block = event.create(blockId, 'cardinal');
 
     // 生成模型 JSON 文件
     JSON_ASSETS.push({
@@ -1047,14 +1047,14 @@ function regBlockReinforcedConcrete(event) {
 
   console.info(`${LOG_PREFIX} 注册方块 - 强化混凝土 - 开始`);
 
-  const keys = Object.keys(COLORS);
+  let keys = Object.keys(COLORS);
 
   keys.forEach((key) => {
 
-    const color = COLORS[key];
-    const id = `${MOD_ID}:reinforced_concrete_${color.CODE}`;
-    const block = event.create(id);
-    const texture = `${P_BLOCK}/reinforced_concrete/${color.CODE}`;
+    let color = COLORS[key];
+    let id = `${MOD_ID}:reinforced_concrete_${color.CODE}`;
+    let block = event.create(id);
+    let texture = `${P_BLOCK}/reinforced_concrete/${color.CODE}`;
 
     TAB_BLOCKS_ITEMS.push(id);
 
@@ -1098,7 +1098,7 @@ function regBlockRoad(event) {
 
   console.info(`${LOG_PREFIX} 注册方块 - 路 - 开始`);
 
-  const blockList = [
+  let blockList = [
     {
       name: 'road_blank',
       label: '路 - 空白',
@@ -1167,24 +1167,24 @@ function regBlockRoad(event) {
   blockList.forEach((config) => {
 
     /** 方块名称 */
-    const blockName = config.name;
+    let blockName = config.name;
 
     /** 方块文本 */
-    const label = (config.label || 'Unknown');
+    let label = (config.label || 'Unknown');
 
     /** 纹理文件相对路径 */
-    const texturePath = config.texturePath;
+    let texturePath = config.texturePath;
 
     /** 是否存在侧边纹理 */
-    const textureSide = config.hasSide;
+    let textureSide = config.hasSide;
 
     // 完整，普通 / 直线
     if (config.hasNormal) {
 
-      const blockId = `${blockName}_full`;
-      const fullId = `${MOD_ID}:${blockId}`;
-      const block = event.create(fullId);
-      const suffix = (config.isBlank ? '' : '，直线');
+      let blockId = `${blockName}_full`;
+      let fullId = `${MOD_ID}:${blockId}`;
+      let block = event.create(fullId);
+      let suffix = (config.isBlank ? '' : '，直线');
 
       JSON_ASSETS.push({
         path: `${P_BLOCK_MODEL}/${blockId}`,
@@ -1210,10 +1210,10 @@ function regBlockRoad(event) {
     // 完整，斜线
     if (config.hasSlant) {
 
-      const blockId = `${blockName}_full_slant`;
-      const fullId = `${MOD_ID}:${blockId}`;
-      const block = event.create(fullId, 'cardinal');
-      const suffix = '，斜线';
+      let blockId = `${blockName}_full_slant`;
+      let fullId = `${MOD_ID}:${blockId}`;
+      let block = event.create(fullId, 'cardinal');
+      let suffix = '，斜线';
 
       JSON_ASSETS.push({
         path: `${P_BLOCK_MODEL}/${blockId}`,
@@ -1239,10 +1239,10 @@ function regBlockRoad(event) {
     // 一半，普通 / 直线
     if (config.hasNormal) {
 
-      const blockId = `${blockName}_half`;
-      const fullId = `${MOD_ID}:${blockId}`;
-      const block = event.create(fullId);
-      const suffix = (config.isBlank ? '' : '，直线');
+      let blockId = `${blockName}_half`;
+      let fullId = `${MOD_ID}:${blockId}`;
+      let block = event.create(fullId);
+      let suffix = (config.isBlank ? '' : '，直线');
 
       JSON_ASSETS.push({
         path: `${P_BLOCK_MODEL}/${blockId}`,
@@ -1268,10 +1268,10 @@ function regBlockRoad(event) {
     // 一半，斜线
     if (config.hasSlant) {
 
-      const blockId = `${blockName}_half_slant`;
-      const fullId = `${MOD_ID}:${blockId}`;
-      const block = event.create(fullId, 'cardinal');
-      const suffix = '，斜线';
+      let blockId = `${blockName}_half_slant`;
+      let fullId = `${MOD_ID}:${blockId}`;
+      let block = event.create(fullId, 'cardinal');
+      let suffix = '，斜线';
 
       JSON_ASSETS.push({
         path: `${P_BLOCK_MODEL}/${blockId}`,
@@ -1308,7 +1308,7 @@ function regBlockOtherBasic(event) {
 
   console.info(`${LOG_PREFIX} 注册方块 - 其他 - 基础 - 开始`);
 
-  const blockList = [
+  let blockList = [
     {
       name: 'crate_a',
       box: null,
@@ -1433,18 +1433,18 @@ function regBlockOtherBasic(event) {
 
   blockList.forEach((config) => {
 
-    const blockBox = config.box;
-    const blockLabel = config.label;
-    const blockName = config.name;
-    const blockId = `${MOD_ID}:${blockName}`;
+    let blockBox = config.box;
+    let blockLabel = config.label;
+    let blockName = config.name;
+    let blockId = `${MOD_ID}:${blockName}`;
 
-    const block = config.orientable ? event.create(blockId, 'cardinal') : event.create(blockId);
+    let block = config.orientable ? event.create(blockId, 'cardinal') : event.create(blockId);
 
-    const modelPath0 = config.model;
-    const modelPath1 = modelPath0 ? `${P_BLOCK}/${modelPath0}` : '';
+    let modelPath0 = config.model;
+    let modelPath1 = modelPath0 ? `${P_BLOCK}/${modelPath0}` : '';
 
-    const texturePath0 = config.texture;
-    const texturePath1 = texturePath0 ? `${P_BLOCK}/${texturePath0}` : '';
+    let texturePath0 = config.texture;
+    let texturePath1 = texturePath0 ? `${P_BLOCK}/${texturePath0}` : '';
 
     TAB_BLOCKS_ITEMS.push(blockId);
 
@@ -1493,7 +1493,7 @@ function regBlockOtherShaped(event) {
 
   console.info(`${LOG_PREFIX} 注册方块 - 其他 - 特殊 - 开始`);
 
-  const blockList = [
+  let blockList = [
     {
       name: 'gravel_stairs',
       label: '沙砾楼梯',
@@ -1539,9 +1539,9 @@ function regBlockOtherShaped(event) {
 
   blockList.forEach((config) => {
 
-    const blockName = config.name;
-    const blockId = `${MOD_ID}:${blockName}`;
-    const block = event.create(blockId, config.type);
+    let blockName = config.name;
+    let blockId = `${MOD_ID}:${blockName}`;
+    let block = event.create(blockId, config.type);
 
     TAB_BLOCKS_ITEMS.push(blockId);
 
@@ -1595,9 +1595,9 @@ StartupEvents.registry('item', (event) => {
 StartupEvents.registry('creative_mode_tab', (event) => {
 
   // 创建标签页
-  const tabBlocks = event.create('wheat_plus:blocks');
-  const tabMinecart = event.create('wheat_plus:minecart');
-  const tabRoads = event.create('wheat_plus:roads');
+  let tabBlocks = event.create('wheat_plus:blocks');
+  let tabMinecart = event.create('wheat_plus:minecart');
+  let tabRoads = event.create('wheat_plus:roads');
 
   // 设置名称
   tabBlocks.displayName('Wheat Plus | 方块');

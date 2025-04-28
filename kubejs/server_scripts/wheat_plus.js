@@ -8,9 +8,9 @@ BlockEvents.farmlandTrampled((event) => {
 // // 玩家切换世界时设置为冒险模式
 // EntityEvents.spawned('player', (event) => {
 
-//   const evServer = event.getServer();
-//   const evPlayer = event.getPlayer();
-//   const player = evServer ? evServer.getPlayer(evPlayer) : null;
+//   let evServer = event.getServer();
+//   let evPlayer = event.getPlayer();
+//   let player = evServer ? evServer.getPlayer(evPlayer) : null;
 
 //   if (!player) {
 //     console.error('自动切换游戏模式失败：找不到玩家');
