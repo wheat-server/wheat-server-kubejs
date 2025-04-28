@@ -104,14 +104,368 @@ function regBlockBrick(event) {
 }
 
 /**
- * @description 注册方块 - 建筑和家具
+ * @description 注册方块 - 纯色方块
  * @param {_RegistryBlock} event
  */
-function regBlockBuildingAndFurniture(event) {
+function regBlockColor(event) {
 
-  console.info(`${LOG_PREFIX} 注册方块 - 建筑和家具 - 开始`);
+  console.info(`${LOG_PREFIX} 注册方块 - 纯色方块 - 开始`);
 
   let blockList = [
+    {
+      name: 'color_white_grow',
+      label: '纯色方块（白色，发光）',
+      color: [255, 255, 255, 1],
+      grow: true,
+    },
+    {
+      name: 'color_blue_grow',
+      label: '纯色方块（蓝色，发光）',
+      color: [0, 0, 255, 1],
+      grow: true,
+    },
+    {
+      name: 'color_green_grow',
+      label: '纯色方块（绿色，发光）',
+      color: [0, 255, 0, 1],
+      grow: true,
+    },
+    {
+      name: 'color_red_grow',
+      label: '纯色方块（红色）',
+      color: [255, 0, 0, 1],
+      grow: true,
+    },
+    {
+      name: 'color_black',
+      label: '纯色方块（黑色）',
+      color: [0, 0, 0, 1],
+      grow: false,
+    },
+    {
+      name: 'color_white',
+      label: '纯色方块（白色）',
+      color: [255, 255, 255, 1],
+      grow: false,
+    },
+    {
+      name: 'color_blue',
+      label: '纯色方块（蓝色）',
+      color: [0, 0, 255, 1],
+      grow: false,
+    },
+    {
+      name: 'color_green',
+      label: '纯色方块（绿色）',
+      color: [0, 255, 0, 1],
+      grow: false,
+    },
+    {
+      name: 'color_red',
+      label: '纯色方块（红色）',
+      color: [255, 0, 0, 1],
+      grow: false,
+    },
+    {
+      name: 'color_yellow',
+      label: '纯色方块（黄色）',
+      color: [255, 255, 0, 1],
+      grow: false,
+    },
+    {
+      name: 'color_39c5bb',
+      label: '纯色方块（#39C5BB）',
+      color: [57, 197, 187, 1],
+      grow: false,
+    },
+    {
+      name: 'color_66ccff',
+      label: '纯色方块（#66CCFF）',
+      color: [102, 204, 255, 1],
+      grow: false,
+    },
+    {
+      name: 'color_gz_line_one',
+      label: '纯色方块（广州地铁一号线，#F3D03E）',
+      color: [243, 208, 62, 1],
+      grow: false,
+    },
+    {
+      name: 'color_gz_line_two',
+      label: '纯色方块（广州地铁二号线，#00629B）',
+      color: [0, 98, 155, 1],
+      grow: false,
+    },
+    {
+      name: 'color_gz_line_three',
+      label: '纯色方块（广州地铁三号线，#ECA154）',
+      color: [236, 161, 84, 1],
+      grow: false,
+    },
+    {
+      name: 'color_gz_line_four',
+      label: '纯色方块（广州地铁四号线，#00843D）',
+      color: [0, 132, 61, 1],
+      grow: false,
+    },
+    {
+      name: 'color_gz_line_five',
+      label: '纯色方块（广州地铁五号线，#C5003E）',
+      color: [197, 0, 62, 1],
+      grow: false,
+    },
+    {
+      name: 'color_gz_line_six',
+      label: '纯色方块（广州地铁六号线，#80225F）',
+      color: [128, 34, 95, 1],
+      grow: false,
+    },
+    {
+      name: 'color_gz_line_seven',
+      label: '纯色方块（广州地铁七号线，#97D700）',
+      color: [151, 215, 0, 1],
+      grow: false,
+    },
+    {
+      name: 'color_gz_line_eight',
+      label: '纯色方块（广州地铁八号线，#008C95）',
+      color: [0, 140, 149, 1],
+      grow: false,
+    },
+    {
+      name: 'color_gz_line_nine',
+      label: '纯色方块（广州地铁九号线，#71CC98）',
+      color: [113, 204, 152, 1],
+      grow: false,
+    },
+  ];
+
+  let textureGrow = `${P_BLOCK}/common/color_grow`;
+  let textureNormal = `${P_BLOCK}/common/color_normal`;
+
+  blockList.forEach((config) => {
+
+    let id = `${MOD_ID}:${config.name}`;
+    let block = event.create(id);
+    let colorCfg = config.color;
+    let isGrow = config.grow;
+
+    TAB_BLOCKS_ITEMS.push(id);
+
+    setBlockProps(block, {
+      displayName: config.label,
+      isSolid: false,
+      lightLevel: (isGrow ? 1 : 0),
+      textureAll: (isGrow ? textureGrow : textureNormal),
+    });
+
+    block.color(0, Color.rgba.apply(Color, colorCfg));
+    block.item((item) => {
+      item.color(0, Color.rgba.apply(Color, colorCfg));
+    });
+
+  });
+
+  console.info(`${LOG_PREFIX} 注册方块 - 纯色方块 - 完成`);
+
+}
+
+/**
+ * @description 注册方块 - 常规
+ * @param {_RegistryBlock} event
+ */
+function regBlockCommon(event) {
+
+  console.info(`${LOG_PREFIX} 注册方块 - 常规 - 开始`);
+
+  let blockList = [
+    // 普通方块
+    {
+      name: 'crate_a',
+      label: '板条箱',
+      blockstate: null,
+      box: null,
+      model: '',
+      texture: 'common/crate_a',
+      type: '',
+    },
+    {
+      name: 'gravel_slab',
+      label: '沙砾半砖',
+      blockstate: null,
+      box: null,
+      model: '',
+      texture: 'minecraft:block/gravel',
+      type: 'slab',
+    },
+    {
+      name: 'gravel_stairs',
+      label: '沙砾楼梯',
+      blockstate: null,
+      box: null,
+      model: '',
+      texture: 'minecraft:block/gravel',
+      type: 'stairs',
+    },
+    {
+      name: 'isolation_pile_a',
+      label: '隔离桩',
+      blockstate: null,
+      box: [5, 0, 5, 11, 16, 11, true],
+      model: 'common/isolation_pile_a',
+      texture: '',
+      type: '',
+    },
+    {
+      name: 'oak_leaves_wall',
+      label: '橡木树叶墙',
+      blockstate: null,
+      box: null,
+      model: '',
+      texture: `common/oak_leaves`,
+      type: 'wall',
+    },
+    {
+      name: 'pole_a_horizon',
+      label: '杆子（水平）',
+      blockstate: getFenceBlockstateJson(
+        `${P_BLOCK}/pole/pole_a_horizon_post`,
+        `${P_BLOCK}/pole/pole_a_horizon_side`,
+      ),
+      box: null,
+      model: '',
+      texture: 'minecraft:block/light_gray_concrete',
+      type: 'fence',
+    },
+    {
+      name: 'pole_a_vertical',
+      label: '杆子（垂直）',
+      blockstate: getFenceBlockstateJson(
+        `${P_BLOCK}/pole/pole_a_vertical_post`,
+        `${P_BLOCK}/pole/pole_a_vertical_side`,
+      ),
+      box: null,
+      model: '',
+      texture: 'minecraft:block/light_gray_concrete',
+      type: 'fence',
+    },
+    {
+      name: 'road_sign_a_ns',
+      label: '路牌（NS）',
+      blockstate: null,
+      box: [6, 0, -16, 10, 16, 32, true],
+      model: 'road_sign/road_sign_a_ns',
+      texture: '',
+      type: '',
+    },
+    {
+      name: 'road_sign_a_we',
+      label: '路牌（WE）',
+      blockstate: null,
+      box: [-16, 0, 6, 32, 16, 10, true],
+      model: 'road_sign/road_sign_a_we',
+      texture: '',
+      type: '',
+    },
+    {
+      name: 'road_sign_a_pole',
+      label: '路牌（杆子）',
+      blockstate: null,
+      box: [5, -16, 5, 11, 32, 11, true],
+      model: 'road_sign/road_sign_a_pole',
+      texture: '',
+      type: '',
+    },
+    {
+      name: 'station_sign_a',
+      label: '站牌',
+      blockstate: null,
+      box: [0, 0, 6, 16, 16, 10, true],
+      model: 'common/station_sign_a',
+      texture: '',
+      type: 'cardinal',
+    },
+    {
+      name: 'statue_player_alex',
+      label: '模型（Alex）',
+      blockstate: null,
+      box: [0, 0, 5, 16, 32, 11, true],
+      model: 'statue/player_alex',
+      texture: '',
+      type: 'cardinal',
+    },
+    {
+      name: 'statue_player_steve',
+      label: '模型（Steve）',
+      blockstate: null,
+      box: [0, 0, 5, 16, 32, 11, true],
+      model: 'statue/player_steve',
+      texture: '',
+      type: 'cardinal',
+    },
+    {
+      name: 'ticket_machine_a',
+      label: '售票机',
+      blockstate: null,
+      box: [3, 0, 6, 13, 30, 16, true],
+      model: 'common/ticket_machine_a',
+      texture: '',
+      type: 'cardinal',
+    },
+    {
+      name: 'traffic_light_a_pedestrian_ns',
+      label: '人行道红绿灯（NS）',
+      blockstate: null,
+      box: [0, 0, 10, 16, 16, 16, true],
+      model: 'traffic_light/traffic_light_a_pedestrian_ns',
+      texture: '',
+      type: 'cardinal',
+    },
+    {
+      name: 'traffic_light_a_pedestrian_we',
+      label: '人行道红绿灯（WE）',
+      blockstate: null,
+      box: [0, 0, 10, 16, 16, 16, true],
+      model: 'traffic_light/traffic_light_a_pedestrian_we',
+      texture: '',
+      type: 'cardinal',
+    },
+    {
+      name: 'traffic_light_a_traffic_h_ns',
+      label: '交通红绿灯（水平，NS）',
+      blockstate: null,
+      box: [0, 0, 10, 16, 16, 16, true],
+      model: 'traffic_light/traffic_light_a_traffic_h_ns',
+      texture: '',
+      type: 'cardinal',
+    },
+    {
+      name: 'traffic_light_a_traffic_h_we',
+      label: '交通红绿灯（水平，WE）',
+      blockstate: null,
+      box: [0, 0, 10, 16, 16, 16, true],
+      model: 'traffic_light/traffic_light_a_traffic_h_we',
+      texture: '',
+      type: 'cardinal',
+    },
+    {
+      name: 'traffic_light_a_traffic_v_ns',
+      label: '交通红绿灯（垂直，NS）',
+      blockstate: null,
+      box: [0, 0, 10, 16, 16, 16, true],
+      model: 'traffic_light/traffic_light_a_traffic_v_ns',
+      texture: '',
+      type: 'cardinal',
+    },
+    {
+      name: 'traffic_light_a_traffic_v_we',
+      label: '交通红绿灯（垂直，WE）',
+      blockstate: null,
+      box: [0, 0, 10, 16, 16, 16, true],
+      model: 'traffic_light/traffic_light_a_traffic_v_we',
+      texture: '',
+      type: 'cardinal',
+    },
     // 建筑方块
     {
       name: 'building_brick_a',
@@ -692,16 +1046,21 @@ function regBlockBuildingAndFurniture(event) {
       texturePath1 = `${P_BLOCK}/${texturePath0}`;
     }
 
+    // 创建方块
     if (blockType) {
       block = event.create(blockId, blockType);
     } else {
       block = event.create(blockId);
     }
 
+    // 添加到创造模式标签页
     TAB_BLOCKS_ITEMS.push(blockId);
 
+    let isType1 = ['', 'cardinal'].indexOf(blockType > -1);
+    let isType2 = ['fence', 'slab', 'stairs', 'wall'].indexOf(blockType) > -1;
+
     // 设置基础属性
-    if (blockType === '' || blockType === 'cardinal') {
+    if (isType1) {
       if (blockBox) {
         setBlockProps(block, {
           boxConfig: blockBox,
@@ -731,7 +1090,7 @@ function regBlockBuildingAndFurniture(event) {
           textureAll: texturePath1,
         });
       }
-    } else if (blockType === 'fence') {
+    } else if (isType2) {
       setBlockProps(block, {
         displayName: blockLabel,
         renderType: 'cutout_mipped',
@@ -749,174 +1108,7 @@ function regBlockBuildingAndFurniture(event) {
 
   });
 
-  console.info(`${LOG_PREFIX} 注册方块 - 建筑和家具 - 完成`);
-
-}
-
-/**
- * @description 注册方块 - 纯色方块
- * @param {_RegistryBlock} event
- */
-function regBlockColor(event) {
-
-  console.info(`${LOG_PREFIX} 注册方块 - 纯色方块 - 开始`);
-
-  let blockList = [
-    {
-      name: 'color_white_grow',
-      label: '纯色方块（白色，发光）',
-      color: [255, 255, 255, 1],
-      grow: true,
-    },
-    {
-      name: 'color_blue_grow',
-      label: '纯色方块（蓝色，发光）',
-      color: [0, 0, 255, 1],
-      grow: true,
-    },
-    {
-      name: 'color_green_grow',
-      label: '纯色方块（绿色，发光）',
-      color: [0, 255, 0, 1],
-      grow: true,
-    },
-    {
-      name: 'color_red_grow',
-      label: '纯色方块（红色）',
-      color: [255, 0, 0, 1],
-      grow: true,
-    },
-    {
-      name: 'color_black',
-      label: '纯色方块（黑色）',
-      color: [0, 0, 0, 1],
-      grow: false,
-    },
-    {
-      name: 'color_white',
-      label: '纯色方块（白色）',
-      color: [255, 255, 255, 1],
-      grow: false,
-    },
-    {
-      name: 'color_blue',
-      label: '纯色方块（蓝色）',
-      color: [0, 0, 255, 1],
-      grow: false,
-    },
-    {
-      name: 'color_green',
-      label: '纯色方块（绿色）',
-      color: [0, 255, 0, 1],
-      grow: false,
-    },
-    {
-      name: 'color_red',
-      label: '纯色方块（红色）',
-      color: [255, 0, 0, 1],
-      grow: false,
-    },
-    {
-      name: 'color_yellow',
-      label: '纯色方块（黄色）',
-      color: [255, 255, 0, 1],
-      grow: false,
-    },
-    {
-      name: 'color_39c5bb',
-      label: '纯色方块（#39C5BB）',
-      color: [57, 197, 187, 1],
-      grow: false,
-    },
-    {
-      name: 'color_66ccff',
-      label: '纯色方块（#66CCFF）',
-      color: [102, 204, 255, 1],
-      grow: false,
-    },
-    {
-      name: 'color_gz_line_one',
-      label: '纯色方块（广州地铁一号线，#F3D03E）',
-      color: [243, 208, 62, 1],
-      grow: false,
-    },
-    {
-      name: 'color_gz_line_two',
-      label: '纯色方块（广州地铁二号线，#00629B）',
-      color: [0, 98, 155, 1],
-      grow: false,
-    },
-    {
-      name: 'color_gz_line_three',
-      label: '纯色方块（广州地铁三号线，#ECA154）',
-      color: [236, 161, 84, 1],
-      grow: false,
-    },
-    {
-      name: 'color_gz_line_four',
-      label: '纯色方块（广州地铁四号线，#00843D）',
-      color: [0, 132, 61, 1],
-      grow: false,
-    },
-    {
-      name: 'color_gz_line_five',
-      label: '纯色方块（广州地铁五号线，#C5003E）',
-      color: [197, 0, 62, 1],
-      grow: false,
-    },
-    {
-      name: 'color_gz_line_six',
-      label: '纯色方块（广州地铁六号线，#80225F）',
-      color: [128, 34, 95, 1],
-      grow: false,
-    },
-    {
-      name: 'color_gz_line_seven',
-      label: '纯色方块（广州地铁七号线，#97D700）',
-      color: [151, 215, 0, 1],
-      grow: false,
-    },
-    {
-      name: 'color_gz_line_eight',
-      label: '纯色方块（广州地铁八号线，#008C95）',
-      color: [0, 140, 149, 1],
-      grow: false,
-    },
-    {
-      name: 'color_gz_line_nine',
-      label: '纯色方块（广州地铁九号线，#71CC98）',
-      color: [113, 204, 152, 1],
-      grow: false,
-    },
-  ];
-
-  let textureGrow = `${P_BLOCK}/common/color_grow`;
-  let textureNormal = `${P_BLOCK}/common/color_normal`;
-
-  blockList.forEach((config) => {
-
-    let id = `${MOD_ID}:${config.name}`;
-    let block = event.create(id);
-    let colorCfg = config.color;
-    let isGrow = config.grow;
-
-    TAB_BLOCKS_ITEMS.push(id);
-
-    setBlockProps(block, {
-      displayName: config.label,
-      isSolid: false,
-      lightLevel: (isGrow ? 1 : 0),
-      textureAll: (isGrow ? textureGrow : textureNormal),
-    });
-
-    block.color(0, Color.rgba.apply(Color, colorCfg));
-    block.item((item) => {
-      item.color(0, Color.rgba.apply(Color, colorCfg));
-    });
-
-  });
-
-  console.info(`${LOG_PREFIX} 注册方块 - 纯色方块 - 完成`);
+  console.info(`${LOG_PREFIX} 注册方块 - 常规 - 完成`);
 
 }
 
@@ -1411,326 +1603,15 @@ function regBlockRoad(event) {
 
 }
 
-/**
- * @description 注册方块 - 其他 - 基础
- * @param {_RegistryBlock} event
- */
-function regBlockOtherBasic(event) {
-
-  console.info(`${LOG_PREFIX} 注册方块 - 其他 - 基础 - 开始`);
-
-  let blockList = [
-    {
-      name: 'crate_a',
-      label: '板条箱',
-      blockstate: null,
-      box: null,
-      model: '',
-      texture: 'common/crate_a',
-      type: '',
-    },
-    {
-      name: 'isolation_pile_a',
-      label: '隔离桩',
-      blockstate: null,
-      box: [5, 0, 5, 11, 16, 11, true],
-      model: 'common/isolation_pile_a',
-      texture: '',
-      type: '',
-    },
-    {
-      name: 'road_sign_a_ns',
-      label: '路牌（NS）',
-      blockstate: null,
-      box: [6, 0, -16, 10, 16, 32, true],
-      model: 'road_sign/road_sign_a_ns',
-      texture: '',
-      type: '',
-    },
-    {
-      name: 'road_sign_a_we',
-      label: '路牌（WE）',
-      blockstate: null,
-      box: [-16, 0, 6, 32, 16, 10, true],
-      model: 'road_sign/road_sign_a_we',
-      texture: '',
-      type: '',
-    },
-    {
-      name: 'road_sign_a_pole',
-      label: '路牌（杆子）',
-      blockstate: null,
-      box: [5, -16, 5, 11, 32, 11, true],
-      model: 'road_sign/road_sign_a_pole',
-      texture: '',
-      type: '',
-    },
-    {
-      name: 'station_sign_a',
-      label: '站牌',
-      blockstate: null,
-      box: [0, 0, 6, 16, 16, 10, true],
-      model: 'common/station_sign_a',
-      texture: '',
-      type: 'cardinal',
-    },
-    {
-      name: 'statue_player_alex',
-      label: '模型（Alex）',
-      blockstate: null,
-      box: [0, 0, 5, 16, 32, 11, true],
-      model: 'statue/player_alex',
-      texture: '',
-      type: 'cardinal',
-    },
-    {
-      name: 'statue_player_steve',
-      label: '模型（Steve）',
-      blockstate: null,
-      box: [0, 0, 5, 16, 32, 11, true],
-      model: 'statue/player_steve',
-      texture: '',
-      type: 'cardinal',
-    },
-    {
-      name: 'ticket_machine_a',
-      label: '售票机',
-      blockstate: null,
-      box: [3, 0, 6, 13, 30, 16, true],
-      model: 'common/ticket_machine_a',
-      texture: '',
-      type: 'cardinal',
-    },
-    {
-      name: 'traffic_light_a_pedestrian_ns',
-      label: '人行道红绿灯（NS）',
-      blockstate: null,
-      box: [0, 0, 10, 16, 16, 16, true],
-      model: 'traffic_light/traffic_light_a_pedestrian_ns',
-      texture: '',
-      type: 'cardinal',
-    },
-    {
-      name: 'traffic_light_a_pedestrian_we',
-      label: '人行道红绿灯（WE）',
-      blockstate: null,
-      box: [0, 0, 10, 16, 16, 16, true],
-      model: 'traffic_light/traffic_light_a_pedestrian_we',
-      texture: '',
-      type: 'cardinal',
-    },
-    {
-      name: 'traffic_light_a_traffic_h_ns',
-      label: '交通红绿灯（水平，NS）',
-      blockstate: null,
-      box: [0, 0, 10, 16, 16, 16, true],
-      model: 'traffic_light/traffic_light_a_traffic_h_ns',
-      texture: '',
-      type: 'cardinal',
-    },
-    {
-      name: 'traffic_light_a_traffic_h_we',
-      label: '交通红绿灯（水平，WE）',
-      blockstate: null,
-      box: [0, 0, 10, 16, 16, 16, true],
-      model: 'traffic_light/traffic_light_a_traffic_h_we',
-      texture: '',
-      type: 'cardinal',
-    },
-    {
-      name: 'traffic_light_a_traffic_v_ns',
-      label: '交通红绿灯（垂直，NS）',
-      blockstate: null,
-      box: [0, 0, 10, 16, 16, 16, true],
-      model: 'traffic_light/traffic_light_a_traffic_v_ns',
-      texture: '',
-      type: 'cardinal',
-    },
-    {
-      name: 'traffic_light_a_traffic_v_we',
-      label: '交通红绿灯（垂直，WE）',
-      blockstate: null,
-      box: [0, 0, 10, 16, 16, 16, true],
-      model: 'traffic_light/traffic_light_a_traffic_v_we',
-      texture: '',
-      type: 'cardinal',
-    },
-  ];
-
-  blockList.forEach((config) => {
-
-    let blockBox = config.box;
-    let blockLabel = config.label;
-    let blockName = config.name;
-    let blockId = `${MOD_ID}:${blockName}`;
-    let blockState = config.blockstate;
-    let blockType = config.type;
-
-    let block = null;
-
-    let modelPath0 = config.model;
-    let modelPath1 = modelPath0 ? `${P_BLOCK}/${modelPath0}` : '';
-
-    let texturePath0 = config.texture;
-    let texturePath1 = texturePath0 || '';
-
-    if (texturePath0 && !texturePath0.includes(':')) {
-      texturePath1 = `${P_BLOCK}/${texturePath0}`;
-    }
-
-    if (blockType) {
-      block = event.create(blockId, blockType);
-    } else {
-      block = event.create(blockId);
-    }
-
-    TAB_BLOCKS_ITEMS.push(blockId);
-
-    // 设置基础属性
-    if (blockType === '' || blockType === 'cardinal') {
-      if (blockBox) {
-        setBlockProps(block, {
-          boxConfig: blockBox,
-          boxType: 'custom',
-          displayName: blockLabel,
-          isSolid: false,
-          modelPath: modelPath1 ? {
-            blockName: blockName,
-            blockNamespace: MOD_ID,
-            filePath: modelPath1,
-          } : null,
-          renderType: 'cutout',
-          textureAll: texturePath1,
-        });
-      } else {
-        setBlockProps(block, {
-          boxConfig: null,
-          boxType: 'full',
-          displayName: blockLabel,
-          isSolid: true,
-          modelPath: modelPath1 ? {
-            blockName: blockName,
-            blockNamespace: MOD_ID,
-            filePath: modelPath1,
-          } : null,
-          renderType: 'solid',
-          textureAll: texturePath1,
-        });
-      }
-    } else if (blockType === 'fence') {
-      setBlockProps(block, {
-        displayName: blockLabel,
-        renderType: 'cutout_mipped',
-        textureAll: texturePath1,
-      });
-    }
-
-    // 生成方块状态
-    if (blockState) {
-      JSON_ASSETS.push({
-        path: `${P_BLOCK_STATE}/${blockName}`,
-        data: blockState,
-      });
-    }
-
-  });
-
-  console.info(`${LOG_PREFIX} 注册方块 - 其他 - 基础 - 完成`);
-
-}
-
-/**
- * @description 注册方块 - 其他 - 特殊
- * @param {_RegistryBlock} event
- */
-function regBlockOtherShaped(event) {
-
-  console.info(`${LOG_PREFIX} 注册方块 - 其他 - 特殊 - 开始`);
-
-  let blockList = [
-    {
-      name: 'gravel_stairs',
-      label: '沙砾楼梯',
-      blockstate: null,
-      texture: 'minecraft:block/gravel',
-      type: 'stairs',
-    },
-    {
-      name: 'gravel_slab',
-      label: '沙砾半砖',
-      blockstate: null,
-      texture: 'minecraft:block/gravel',
-      type: 'slab',
-    },
-    {
-      name: 'oak_leaves_wall',
-      label: '橡木树叶墙',
-      blockstate: null,
-      texture: `${P_BLOCK}/common/oak_leaves`,
-      type: 'wall',
-    },
-    {
-      name: 'pole_a_horizon',
-      label: '杆子（水平）',
-      blockstate: getFenceBlockstateJson(
-        `${P_BLOCK}/pole/pole_a_horizon_post`,
-        `${P_BLOCK}/pole/pole_a_horizon_side`,
-      ),
-      texture: 'minecraft:block/light_gray_concrete',
-      type: 'fence',
-    },
-    {
-      name: 'pole_a_vertical',
-      label: '杆子（垂直）',
-      blockstate: getFenceBlockstateJson(
-        `${P_BLOCK}/pole/pole_a_vertical_post`,
-        `${P_BLOCK}/pole/pole_a_vertical_side`,
-      ),
-      texture: 'minecraft:block/light_gray_concrete',
-      type: 'fence',
-    },
-  ];
-
-  blockList.forEach((config) => {
-
-    let blockName = config.name;
-    let blockId = `${MOD_ID}:${blockName}`;
-    let block = event.create(blockId, config.type);
-
-    TAB_BLOCKS_ITEMS.push(blockId);
-
-    // 设置基础属性
-    setBlockProps(block, {
-      displayName: config.label,
-      renderType: 'cutout_mipped',
-      textureAll: config.texture,
-    });
-
-    // 生成方块状态
-    if (config.blockstate) {
-      JSON_ASSETS.push({
-        path: `${P_BLOCK_STATE}/${blockName}`,
-        data: config.blockstate,
-      });
-    }
-
-  });
-
-  console.info(`${LOG_PREFIX} 注册方块 - 其他 - 特殊 - 完成`);
-
-}
-
 // 注册方块
 StartupEvents.registry('block', regBlockBrick);
-StartupEvents.registry('block', regBlockBuildingAndFurniture);
 StartupEvents.registry('block', regBlockColor);
+StartupEvents.registry('block', regBlockCommon);
 StartupEvents.registry('block', regBlockLampModern);
 StartupEvents.registry('block', regBlockLampSimple);
 StartupEvents.registry('block', regBlockMinecart);
 StartupEvents.registry('block', regBlockRoad);
 StartupEvents.registry('block', regBlockReinforcedConcrete);
-StartupEvents.registry('block', regBlockOtherBasic);
-StartupEvents.registry('block', regBlockOtherShaped);
 
 // 注册物品
 StartupEvents.registry('item', (event) => {
