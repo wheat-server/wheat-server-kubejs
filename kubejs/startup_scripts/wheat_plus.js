@@ -113,129 +113,150 @@ function regBlockColor(event) {
 
   let blockList = [
     {
+      name: 'color_colorful_a',
+      label: '彩色方块（发光）',
+      color: null,
+      grow: true,
+      texture: 'common/color_colorful_a',
+    },
+    {
+      name: 'color_semi_transparent_white',
+      label: '透明方块（半透明白色）',
+      color: [255, 255, 255, 0],
+      grow: false,
+      texture: 'common/color_semi_transparent',
+    },
+    {
+      name: 'color_semi_transparent_black',
+      label: '透明方块（半透明黑色）',
+      color: [0, 0, 0, 0],
+      grow: false,
+      texture: 'common/color_semi_transparent',
+    },
+    {
       name: 'color_white_grow',
       label: '纯色方块（白色，发光）',
-      color: [255, 255, 255, 1],
+      color: [255, 255, 255, 0],
       grow: true,
     },
     {
       name: 'color_blue_grow',
       label: '纯色方块（蓝色，发光）',
-      color: [0, 0, 255, 1],
+      color: [0, 0, 255, 0],
       grow: true,
     },
     {
       name: 'color_green_grow',
       label: '纯色方块（绿色，发光）',
-      color: [0, 255, 0, 1],
+      color: [0, 255, 0, 0],
       grow: true,
     },
     {
       name: 'color_red_grow',
       label: '纯色方块（红色）',
-      color: [255, 0, 0, 1],
+      color: [255, 0, 0, 0],
       grow: true,
     },
     {
       name: 'color_black',
       label: '纯色方块（黑色）',
-      color: [0, 0, 0, 1],
+      color: [0, 0, 0, 0],
       grow: false,
     },
     {
       name: 'color_white',
       label: '纯色方块（白色）',
-      color: [255, 255, 255, 1],
+      color: [255, 255, 255, 0],
       grow: false,
     },
     {
       name: 'color_blue',
       label: '纯色方块（蓝色）',
-      color: [0, 0, 255, 1],
+      color: [0, 0, 255, 0],
       grow: false,
     },
     {
       name: 'color_green',
       label: '纯色方块（绿色）',
-      color: [0, 255, 0, 1],
+      color: [0, 255, 0, 0],
       grow: false,
     },
     {
       name: 'color_red',
       label: '纯色方块（红色）',
-      color: [255, 0, 0, 1],
+      color: [255, 0, 0, 0],
       grow: false,
     },
     {
       name: 'color_yellow',
       label: '纯色方块（黄色）',
-      color: [255, 255, 0, 1],
+      color: [255, 255, 0, 0],
       grow: false,
     },
     {
       name: 'color_39c5bb',
       label: '纯色方块（#39C5BB）',
-      color: [57, 197, 187, 1],
+      color: [57, 197, 187, 0],
       grow: false,
     },
     {
       name: 'color_66ccff',
       label: '纯色方块（#66CCFF）',
-      color: [102, 204, 255, 1],
+      color: [102, 204, 255, 0],
       grow: false,
     },
     {
       name: 'color_gz_line_one',
       label: '纯色方块（广州地铁一号线，#F3D03E）',
-      color: [243, 208, 62, 1],
+      color: [243, 208, 62, 0],
       grow: false,
     },
     {
       name: 'color_gz_line_two',
       label: '纯色方块（广州地铁二号线，#00629B）',
-      color: [0, 98, 155, 1],
+      color: [0, 98, 155, 0],
       grow: false,
     },
     {
       name: 'color_gz_line_three',
       label: '纯色方块（广州地铁三号线，#ECA154）',
-      color: [236, 161, 84, 1],
+      color: [236, 161, 84, 0],
       grow: false,
     },
     {
       name: 'color_gz_line_four',
       label: '纯色方块（广州地铁四号线，#00843D）',
-      color: [0, 132, 61, 1],
+      color: [0, 132, 61, 0],
       grow: false,
     },
     {
       name: 'color_gz_line_five',
       label: '纯色方块（广州地铁五号线，#C5003E）',
-      color: [197, 0, 62, 1],
+      color: [197, 0, 62, 0],
       grow: false,
     },
     {
       name: 'color_gz_line_six',
       label: '纯色方块（广州地铁六号线，#80225F）',
-      color: [128, 34, 95, 1],
+      color: [128, 34, 95, 0],
       grow: false,
     },
     {
       name: 'color_gz_line_seven',
       label: '纯色方块（广州地铁七号线，#97D700）',
-      color: [151, 215, 0, 1],
+      color: [151, 215, 0, 0],
       grow: false,
     },
     {
       name: 'color_gz_line_eight',
       label: '纯色方块（广州地铁八号线，#008C95）',
-      color: [0, 140, 149, 1],
+      color: [0, 140, 149, 0],
       grow: false,
     },
     {
       name: 'color_gz_line_nine',
       label: '纯色方块（广州地铁九号线，#71CC98）',
-      color: [113, 204, 152, 1],
+      color: [113, 204, 152, 0],
       grow: false,
     },
   ];
@@ -249,6 +270,7 @@ function regBlockColor(event) {
     let block = event.create(id);
     let colorCfg = config.color;
     let isGrow = config.grow;
+    let texture = config.texture;
 
     TAB_BLOCKS_ITEMS.push(id);
 
@@ -256,13 +278,16 @@ function regBlockColor(event) {
       displayName: config.label,
       isSolid: false,
       lightLevel: (isGrow ? 1 : 0),
-      textureAll: (isGrow ? textureGrow : textureNormal),
+      renderType: 'translucent',
+      textureAll: (texture ? `${P_BLOCK}/${texture}` : (isGrow ? textureGrow : textureNormal)),
     });
 
-    block.color(0, Color.rgba.apply(Color, colorCfg));
-    block.item((item) => {
-      item.color(0, Color.rgba.apply(Color, colorCfg));
-    });
+    if (colorCfg) {
+      block.color(0, Color.rgba.apply(Color, colorCfg));
+      block.item((item) => {
+        item.color(0, Color.rgba.apply(Color, colorCfg));
+      });
+    }
 
   });
 
