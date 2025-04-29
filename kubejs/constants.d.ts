@@ -152,6 +152,12 @@ type SetBlockPropsOpts = {
   /** 纹理文件路径，每一面都相同时指定 */
   textureAll?: string;
 
+  /** 纹理文件路径，侧面都相同时指定 */
+  textureSide?: string;
+
+  /** 纹理文件路径，上下面都相同时指定 */
+  textureUpDown?: string;
+
 };
 
 declare global {

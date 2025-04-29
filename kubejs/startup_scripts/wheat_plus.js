@@ -356,7 +356,7 @@ function regBlockCommon(event) {
       blockstate: null,
       box: null,
       model: '',
-      texture: `common/oak_leaves`,
+      texture: `common/tree_oak_leaves`,
       type: 'wall',
     },
     {
@@ -1084,6 +1084,67 @@ function regBlockCommon(event) {
       texture: '',
       type: 'cardinal',
     },
+    // 树木
+    {
+      name: 'tree_maple_leaves',
+      label: '枫树叶',
+      blockstate: null,
+      box: [0, 0, 0, 16, 16, 16, true],
+      model: '',
+      texture: 'common/tree_maple_leaves',
+      type: '',
+    },
+    {
+      name: 'tree_maple_wood',
+      label: '枫树木',
+      blockstate: null,
+      box: null,
+      model: '',
+      texture: '',
+      textureSide: 'common/tree_maple_wood_side',
+      textureUpDown: 'common/tree_maple_wood_ud',
+      type: '',
+    },
+    {
+      name: 'tree_palm_leaves',
+      label: '棕榈树叶',
+      blockstate: null,
+      box: [0, 0, 0, 16, 16, 16, true],
+      model: '',
+      texture: 'common/tree_palm_leaves',
+      type: '',
+    },
+    {
+      name: 'tree_palm_wood',
+      label: '棕榈树木',
+      blockstate: null,
+      box: null,
+      model: '',
+      texture: '',
+      textureSide: 'common/tree_palm_wood_side',
+      textureUpDown: 'common/tree_palm_wood_ud',
+      type: '',
+    },
+    {
+      name: 'tree_willow_leaves',
+      label: '柳树叶',
+      blockstate: null,
+      box: [0, 0, 0, 16, 16, 16, true],
+      model: '',
+      texture: 'common/tree_willow_leaves',
+      type: '',
+    },
+    {
+      name: 'tree_willow_wood',
+      label: '柳树木',
+      blockstate: null,
+      box: null,
+      model: '',
+      texture: '',
+      textureSide: 'common/tree_willow_wood_side',
+      textureUpDown: 'common/tree_willow_wood_ud',
+      type: '',
+    },
   ];
 
   blockList.forEach((config) => {
@@ -1097,14 +1158,27 @@ function regBlockCommon(event) {
 
     let block = null;
 
+    // 获取模型文件路径
     let modelPath0 = config.model;
     let modelPath1 = modelPath0 ? `${P_BLOCK}/${modelPath0}` : '';
 
-    let texturePath0 = config.texture;
-    let texturePath1 = texturePath0 || '';
+    // 获取纹理文件路径
+    let textureAllPath0 = config.texture;
+    let textureAllPath1 = textureAllPath0 || '';
+    let textureSidePath0 = config.textureSide;
+    let textureSidePath1 = textureSidePath0 || '';
+    let textureUpDownPath0 = config.textureUpDown;
+    let textureUpDownPath1 = textureUpDownPath0 || '';
 
-    if (texturePath0 && !texturePath0.includes(':')) {
-      texturePath1 = `${P_BLOCK}/${texturePath0}`;
+    // 处理纹理文件路径
+    if (textureAllPath0 && !textureAllPath0.includes(':')) {
+      textureAllPath1 = `${P_BLOCK}/${textureAllPath0}`;
+    }
+    if (textureSidePath0 && !textureSidePath0.includes(':')) {
+      textureSidePath1 = `${P_BLOCK}/${textureSidePath0}`;
+    }
+    if (textureUpDownPath0 && !textureUpDownPath0.includes(':')) {
+      textureUpDownPath1 = `${P_BLOCK}/${textureUpDownPath0}`;
     }
 
     // 创建方块
@@ -1120,42 +1194,39 @@ function regBlockCommon(event) {
     let isType1 = ['', 'cardinal'].indexOf(blockType > -1);
     let isType2 = ['fence', 'slab', 'stairs', 'wall'].indexOf(blockType) > -1;
 
-    // 设置基础属性
+    // 设置基础属性（通用）
+    setBlockProps(block, {
+      displayName: blockLabel,
+      modelPath: modelPath1 ? {
+        blockName: blockName,
+        blockNamespace: MOD_ID,
+        filePath: modelPath1,
+      } : null,
+      textureAll: textureAllPath1,
+      textureSide: textureSidePath1,
+      textureUpDown: textureUpDownPath1,
+    });
+
+    // 设置基础属性（特殊）
     if (isType1) {
       if (blockBox) {
         setBlockProps(block, {
           boxConfig: blockBox,
           boxType: 'custom',
-          displayName: blockLabel,
           isSolid: false,
-          modelPath: modelPath1 ? {
-            blockName: blockName,
-            blockNamespace: MOD_ID,
-            filePath: modelPath1,
-          } : null,
           renderType: 'cutout',
-          textureAll: texturePath1,
         });
       } else {
         setBlockProps(block, {
           boxConfig: null,
           boxType: 'full',
-          displayName: blockLabel,
           isSolid: true,
-          modelPath: modelPath1 ? {
-            blockName: blockName,
-            blockNamespace: MOD_ID,
-            filePath: modelPath1,
-          } : null,
           renderType: 'solid',
-          textureAll: texturePath1,
         });
       }
     } else if (isType2) {
       setBlockProps(block, {
-        displayName: blockLabel,
         renderType: 'cutout_mipped',
-        textureAll: texturePath1,
       });
     }
 
