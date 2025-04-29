@@ -1194,8 +1194,8 @@ function regBlockCommon(event) {
     let isType1 = ['', 'cardinal'].indexOf(blockType > -1);
     let isType2 = ['fence', 'slab', 'stairs', 'wall'].indexOf(blockType) > -1;
 
-    // 设置基础属性（通用）
-    setBlockProps(block, {
+    /** @type {_SetBlockPropsOpts} */
+    let commonProps = {
       displayName: blockLabel,
       modelPath: modelPath1 ? {
         blockName: blockName,
@@ -1205,30 +1205,36 @@ function regBlockCommon(event) {
       textureAll: textureAllPath1,
       textureSide: textureSidePath1,
       textureUpDown: textureUpDownPath1,
-    });
+    };
 
-    // 设置基础属性（特殊）
+    /** @type {_SetBlockPropsOpts} */
+    let specialProps = {};
+
+    // 处理基础属性
     if (isType1) {
       if (blockBox) {
-        setBlockProps(block, {
+        specialProps = {
           boxConfig: blockBox,
           boxType: 'custom',
           isSolid: false,
           renderType: 'cutout',
-        });
+        };
       } else {
-        setBlockProps(block, {
+        specialProps = {
           boxConfig: null,
           boxType: 'full',
           isSolid: true,
           renderType: 'solid',
-        });
+        };
       }
     } else if (isType2) {
-      setBlockProps(block, {
+      specialProps = {
         renderType: 'cutout_mipped',
-      });
+      };
     }
+
+    // 设置基础属性
+    setBlockProps(block, Object.assign(commonProps, specialProps));
 
     // 生成方块状态
     if (blockState) {

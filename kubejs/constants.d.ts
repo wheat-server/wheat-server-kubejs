@@ -165,6 +165,9 @@ declare global {
   /** 方块注册事件 */
   type _RegistryBlock = $Block;
 
+  /** 配置选项 */
+  type _SetBlockPropsOpts = SetBlockPropsOpts;
+
   const global: {
 
     /**
