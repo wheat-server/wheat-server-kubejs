@@ -132,6 +132,8 @@ global.setBlockProps = function (block, opts) {
   let soundType = defaults(opts.soundType, 'stone');
   let textureAll = defaults(opts.textureAll, '');
   let textureSide = defaults(opts.textureSide, '');
+  let textureSideNS = defaults(opts.textureSideNS, '');
+  let textureSideWE = defaults(opts.textureSideWE, '');
   let textureUpDown = defaults(opts.textureUpDown, '');
 
   if (boxType === 'custom') {
@@ -182,6 +184,20 @@ global.setBlockProps = function (block, opts) {
       Direction.WEST,
       Direction.EAST,
     ], textureSide);
+  }
+
+  if (textureSideNS) {
+    block.texture([
+      Direction.NORTH,
+      Direction.SOUTH,
+    ], textureSideNS);
+  }
+
+  if (textureSideWE) {
+    block.texture([
+      Direction.WEST,
+      Direction.EAST,
+    ], textureSideWE);
   }
 
   if (textureUpDown) {

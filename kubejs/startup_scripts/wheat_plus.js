@@ -306,6 +306,18 @@ function regBlockCommon(event) {
   let blockList = [
     // 普通方块
     {
+      name: 'carton_a',
+      label: '纸箱',
+      blockstate: null,
+      box: null,
+      model: '',
+      texture: '',
+      textureSideNS: 'common/carton_a_ns',
+      textureSideWE: 'common/carton_a_we',
+      textureUpDown: 'common/carton_a_ud',
+      type: '',
+    },
+    {
       name: 'crash_barriar_a',
       label: '防撞墩（石头）',
       blockstate: null,
@@ -1185,6 +1197,10 @@ function regBlockCommon(event) {
     let textureAllPath1 = textureAllPath0 || '';
     let textureSidePath0 = config.textureSide;
     let textureSidePath1 = textureSidePath0 || '';
+    let textureSideNSPath0 = config.textureSideNS;
+    let textureSideNSPath1 = textureSideNSPath0 || '';
+    let textureSideWEPath0 = config.textureSideWE;
+    let textureSideWEPath1 = textureSideWEPath0 || '';
     let textureUpDownPath0 = config.textureUpDown;
     let textureUpDownPath1 = textureUpDownPath0 || '';
 
@@ -1194,6 +1210,12 @@ function regBlockCommon(event) {
     }
     if (textureSidePath0 && !textureSidePath0.includes(':')) {
       textureSidePath1 = `${P_BLOCK}/${textureSidePath0}`;
+    }
+    if (textureSideNSPath0 && !textureSideNSPath0.includes(':')) {
+      textureSideNSPath1 = `${P_BLOCK}/${textureSideNSPath0}`;
+    }
+    if (textureSideWEPath0 && !textureSideWEPath0.includes(':')) {
+      textureSideWEPath1 = `${P_BLOCK}/${textureSideWEPath0}`;
     }
     if (textureUpDownPath0 && !textureUpDownPath0.includes(':')) {
       textureUpDownPath1 = `${P_BLOCK}/${textureUpDownPath0}`;
@@ -1222,6 +1244,8 @@ function regBlockCommon(event) {
       } : null,
       textureAll: textureAllPath1,
       textureSide: textureSidePath1,
+      textureSideNS: textureSideNSPath1,
+      textureSideWE: textureSideWEPath1,
       textureUpDown: textureUpDownPath1,
     };
 
