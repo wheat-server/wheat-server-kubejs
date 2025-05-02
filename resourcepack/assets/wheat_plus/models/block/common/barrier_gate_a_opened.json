@@ -1,0 +1,7 @@
+{
+  "credit": "Created by Frost-ZX using Blockbench.",
+  "parent": "wheat_plus:block/common/barrier_gate_a_base",
+  "textures": {
+    "pole_closed": "wheat_plus:block/common/transparent"
+  }
+}

@@ -48,25 +48,54 @@ function getFenceBlockstateJson(postPath, sidePath) {
   return {
     multipart: [
       {
-        apply: { model: postPath }
+        apply: { model: postPath, uvlock: false, y: 0 },
       },
       {
-        apply: { model: sidePath, uvlock: true },
-        when: { north: 'true' }
+        apply: { model: sidePath, uvlock: true, y: 0 },
+        when: { north: 'true' },
       },
       {
         apply: { model: sidePath, uvlock: true, y: 90 },
-        when: { east: 'true' }
+        when: { east: 'true' },
       },
       {
         apply: { model: sidePath, uvlock: true, y: 180 },
-        when: { south: 'true' }
+        when: { south: 'true' },
       },
       {
         apply: { model: sidePath, uvlock: true, y: 270 },
-        when: { west: 'true' }
-      }
-    ]
+        when: { west: 'true' },
+      },
+    ],
+  };
+}
+
+/**
+ * @description 获取活板门方块状态 JSON
+ * @param {string} bottomPath 活板门 bottom 模型短路径
+ * @param {string} topPath    活板门 top 模型短路径
+ * @param {string} openPath   活板门 open 模型短路径
+ */
+function getTrapdoorBlockstateJson(bottomPath, topPath, openPath) {
+  return {
+    variants: {
+      'facing=east,half=bottom,open=false': { model: bottomPath, y: 0 },
+      'facing=east,half=bottom,open=true': { model: openPath, y: 90 },
+      'facing=east,half=top,open=false': { model: topPath, y: 0 },
+      'facing=east,half=top,open=true': { model: openPath, y: 90 },
+      'facing=north,half=bottom,open=false': { model: bottomPath, y: 0 },
+      'facing=north,half=bottom,open=true': { model: openPath, y: 0 },
+      'facing=north,half=top,open=false': { model: topPath, y: 0 },
+      'facing=north,half=top,open=true': { model: openPath, y: 0 },
+      'facing=south,half=bottom,open=false': { model: bottomPath, y: 0 },
+      'facing=south,half=bottom,open=true': { model: openPath, y: 180 },
+      'facing=south,half=top,open=false': { model: topPath, y: 0 },
+      'facing=south,half=top,open=true': { model: openPath, y: 180 },
+      'facing=west,half=bottom,open=false': { model: bottomPath, y: 0 },
+      'facing=west,half=bottom,open=true': { model: openPath, y: 270 },
+      'facing=west,half=top,open=false': { model: topPath, y: 0 },
+      'facing=west,half=top,open=true': { model: openPath, y: 270 }
+    },
   };
 }
 
@@ -304,7 +333,20 @@ function regBlockCommon(event) {
   console.info(`${LOG_PREFIX} 注册方块 - 常规 - 开始`);
 
   let blockList = [
-    // 普通方块
+    // -- 普通方块 --
+    // {
+    //   name: 'barrier_gate_a',
+    //   label: '道闸',
+    //   blockstate: getTrapdoorBlockstateJson(
+    //     `${P_BLOCK}/common/barrier_gate_a_base`,
+    //     `${P_BLOCK}/common/barrier_gate_a_closed`,
+    //     `${P_BLOCK}/common/barrier_gate_a_opened`,
+    //   ),
+    //   box: null,
+    //   model: '',
+    //   texture: 'minecraft:block/yellow_concrete',
+    //   type: 'trapdoor',
+    // },
     {
       name: 'carton_a',
       label: '纸箱',
@@ -671,7 +713,7 @@ function regBlockCommon(event) {
       texture: '',
       type: 'cardinal',
     },
-    // 建筑方块
+    // -- 建筑方块 --
     {
       name: 'building_brick_a',
       label: '砖块（大三角）',
@@ -1146,7 +1188,7 @@ function regBlockCommon(event) {
       texture: '',
       type: 'cardinal',
     },
-    // 家具方块
+    // -- 家具方块 --
     {
       name: 'furniture_birch_chair_a',
       label: '白桦木椅子',
@@ -1246,7 +1288,7 @@ function regBlockCommon(event) {
       texture: '',
       type: 'cardinal',
     },
-    // 树木
+    // -- 树木 --
     {
       name: 'tree_maple_leaves',
       label: '枫树叶',
