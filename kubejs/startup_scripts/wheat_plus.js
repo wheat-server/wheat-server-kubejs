@@ -1892,6 +1892,55 @@ function regBlockRoad(event) {
       rotatable: true,
       texturePath: 'road/line/double_yellow_slant',
     },
+    {
+      name: 'road_mark_arrow_f',
+      label: '路 - 标记 - 箭头',
+      hasSide: false,
+      rotatable: true,
+      texturePath: 'road/mark/arrow_f',
+    },
+    {
+      name: 'road_mark_arrow_fl',
+      label: '路 - 标记 - 箭头',
+      hasSide: false,
+      rotatable: true,
+      texturePath: 'road/mark/arrow_fl',
+    },
+    {
+      name: 'road_mark_arrow_flr',
+      label: '路 - 标记 - 箭头',
+      hasSide: false,
+      rotatable: true,
+      texturePath: 'road/mark/arrow_flr',
+    },
+    {
+      name: 'road_mark_arrow_fr',
+      label: '路 - 标记 - 箭头',
+      hasSide: false,
+      rotatable: true,
+      texturePath: 'road/mark/arrow_fr',
+    },
+    {
+      name: 'road_mark_arrow_l',
+      label: '路 - 标记 - 箭头',
+      hasSide: false,
+      rotatable: true,
+      texturePath: 'road/mark/arrow_l',
+    },
+    {
+      name: 'road_mark_arrow_lr',
+      label: '路 - 标记 - 箭头',
+      hasSide: false,
+      rotatable: true,
+      texturePath: 'road/mark/arrow_lr',
+    },
+    {
+      name: 'road_mark_arrow_r',
+      label: '路 - 标记 - 箭头',
+      hasSide: false,
+      rotatable: true,
+      texturePath: 'road/mark/arrow_r',
+    },
   ];
 
   blockList.forEach((config) => {
