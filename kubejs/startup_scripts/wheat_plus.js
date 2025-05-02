@@ -1362,6 +1362,42 @@ function regBlockCommon(event) {
       textureUpDown: 'common/tree_willow_wood_ud',
       type: '',
     },
+    {
+      name: 'demo_block_a',
+      label: 'demo 方块',
+      blockstate: null,
+      box: [1, 1, 1, 15, 15, 15, true],
+      model: 'demo/demo_block_a',
+      texture: '',
+      type: 'cardinal',
+    },
+    {
+      name: 'demo_block_b',
+      label: 'demo 方块',
+      blockstate: null,
+      box: [1, 1, 1, 15, 15, 15, true],
+      model: 'demo/demo_block_b',
+      texture: '',
+      type: 'cardinal',
+    },
+    {
+      name: 'demo_block_c',
+      label: 'demo 方块',
+      blockstate: null,
+      box: [1, 1, 1, 15, 15, 15, true],
+      model: 'demo/demo_block_c',
+      texture: '',
+      type: 'cardinal',
+    },
+    {
+      name: 'demo_block_d',
+      label: 'demo 方块',
+      blockstate: null,
+      box: [1, 1, 1, 15, 15, 15, true],
+      model: 'demo/demo_block_d',
+      texture: '',
+      type: 'cardinal',
+    },
   ];
 
   blockList.forEach((config) => {
