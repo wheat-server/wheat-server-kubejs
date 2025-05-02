@@ -80,21 +80,21 @@ function getTrapdoorBlockstateJson(bottomPath, topPath, openPath) {
   return {
     variants: {
       'facing=east,half=bottom,open=false': { model: bottomPath, y: 0 },
-      'facing=east,half=bottom,open=true': { model: openPath, y: 90 },
-      'facing=east,half=top,open=false': { model: topPath, y: 0 },
-      'facing=east,half=top,open=true': { model: openPath, y: 90 },
+      'facing=east,half=bottom,open=true': { model: bottomPath, y: 0 },
+      'facing=east,half=top,open=false': { model: topPath, y: 180 },
+      'facing=east,half=top,open=true': { model: openPath, y: 180 },
       'facing=north,half=bottom,open=false': { model: bottomPath, y: 0 },
-      'facing=north,half=bottom,open=true': { model: openPath, y: 0 },
-      'facing=north,half=top,open=false': { model: topPath, y: 0 },
-      'facing=north,half=top,open=true': { model: openPath, y: 0 },
+      'facing=north,half=bottom,open=true': { model: bottomPath, y: 0 },
+      'facing=north,half=top,open=false': { model: topPath, y: 90 },
+      'facing=north,half=top,open=true': { model: openPath, y: 90 },
       'facing=south,half=bottom,open=false': { model: bottomPath, y: 0 },
-      'facing=south,half=bottom,open=true': { model: openPath, y: 180 },
-      'facing=south,half=top,open=false': { model: topPath, y: 0 },
-      'facing=south,half=top,open=true': { model: openPath, y: 180 },
+      'facing=south,half=bottom,open=true': { model: bottomPath, y: 0 },
+      'facing=south,half=top,open=false': { model: topPath, y: 270 },
+      'facing=south,half=top,open=true': { model: openPath, y: 270 },
       'facing=west,half=bottom,open=false': { model: bottomPath, y: 0 },
-      'facing=west,half=bottom,open=true': { model: openPath, y: 270 },
+      'facing=west,half=bottom,open=true': { model: bottomPath, y: 0 },
       'facing=west,half=top,open=false': { model: topPath, y: 0 },
-      'facing=west,half=top,open=true': { model: openPath, y: 270 }
+      'facing=west,half=top,open=true': { model: openPath, y: 0 },
     },
   };
 }
@@ -1288,6 +1288,19 @@ function regBlockCommon(event) {
       texture: '',
       type: 'cardinal',
     },
+    {
+      name: 'turnstile_door_a',
+      label: '闸机门',
+      blockstate: getTrapdoorBlockstateJson(
+        `${P_BLOCK}/common/turnstile_door_a_base`,
+        `${P_BLOCK}/common/turnstile_door_a_closed`,
+        `${P_BLOCK}/common/turnstile_door_a_opened`,
+      ),
+      box: null,
+      model: '',
+      texture: 'minecraft:block/red_wool',
+      type: 'trapdoor',
+    },
     // -- 树木 --
     {
       name: 'tree_maple_leaves',
@@ -1405,8 +1418,18 @@ function regBlockCommon(event) {
     // 添加到创造模式标签页
     TAB_BLOCKS_ITEMS.push(blockId);
 
-    let isType1 = ['', 'cardinal'].indexOf(blockType > -1);
-    let isType2 = ['fence', 'slab', 'stairs', 'wall'].indexOf(blockType) > -1;
+    let isBlockType1 = [
+      '',
+      'cardinal',
+    ].indexOf(blockType > -1);
+
+    let isBlockType2 = [
+      'fence',
+      'slab',
+      'stairs',
+      'trapdoor',
+      'wall',
+    ].indexOf(blockType) > -1;
 
     /** @type {_SetBlockPropsOpts} */
     let commonProps = {
@@ -1427,7 +1450,7 @@ function regBlockCommon(event) {
     let specialProps = {};
 
     // 处理基础属性
-    if (isType1) {
+    if (isBlockType1) {
       if (blockBox) {
         specialProps = {
           boxConfig: blockBox,
@@ -1443,7 +1466,7 @@ function regBlockCommon(event) {
           renderType: 'solid',
         };
       }
-    } else if (isType2) {
+    } else if (isBlockType2) {
       specialProps = {
         renderType: 'cutout_mipped',
       };

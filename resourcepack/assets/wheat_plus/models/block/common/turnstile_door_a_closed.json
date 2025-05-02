@@ -1,0 +1,8 @@
+{
+  "credit": "Created by Frost-ZX using Blockbench.",
+  "parent": "wheat_plus:block/common/turnstile_door_a_base",
+  "textures": {
+    "closed": "block/red_wool",
+    "opened": "wheat_plus:block/common/transparent"
+  }
+}
