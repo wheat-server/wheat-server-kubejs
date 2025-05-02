@@ -1,0 +1,6 @@
+{
+  "parent": "wheat_plus:block/rail_transit_sign/sign_a_base_post",
+  "textures": {
+    "texture": "block/white_concrete"
+  }
+}

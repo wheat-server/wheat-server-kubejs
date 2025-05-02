@@ -1,0 +1,7 @@
+{
+  "credit": "Created by Frost-ZX using Blockbench.",
+  "parent": "wheat_plus:block/rail_transit_sign/char_base",
+  "textures": {
+    "texture": "wheat_plus:block/rail_transit_sign/char_e"
+  }
+}
