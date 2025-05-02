@@ -155,6 +155,12 @@ type SetBlockPropsOpts = {
   /** 纹理文件路径，侧面都相同时指定 */
   textureSide?: string;
 
+  /** 纹理文件路径，南北面都相同时指定 */
+  textureSideNS?: string;
+
+  /** 纹理文件路径，东西面都相同时指定 */
+  textureSideWE?: string;
+
   /** 纹理文件路径，上下面都相同时指定 */
   textureUpDown?: string;
 
