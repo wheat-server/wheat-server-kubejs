@@ -1818,65 +1818,79 @@ function regBlockRoad(event) {
     {
       name: 'road_blank',
       label: '路 - 空白',
+      hasSide: false,
+      rotatable: false,
       texturePath: 'common/transparent',
-      hasNormal: true, // 普通 / 直线
-      hasSlant: false, // 斜线
-      hasSide: false,  // 侧边纹理
-      isBlank: true,   // 空白
     },
     {
       name: 'road_white',
       label: '路 - 白色',
-      texturePath: 'road/content_white',
-      hasNormal: true,
-      hasSlant: false,
       hasSide: false,
-      isBlank: true,
+      rotatable: false,
+      texturePath: 'road/content_white',
     },
     {
       name: 'road_yellow',
       label: '路 - 黄色',
-      texturePath: 'road/content_yellow',
-      hasNormal: true,
-      hasSlant: false,
       hasSide: false,
-      isBlank: true,
+      rotatable: false,
+      texturePath: 'road/content_yellow',
     },
     {
-      name: 'road_line_single_white',
-      label: '路 - 单白线',
-      texturePath: 'road/line/single_white',
-      hasNormal: true,
-      hasSlant: true,
+      name: 'road_line_single_white_straight',
+      label: '路 - 单白线 - 直线',
       hasSide: true,
-      isBlank: false,
+      rotatable: false,
+      texturePath: 'road/line/single_white_straight',
     },
     {
-      name: 'road_line_single_yellow',
-      label: '路 - 单黄线',
-      texturePath: 'road/line/single_yellow',
-      hasNormal: true,
-      hasSlant: true,
-      hasSide: true,
-      isBlank: false,
+      name: 'road_line_single_white_slant',
+      label: '路 - 单白线 - 斜线',
+      hasSide: false,
+      rotatable: true,
+      texturePath: 'road/line/single_white_slant',
     },
     {
-      name: 'road_line_double_white',
-      label: '路 - 双白线',
-      texturePath: 'road/line/double_white',
-      hasNormal: true,
-      hasSlant: true,
+      name: 'road_line_single_yellow_straight',
+      label: '路 - 单黄线 - 直线',
       hasSide: true,
-      isBlank: false,
+      rotatable: false,
+      texturePath: 'road/line/single_yellow_straight',
     },
     {
-      name: 'road_line_double_yellow',
-      label: '路 - 双黄线',
-      texturePath: 'road/line/double_yellow',
-      hasNormal: true,
-      hasSlant: true,
+      name: 'road_line_single_yellow_slant',
+      label: '路 - 单黄线 - 斜线',
+      hasSide: false,
+      rotatable: true,
+      texturePath: 'road/line/single_yellow_slant',
+    },
+    {
+      name: 'road_line_double_white_straight',
+      label: '路 - 双白线 - 直线',
       hasSide: true,
-      isBlank: false,
+      rotatable: false,
+      texturePath: 'road/line/double_white_straight',
+    },
+    {
+      name: 'road_line_double_white_slant',
+      label: '路 - 双白线 - 斜线',
+      hasSide: false,
+      rotatable: true,
+      texturePath: 'road/line/double_white_slant',
+    },
+    {
+      name: 'road_line_double_yellow_straight',
+      label: '路 - 双黄线 - 直线',
+      hasSide: true,
+      rotatable: false,
+      texturePath: 'road/line/double_yellow_straight',
+    },
+    {
+      name: 'road_line_double_yellow_slant',
+      label: '路 - 双黄线 - 斜线',
+      hasSide: false,
+      rotatable: true,
+      texturePath: 'road/line/double_yellow_slant',
     },
   ];
 
@@ -1886,7 +1900,10 @@ function regBlockRoad(event) {
     let blockName = config.name;
 
     /** 方块文本 */
-    let label = (config.label || 'Unknown');
+    let blockLabel = config.label;
+
+    /** 可旋转方块 */
+    let rotatable = config.rotatable;
 
     /** 纹理文件相对路径 */
     let texturePath = config.texturePath;
@@ -1894,16 +1911,22 @@ function regBlockRoad(event) {
     /** 是否存在侧边纹理 */
     let textureSide = config.hasSide;
 
-    // 完整，普通 / 直线
-    if (config.hasNormal) {
+    // 完整方块
+    if (true) {
 
-      let blockId = `${blockName}_full`;
-      let fullId = `${MOD_ID}:${blockId}`;
-      let block = event.create(fullId);
-      let suffix = (config.isBlank ? '' : '，直线');
+      let fullName = `${blockName}_full`;
+      let blockId = `${MOD_ID}:${fullName}`;
+      let block = null;
 
+      if (rotatable) {
+        block = event.create(blockId, 'cardinal');
+      } else {
+        block = event.create(blockId);
+      }
+
+      // 方块模型
       JSON_ASSETS.push({
-        path: `${P_BLOCK_MODEL}/${blockId}`,
+        path: `${P_BLOCK_MODEL}/${fullName}`,
         data: {
           parent: `${P_BLOCK}/road/base_full`,
           textures: {
@@ -1913,55 +1936,34 @@ function regBlockRoad(event) {
         },
       });
 
-      TAB_ROADS_ITEMS.push(fullId);
+      // 创造模式标签页
+      TAB_ROADS_ITEMS.push(blockId);
 
+      // 方块属性
       setBlockProps(block, {
         boxType: 'full',
-        displayName: `${label}，完整${suffix}`,
+        displayName: `${blockLabel} - 完整`,
         renderType: 'cutout',
       });
 
     }
 
-    // 完整，斜线
-    if (config.hasSlant) {
+    // 半砖方块
+    if (true) {
 
-      let blockId = `${blockName}_full_slant`;
-      let fullId = `${MOD_ID}:${blockId}`;
-      let block = event.create(fullId, 'cardinal');
-      let suffix = '，斜线';
+      let fullName = `${blockName}_half`;
+      let blockId = `${MOD_ID}:${fullName}`;
+      let block = null;
 
+      if (rotatable) {
+        block = event.create(blockId, 'cardinal');
+      } else {
+        block = event.create(blockId);
+      }
+
+      // 方块模型
       JSON_ASSETS.push({
-        path: `${P_BLOCK_MODEL}/${blockId}`,
-        data: {
-          parent: `${P_BLOCK}/road/base_full`,
-          textures: {
-            content: `${P_BLOCK}/${texturePath}_slant`,
-            side: textureSide ? `${P_BLOCK}/${texturePath}` : P_BLOCK_TRANSPARENT,
-          },
-        },
-      });
-
-      TAB_ROADS_ITEMS.push(fullId);
-
-      setBlockProps(block, {
-        boxType: 'full',
-        displayName: `${label}，完整${suffix}`,
-        renderType: 'cutout',
-      });
-
-    }
-
-    // 一半，普通 / 直线
-    if (config.hasNormal) {
-
-      let blockId = `${blockName}_half`;
-      let fullId = `${MOD_ID}:${blockId}`;
-      let block = event.create(fullId);
-      let suffix = (config.isBlank ? '' : '，直线');
-
-      JSON_ASSETS.push({
-        path: `${P_BLOCK_MODEL}/${blockId}`,
+        path: `${P_BLOCK_MODEL}/${fullName}`,
         data: {
           parent: `${P_BLOCK}/road/base_half`,
           textures: {
@@ -1971,40 +1973,13 @@ function regBlockRoad(event) {
         },
       });
 
-      TAB_ROADS_ITEMS.push(fullId);
+      // 创造模式标签页
+      TAB_ROADS_ITEMS.push(blockId);
 
+      // 方块属性
       setBlockProps(block, {
         boxType: 'half',
-        displayName: `${label}，一半${suffix}`,
-        renderType: 'cutout',
-      });
-
-    }
-
-    // 一半，斜线
-    if (config.hasSlant) {
-
-      let blockId = `${blockName}_half_slant`;
-      let fullId = `${MOD_ID}:${blockId}`;
-      let block = event.create(fullId, 'cardinal');
-      let suffix = '，斜线';
-
-      JSON_ASSETS.push({
-        path: `${P_BLOCK_MODEL}/${blockId}`,
-        data: {
-          parent: `${P_BLOCK}/road/base_half`,
-          textures: {
-            content: `${P_BLOCK}/${texturePath}_slant`,
-            side: textureSide ? `${P_BLOCK}/${texturePath}` : P_BLOCK_TRANSPARENT,
-          },
-        },
-      });
-
-      TAB_ROADS_ITEMS.push(fullId);
-
-      setBlockProps(block, {
-        boxType: 'half',
-        displayName: `${label}，一半${suffix}`,
+        displayName: `${blockLabel} - 一半`,
         renderType: 'cutout',
       });
 
