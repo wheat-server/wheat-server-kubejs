@@ -1114,6 +1114,24 @@ function regBlockCommon(event) {
       texture: '',
       type: 'cardinal',
     },
+    {
+      name: 'furniture_tv_d',
+      label: '电视机',
+      blockstate: null,
+      box: [-4, 0, 12, 20, 14, 16, true],
+      model: 'furniture/furniture_tv_d',
+      texture: '',
+      type: 'cardinal',
+    },
+    {
+      name: 'furniture_tv_d_double',
+      label: '电视机',
+      blockstate: null,
+      box: [-4, 0, 3, 20, 16, 13, true],
+      model: 'furniture/furniture_tv_d_double',
+      texture: '',
+      type: 'cardinal',
+    },
     // 树木
     {
       name: 'tree_maple_leaves',
