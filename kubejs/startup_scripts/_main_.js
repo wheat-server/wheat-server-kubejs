@@ -131,6 +131,7 @@ global.setBlockProps = function (block, opts) {
   let resistance = defaults(opts.resistance, 16);
   let soundType = defaults(opts.soundType, 'stone');
   let textureAll = defaults(opts.textureAll, '');
+  let textureParticle = defaults(opts.textureParticle, '');
   let textureSide = defaults(opts.textureSide, '');
   let textureSideNS = defaults(opts.textureSideNS, '');
   let textureSideWE = defaults(opts.textureSideWE, '');
@@ -175,6 +176,10 @@ global.setBlockProps = function (block, opts) {
 
   if (textureAll) {
     block.texture(textureAll);
+  }
+
+  if (textureParticle) {
+    block.texture('particle', textureParticle);
   }
 
   if (textureSide) {

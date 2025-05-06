@@ -152,6 +152,9 @@ type SetBlockPropsOpts = {
   /** 纹理文件路径，每一面都相同时指定 */
   textureAll?: string;
 
+  /** 方块粒子效果纹理文件路径，不使用 `textureAll` 的情况下才需要指定 */
+  textureParticle?: string;
+
   /** 纹理文件路径，侧面都相同时指定 */
   textureSide?: string;
 

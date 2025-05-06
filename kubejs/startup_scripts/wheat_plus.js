@@ -354,6 +354,7 @@ function regBlockCommon(event) {
       box: null,
       model: '',
       texture: '',
+      textureParticle: 'common/carton_a_ud',
       textureSideNS: 'common/carton_a_ns',
       textureSideWE: 'common/carton_a_we',
       textureUpDown: 'common/carton_a_ud',
@@ -1318,6 +1319,7 @@ function regBlockCommon(event) {
       box: null,
       model: '',
       texture: '',
+      textureParticle: 'common/tree_maple_wood_side',
       textureSide: 'common/tree_maple_wood_side',
       textureUpDown: 'common/tree_maple_wood_ud',
       type: '',
@@ -1338,6 +1340,7 @@ function regBlockCommon(event) {
       box: null,
       model: '',
       texture: '',
+      textureParticle: 'common/tree_palm_wood_side',
       textureSide: 'common/tree_palm_wood_side',
       textureUpDown: 'common/tree_palm_wood_ud',
       type: '',
@@ -1358,6 +1361,7 @@ function regBlockCommon(event) {
       box: null,
       model: '',
       texture: '',
+      textureParticle: 'common/tree_willow_wood_side',
       textureSide: 'common/tree_willow_wood_side',
       textureUpDown: 'common/tree_willow_wood_ud',
       type: '',
@@ -1418,6 +1422,8 @@ function regBlockCommon(event) {
     // 获取纹理文件路径
     let textureAllPath0 = config.texture;
     let textureAllPath1 = textureAllPath0 || '';
+    let textureParticlePath0 = config.textureParticle;
+    let textureParticlePath1 = textureParticlePath0 || '';
     let textureSidePath0 = config.textureSide;
     let textureSidePath1 = textureSidePath0 || '';
     let textureSideNSPath0 = config.textureSideNS;
@@ -1430,6 +1436,9 @@ function regBlockCommon(event) {
     // 处理纹理文件路径
     if (textureAllPath0 && !textureAllPath0.includes(':')) {
       textureAllPath1 = `${P_BLOCK}/${textureAllPath0}`;
+    }
+    if (textureParticlePath0 && !textureParticlePath0.includes(':')) {
+      textureParticlePath1 = `${P_BLOCK}/${textureParticlePath0}`;
     }
     if (textureSidePath0 && !textureSidePath0.includes(':')) {
       textureSidePath1 = `${P_BLOCK}/${textureSidePath0}`;
@@ -1476,6 +1485,7 @@ function regBlockCommon(event) {
         filePath: modelPath1,
       } : null,
       textureAll: textureAllPath1,
+      textureParticle: textureParticlePath1,
       textureSide: textureSidePath1,
       textureSideNS: textureSideNSPath1,
       textureSideWE: textureSideWEPath1,
