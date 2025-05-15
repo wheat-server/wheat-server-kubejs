@@ -1,6 +1,6 @@
 {
   "credit": "Created by HuJiao & Frost-ZX using Blockbench.",
-  "ambientocclusion": false,
+  "ambientocclusion": true,
   "texture_size": [128, 128],
   "textures": {
     "0": "wheat_plus:block/common/station_sign_a",

@@ -1,6 +1,6 @@
 {
   "credit": "Created by Frost-ZX using Blockbench.",
-  "ambientocclusion": false,
+  "ambientocclusion": true,
   "display": {
     "thirdperson_righthand": {
       "rotation": [70, 0, 0],

@@ -3,7 +3,7 @@
     "textures": {
         "particle": "#main"
     },
-    "ambientocclusion": false,
+    "ambientocclusion": true,
     "elements": [
         {
             "name": "Side_N",

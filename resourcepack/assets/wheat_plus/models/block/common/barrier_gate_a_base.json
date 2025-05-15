@@ -1,6 +1,6 @@
 {
   "credit": "Created by Frost-ZX using Blockbench.",
-  "ambientocclusion": false,
+  "ambientocclusion": true,
   "textures": {
     "connection": "block/black_concrete",
     "particle": "block/yellow_concrete",
